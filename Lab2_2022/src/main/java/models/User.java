@@ -38,9 +38,9 @@ public class User implements java.io.Serializable {
 	private String pwd2 = "";
 	private String name = "";
 	private String surname = "";
-	private String secondsurname = "";
-	private Date birthdate = new Date();
-	private List<String> musicgenders = new ArrayList<String>();
+	private String surname2 = "";
+	private Date birthDate = new Date();
+	private List<String> genders = new ArrayList<String>();
 	private Part photo;
 	
 	private boolean[] error  = {false,false,false,false};
@@ -56,9 +56,9 @@ public class User implements java.io.Serializable {
 	public void setUser(String user) {
 		/* We can simulate that a user with the same name exists in our DB and mark error[0] as true  */
 		// sin un manager no podemos hacerlo :(
-		error[0] = true;
-		//this.user = user;
-		//System.out.println(user);
+		//error[0] = true;
+		this.user = user;
+		System.out.println(user);
 	}
 	
 	public String getMail() {
@@ -123,30 +123,30 @@ public class User implements java.io.Serializable {
 		System.out.println(surname);
 	}
 	
-	public String getSecondSurname() {
-		return this.secondsurname;
+	public String getSurname2() {
+		return this.surname2;
 	}
 	
-	public void setSecondSurname(String secondsurname) {
-		this.secondsurname = secondsurname;
-		System.out.println(secondsurname);
+	public void setSurname2(String surname2) {
+		this.surname2 = surname2;
+		System.out.println(surname2);
 	}
 	
 	public Date getBirthDate() {
-		return this.birthdate;
+		return this.birthDate;
 	}
 	
 	public void setBirthDate(Date birthdate) {
-		this.birthdate = birthdate;
+		this.birthDate = birthdate;
 		System.out.print(birthdate);
 	}
 	
-	public List<String> getMusicGenders() {
-		return this.musicgenders;
+	public List<String> getGenders() {
+		return this.genders;
 	}
 	
-	public void setMusicGenders(List<String> musicgenders) {
-		this.musicgenders = musicgenders;
+	public void setGenders(List<String> gender) {
+		this.genders = gender;
 		//System.out.print(musicgenders);
 	}
 	

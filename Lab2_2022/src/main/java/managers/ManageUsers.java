@@ -33,27 +33,31 @@ public class ManageUsers {
 	}
 		
 	// Add new user
-	public void addUser(String username, String mail, String pwd, String name, String surname, String secondsurname,
-			Date birthdate, List<String> musicgenders, Part photo) {
-		String query = "INSERT INTO users (user,name,surname,surname2,mail,pwd1,birthDate,gender,photo) VALUES (?,?,?,?,?,?,?,?,?)";
+	public void addUser(String user, String mail, String pwd1, String name, String surname, String surname2,
+			Date birthDate,  String photo) {
+		String query = "INSERT INTO users (user,name,surname,surname2,mail,pwd1,birthDate,photo) VALUES (?,?,?,?,?,?,?,?)";
 		PreparedStatement statement = null;
 		try {
 			statement = db.prepareStatement(query);
-			statement.setString(1,username);
+			statement.setString(1,user);
 			statement.setString(2,name);
 			statement.setString(2,surname);
-			statement.setString(3,secondsurname);
-			statement.setString(4,mail);
-			statement.setString(5,pwd);
-			statement.setDate(6,(java.sql.Date) birthdate);//sino podemos usar la clase time de java
-			statement.setArray(7,(Array) musicgenders);
-			//statement.setPart(8,photo);
-			//statement.setObject(8, photo);
+			statement.setString(3,surname2);
+			statement.setString(4,mail);	
+			statement.setString(5,pwd1);
+			statement.setDate(6,(java.sql.Date) birthDate);//sino podemos usar la clase time de java
+			statement.setString(7,photo);
 			statement.executeUpdate();
 			statement.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void addGender(List<String> gender) {
+		
+		String query = "INSERT INTO users_genders (user_id,gender_id) VALUES (?,?)";
+		
 	}
 	
 	/*Check if all the fields are filled correctly */
