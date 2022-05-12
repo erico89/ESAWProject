@@ -47,12 +47,7 @@ input:invalid {
 		  <input type="date" id="birthDate" class="form-control" name="birthDate" placeholder="BirthDate" value="${model.birthDate}" required><br>
  		  <label for="genders"> Music Genders:</label><br>
 		  <fieldset class="form-group">
-		  	<input type="checkbox" name="gender" value="Reggaeton">Reggaeton<br>  
-	  		<input type="checkbox" name="gender" value="Trap">Trap<br>     
-		  	<input type="checkbox" name="gender" value="Blues">Blues<br>  
-	  		<input type="checkbox" name="gender" value="EDM">EDM<br> 
-		  	<input type="checkbox" name="gender" value="Rock">Rock<br>  
-	  		<input type="checkbox" name="gender" value="Pop">Pop<br> 		  
+		  	<input type="checkbox" name="gender" value="Reggaeton">Reggaeton<br>   		  
   		  </fieldset>
   		  <label for="perfil_photo">Profile photo:</label>
   		  <input type="file" id="photo" class="form-control-file" name="photo" placeholder="Photo" value="">
