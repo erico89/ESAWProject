@@ -65,7 +65,10 @@ public class RegisterController extends HttpServlet {
 			model.setPhoto(file.getSubmittedFileName());
 			
 			if (manager.isComplete(model)) {
-				if (!manager.checkUsername(model.getUser(), model) && !manager.checkMail(model.getMail(), model)) {	
+				manager.checkUsername(model.getUser(), model);
+				manager.checkMail(model.getMail(), model);
+				
+				if (manager.isValidForm(model)) {	
 					// Hash password
 					String pwd_hashed = process_pwd(model.getPwd1());
 					model.setPwd1(pwd_hashed);
@@ -79,10 +82,10 @@ public class RegisterController extends HttpServlet {
 					}
 					
 					// Insert Genders
-					String[] genders = model.getGenders();
-					for (int i = 0; i < genders.length; i++) {
-						manager.addGender(model.getUser(), genders[i]);
-					}
+					// String[] genders = model.getGenders();
+					// for (int i = 0; i < genders.length; i++) {
+					//	manager.addGender(model.getUser(), genders[i]);
+					// }
 					
 					manager.finalize();
 					view = "Registered.jsp";
