@@ -31,6 +31,8 @@ import models.User;
 
 public class RegisterController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	// !!! Change image path to your personal folder path!!!
+	private static final String img_path = "C:\\Users\\WENJI\\eclipse-workspace\\ESAWProject\\Lab2_2022\\src\\main\\webapp\\img/";
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -65,7 +67,7 @@ public class RegisterController extends HttpServlet {
 					manager.addUser(model.getUser(), model.getMail(), model.getPwd1(), model.getName(), model.getSurname(), model.getSurname2(), model.getBirthDate(), model.getPhoto());
 						
 					// Store photo
-					file.write("/Lab2_2022/src/main/webapp/img" + file.getSubmittedFileName());
+					file.write(img_path + model.getPhoto());
 					
 					// Insert Genders
 					List<String> genders = model.getGenders();
