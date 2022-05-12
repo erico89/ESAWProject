@@ -1,7 +1,10 @@
 package controllers;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -63,7 +66,11 @@ public class RegisterController extends HttpServlet {
 			
 			if (manager.isComplete(model)) {
 				if (!manager.checkUsername(model.getUser()) && !manager.checkMail(model.getMail())) {	
-
+					// Hash password
+					String pwd_hashed = process_pwd(model.getPwd1());
+					model.setPwd1(pwd_hashed);
+					
+					// Insert user into DB.
 					manager.addUser(model.getUser(), model.getMail(), model.getPwd1(), model.getName(), model.getSurname(), model.getSurname2(), model.getBirthDate(), model.getPhoto());
 						
 					// Store photo
@@ -99,6 +106,32 @@ public class RegisterController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
+	}
+	
+	private String process_pwd(String pwd1) throws NoSuchAlgorithmException {
+		if (pwd1.isEmpty()) {
+			return "";
+		}
+		
+		MessageDigest hash = null;
+		try {
+			hash = MessageDigest.getInstance("SHA256");
+			byte[] pwd_hashed = hash.digest(pwd1.getBytes("UTF-8"));
+			String result = "";
+			for (byte b : pwd_hashed) {
+				String tmp = Integer.toHexString(b & 0xff);
+				if (tmp.length() == 1) {
+						tmp = "0"+tmp;
+				}
+				result += tmp;
+			}
+			return result;
+		} 
+		catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		
+		return "";
 	}
 
 }
