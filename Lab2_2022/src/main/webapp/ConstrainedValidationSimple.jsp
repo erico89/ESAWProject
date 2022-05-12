@@ -20,17 +20,18 @@ input:invalid {
 </head>
 <body>
 
-<ul>
-<c:if test = "${model.error[0]}">
-	<li> Entered user name has been already registered </li>
-</c:if>
-</ul>
 <div class="row align-items-center justify-content-center">
 	<div class="shadow-sm p-3 mb-5 bg-white rounded">	
 		<h2> Register </h2>
 		<form class="form-group" action="RegisterController" id="myform" method="post" enctype="multipart/form-data">
 		  <label for="user"> User name:</label><br>
 		  <input type="text" id="user" class="form-control" name="user" placeholder="User" value="${model.user}" required pattern=".{4,}"><br>
+  		  <c:if test = "${model.error[0]}">
+  		  <div class="alert alert-danger" role="alert">
+			   Entered user name has been already registered
+		  </div>
+		  </c:if>
+		  
   		  <label for="name"> Name:</label><br>
 		  <input type="text" id="name" class="form-control" name="name" placeholder="Name" value="${model.name}" required><br>
   		  <label for="surname"> Surname:</label><br>
@@ -39,10 +40,26 @@ input:invalid {
 		  <input type="text" id="surname2" class="form-control" name="surname2" placeholder="Surname2" value="${model.surname2}"><br>
 		  <label for="mail"> Mail: </label><br>
 		  <input type="email" id="mail" class="form-control" name="mail" placeholder="Mail" value="${model.mail}" required><br>
+   		  <c:if test = "${model.error[1]}">
+  		  <div class="alert alert-danger" role="alert">
+			   Entered email has been already registered
+		  </div>
+		  </c:if>
 		  <label for="pwd1"> Password: </label><br>
-		  <input type="password" id="pwd1" class="form-control" name="pwd1" placeholder="Password" value="${model.pwd1}" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$"><br>
+		  <input type="password" id="pwd1" class="form-control" name="pwd1" placeholder="Password" value="${model.pwd1}" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$">
+   		  <small id="emailHelp" class="form-text text-muted">Min. 8 character, with 1 letter Uppercase and 1 Number </small><br>
+   		  <c:if test = "${model.error[2]}">
+  		  <div class="alert alert-danger" role="alert">
+			   Invalid format. Must be contain at least 1 letter Uppercase and 1 Number.
+		  </div>
+		  </c:if>
 		  <label for="pwd2"> Confirm Password: </label>	
 		  <input type="password" id="pwd2" class="form-control" name="pwd2" placeholder="Confirm Password" value="${model.pwd2}" required><br>
+   		  <c:if test = "${model.error[3]}">
+  		  <div class="alert alert-danger" role="alert">
+			   Passwords must match!
+		  </div>
+		  </c:if>
 		  <label for="birthDate"> Date of birth:</label><br>
 		  <input type="date" id="birthDate" class="form-control" name="birthDate" placeholder="BirthDate" value="${model.birthDate}" required><br>
  		  <!-- 
