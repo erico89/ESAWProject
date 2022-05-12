@@ -162,9 +162,5 @@ public class User implements java.io.Serializable {
 	public boolean[] getError() {
 		return error;
 	}
-	
-	public void setError(Integer indx,boolean bool) {
-		error[indx] = bool;
-	}
 		
 }

@@ -100,19 +100,13 @@ public class ManageUsers {
 		
 	
 	// TODO: add other methods 
-	public boolean checkUsername(String user, User model) throws SQLException {
+	public boolean checkUsername(String user) throws SQLException {
 		ResultSet usr = db.prepareStatement("select user from users WHERE user = '" + user +"'").executeQuery();
-		if(usr.next()) {
-			model.setError(0,true);
-		}
 		return usr.next();
 	}
 	
-	public boolean checkMail(String mail, User model) throws SQLException {
+	public boolean checkMail(String mail) throws SQLException {
         ResultSet mil= db.prepareStatement("select mail from users WHERE mail = '" + mail +"'").executeQuery();
-        if(mil.next()) {
-			model.setError(1,true);
-		}
         return mil.next();
     }
 	
