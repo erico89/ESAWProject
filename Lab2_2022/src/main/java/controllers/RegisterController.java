@@ -65,7 +65,7 @@ public class RegisterController extends HttpServlet {
 			model.setPhoto(file.getSubmittedFileName());
 			
 			if (manager.isComplete(model)) {
-				if (!manager.checkUsername(model.getUser()) && !manager.checkMail(model.getMail())) {	
+				if (!manager.checkUsername(model.getUser(), model) && !manager.checkMail(model.getMail(), model)) {	
 					// Hash password
 					String pwd_hashed = process_pwd(model.getPwd1());
 					model.setPwd1(pwd_hashed);
