@@ -74,7 +74,9 @@ public class RegisterController extends HttpServlet {
 					manager.addUser(model.getUser(), model.getMail(), model.getPwd1(), model.getName(), model.getSurname(), model.getSurname2(), model.getBirthDate(), model.getPhoto());
 						
 					// Store photo
-					file.write(img_path + model.getPhoto());
+					if (model.getPhoto().length() > 0) {
+						file.write(img_path + model.getPhoto());						
+					}
 					
 					// Insert Genders
 					String[] genders = model.getGenders();
