@@ -54,10 +54,33 @@ public class ManageUsers {
 		}
 	}
 	
-	public void addGender(List<String> gender) {
+	public void addGender(String name, String gender) throws SQLException {
+		String query1 = "SELECT id FROM users as u where u.user = '" + name + "'";
+		ResultSet userId = runQuery(query1);
 		
-		String query = "INSERT INTO users_genders (user_id,gender_id) VALUES (?,?)";
-		
+		String query2 = "SELECT id FROM genders as g where gender = '" + gender + "'";
+		ResultSet genderId = runQuery(query2);
+
+		if (userId.next() && genderId.next()) {
+			String query3 = "SELECT id FROM users_genders WHERE user_id = '" + userId.getInt("id") + "' AND gender_id = '" + genderId.getInt("id") + "'";
+			ResultSet rs = runQuery(query3);
+			
+			// If not exist, Create
+			if (!rs.next()) {
+				String query4 = "INSERT INTO users_genders (user_id, gender_id) VALUES (?, ?)";
+				PreparedStatement statement = null;
+				try {
+					statement = db.prepareStatement(query4);
+					statement.setInt(1, userId.getInt("id"));
+					statement.setInt(2, genderId.getInt("id"));
+					statement.executeUpdate();
+					statement.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}			
+ 
 	}
 	
 	/*Check if all the fields are filled correctly */
@@ -79,6 +102,19 @@ public class ManageUsers {
 	private boolean checkUsername(String user) throws SQLException {
 		ResultSet usr = db.prepareStatement("select user from users WHERE user = '" + user +"'").executeQuery();
 		return usr.next();
+	}
+	
+	private ResultSet runQuery (String query) {
+		PreparedStatement statement = null;
+		ResultSet result = null;
+		try {
+			statement = db.prepareStatement(query);
+			result = statement.executeQuery();
+			statement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 }
