@@ -39,8 +39,8 @@ public class User implements java.io.Serializable {
 	private String name = "";
 	private String surname = "";
 	private String surname2 = "";
-	private String birthDate = null;
-	private List<String> genders = new ArrayList<String>();
+	private String birthDate = "";
+	private String genders[];
 	private String photo;
 	
 	private boolean[] error  = {false,false,false,false};
@@ -141,11 +141,11 @@ public class User implements java.io.Serializable {
 		System.out.print(birthdate);
 	}
 	
-	public List<String> getGenders() {
+	public String[] getGenders() {
 		return this.genders;
 	}
 	
-	public void setGenders(List<String> gender) {
+	public void setGenders(String gender[]) {
 		this.genders = gender;
 		//System.out.print(musicgenders);
 	}

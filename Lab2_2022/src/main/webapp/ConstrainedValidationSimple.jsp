@@ -45,6 +45,7 @@ input:invalid {
 		  <input type="password" id="pwd2" class="form-control" name="pwd2" placeholder="Confirm Password" value="${model.pwd2}" required><br>
 		  <label for="birthDate"> Date of birth:</label><br>
 		  <input type="date" id="birthDate" class="form-control" name="birthDate" placeholder="BirthDate" value="${model.birthDate}" required><br>
+ 		  <!-- 
  		  <label for="genders"> Music Genders:</label><br>
 		  <fieldset class="form-group">
 		  	<input type="checkbox" name="gender" value="Reggaeton">Reggaeton<br>  
@@ -54,6 +55,7 @@ input:invalid {
 		  	<input type="checkbox" name="gender" value="Rock">Rock<br>  
 	  		<input type="checkbox" name="gender" value="Pop">Pop<br> 		  
   		  </fieldset>
+  		   -->
   		  <label for="perfil_photo">Profile photo:</label>
   		  <input type="file" id="photo" class="form-control-file" name="photo" placeholder="Photo" value="">
   		  
