@@ -34,19 +34,19 @@ public class ManageUsers {
 		
 	// Add new user
 	public void addUser(String user, String mail, String pwd1, String name, String surname, String surname2,
-			Date birthDate,  String photo) {
-		String query = "INSERT INTO users (user,name,surname,surname2,mail,pwd1,birthDate,photo) VALUES (?,?,?,?,?,?,?,?)";
+			String birthDate,  String photo) {
+		String query = "INSERT INTO users (user,name,surname,surname2,mail,pwd,birthDate,photo) VALUES (?,?,?,?,?,?,?,?)";
 		PreparedStatement statement = null;
 		try {
 			statement = db.prepareStatement(query);
 			statement.setString(1,user);
 			statement.setString(2,name);
-			statement.setString(2,surname);
-			statement.setString(3,surname2);
-			statement.setString(4,mail);	
-			statement.setString(5,pwd1);
-			statement.setDate(6,(java.sql.Date) birthDate);//sino podemos usar la clase time de java
-			statement.setString(7,photo);
+			statement.setString(3,surname);
+			statement.setString(4,surname2);
+			statement.setString(5,mail);	
+			statement.setString(6,pwd1);
+			statement.setString(7,birthDate);//sino podemos usar la clase time de java
+			statement.setString(8,photo);
 			statement.executeUpdate();
 			statement.close();
 		} catch (SQLException e) {
@@ -54,6 +54,7 @@ public class ManageUsers {
 		}
 	}
 	
+	// Add user_genders relation
 	public void addGender(String name, String gender) throws SQLException {
 		String query1 = "SELECT id FROM users as u where u.user = '" + name + "'";
 		ResultSet userId = runQuery(query1);
@@ -99,10 +100,15 @@ public class ManageUsers {
 		
 	
 	// TODO: add other methods 
-	private boolean checkUsername(String user) throws SQLException {
+	public boolean checkUsername(String user) throws SQLException {
 		ResultSet usr = db.prepareStatement("select user from users WHERE user = '" + user +"'").executeQuery();
 		return usr.next();
 	}
+	
+	public boolean checkMail(String mail) throws SQLException {
+        ResultSet mil= db.prepareStatement("select mail from users WHERE mail = '" + mail +"'").executeQuery();
+        return mil.next();
+    }
 	
 	private ResultSet runQuery (String query) {
 		PreparedStatement statement = null;

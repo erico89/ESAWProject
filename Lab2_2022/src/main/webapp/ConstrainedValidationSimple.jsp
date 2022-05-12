@@ -28,7 +28,7 @@ input:invalid {
 <div class="row align-items-center justify-content-center">
 	<div class="shadow-sm p-3 mb-5 bg-white rounded">	
 		<h2> Register </h2>
-		<form class="form-group" action="RegisterController" id="myform">
+		<form class="form-group" action="RegisterController" id="myform" method="post" enctype="multipart/form-data">
 		  <label for="user"> User name:</label><br>
 		  <input type="text" id="user" class="form-control" name="user" placeholder="User" value="${model.user}" required pattern=".{4,}"><br>
   		  <label for="name"> Name:</label><br>
@@ -45,15 +45,6 @@ input:invalid {
 		  <input type="password" id="pwd2" class="form-control" name="pwd2" placeholder="Confirm Password" value="${model.pwd2}" required><br>
 		  <label for="birthDate"> Date of birth:</label><br>
 		  <input type="date" id="birthDate" class="form-control" name="birthDate" placeholder="BirthDate" value="${model.birthDate}" required><br>
-		  <label for="genders"> Music Genders:</label><br>
-		  <fieldset class="form-group">
-		  	<input type="checkbox" name="gender" value="Reggaeton">Reggaeton<br>  
-	  		<input type="checkbox" name="gender" value="Trap">Trap<br>     
-		  	<input type="checkbox" name="gender" value="Blues">Blues<br>  
-	  		<input type="checkbox" name="gender" value="EDM">EDM<br> 
-		  	<input type="checkbox" name="gender" value="Rock">Rock<br>  
-	  		<input type="checkbox" name="gender" value="Pop">Pop<br> 		  
-  		  </fieldset>
   		  <label for="perfil_photo">Profile photo:</label>
   		  <input type="file" id="photo" class="form-control-file" name="photo" placeholder="Photo" value="">
   		  

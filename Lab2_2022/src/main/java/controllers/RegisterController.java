@@ -2,13 +2,17 @@ package controllers;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 import org.apache.commons.beanutils.BeanUtils;
 
@@ -19,6 +23,12 @@ import models.User;
  * Servlet implementation class FormController
  */
 @WebServlet("/RegisterController")
+@MultipartConfig(
+		  fileSizeThreshold = 1024 * 1024 * 1, // 1 MB
+		  maxFileSize = 1024 * 1024 * 10,      // 10 MB
+		  maxRequestSize = 1024 * 1024 * 100   // 100 MB
+)
+
 public class RegisterController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -37,20 +47,42 @@ public class RegisterController extends HttpServlet {
 		User model = new User();
 		ManageUsers manager = new ManageUsers();
 
-		String view = "ConstrainedValidationHTML5.jsp";
-		//String view = "ConstrainedValidationSimple.jsp";
+		//String view = "ConstrainedValidationHTML5.jsp";
+		String view = "ConstrainedValidationSimple.jsp";
 		//String view = "ConstrainedValidationComplex.jsp";
 		//String view = "ConstrainedValidationParsley.jsp";
 		
 		try {
 			BeanUtils.populate(model,request.getParameterMap());
+			
+			// Manual set photo property
+			Part file = request.getPart("photo");
+			model.setPhoto(file.getSubmittedFileName());
+			
 			if (manager.isComplete(model)) {
-				manager.addUser(model.getUser(), model.getMail(), model.getPwd1());
-				manager.finalize();
-				view = "Registered.jsp";
+				if (!manager.checkUsername(model.getUser()) && !manager.checkMail(model.getMail())) {	
+
+					manager.addUser(model.getUser(), model.getMail(), model.getPwd1(), model.getName(), model.getSurname(), model.getSurname2(), model.getBirthDate(), model.getPhoto());
+						
+					// Store photo
+					file.write("/Lab2_2022/src/main/webapp/img" + file.getSubmittedFileName());
+					
+					// Insert Genders
+					List<String> genders = model.getGenders();
+					for (int i = 0; i < genders.size(); i++) {
+						manager.addGender(model.getUser(), genders.get(i));
+					}
+					
+					manager.finalize();
+					view = "Registered.jsp";
+				} else {
+					System.out.println("Some Error.");
+				}
 			}
-				
 		} catch (IllegalAccessException | InvocationTargetException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

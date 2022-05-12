@@ -39,9 +39,9 @@ public class User implements java.io.Serializable {
 	private String name = "";
 	private String surname = "";
 	private String surname2 = "";
-	private Date birthDate = new Date();
+	private String birthDate = null;
 	private List<String> genders = new ArrayList<String>();
-	private Part photo;
+	private String photo;
 	
 	private boolean[] error  = {false,false,false,false};
 	
@@ -97,7 +97,7 @@ public class User implements java.io.Serializable {
 	}
 	
 	public void setPwd2(String pwd2) {
-		if(this.pwd1 == pwd2) {
+		if(this.pwd1.equals(pwd2)) {
 			this.pwd2 = pwd2;
 		}else {
 			error[3] = true;
@@ -118,7 +118,7 @@ public class User implements java.io.Serializable {
 		return this.surname;
 	}
 	
-	public void setSurame(String surname) {
+	public void setSurname(String surname) {
 		this.surname = surname;
 		System.out.println(surname);
 	}
@@ -132,11 +132,11 @@ public class User implements java.io.Serializable {
 		System.out.println(surname2);
 	}
 	
-	public Date getBirthDate() {
+	public String getBirthDate() {
 		return this.birthDate;
 	}
 	
-	public void setBirthDate(Date birthdate) {
+	public void setBirthDate(String birthdate) {
 		this.birthDate = birthdate;
 		System.out.print(birthdate);
 	}
@@ -150,11 +150,11 @@ public class User implements java.io.Serializable {
 		//System.out.print(musicgenders);
 	}
 	
-	public Part getPhoto() {
+	public String getPhoto() {
 		return this.photo;
 	}
 	
-	public void setPhoto(Part photo) {
+	public void setPhoto(String photo) {
 		this.photo = photo;
 		//System.out.print(photo);
 	}
