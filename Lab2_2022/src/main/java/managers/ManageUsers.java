@@ -45,7 +45,7 @@ public class ManageUsers {
 			statement.setString(4,surname2);
 			statement.setString(5,mail);	
 			statement.setString(6,pwd1);
-			statement.setString(7,birthDate);//sino podemos usar la clase time de java
+			statement.setString(7,birthDate);
 			statement.setString(8,photo);
 			statement.executeUpdate();
 			statement.close();
@@ -100,15 +100,22 @@ public class ManageUsers {
 		
 	
 	// TODO: add other methods 
-	public boolean checkUsername(String user) throws SQLException {
-		ResultSet usr = db.prepareStatement("select user from users WHERE user = '" + user +"'").executeQuery();
-		return usr.next();
-	}
-	
-	public boolean checkMail(String mail) throws SQLException {
+	public boolean checkUsername(String user, User model) throws SQLException {
+        ResultSet usr = db.prepareStatement("select user from users WHERE user = '" + user +"'").executeQuery();
+        if(usr.next()) {
+            model.setError(0,true);
+        }
+        return usr.next();
+    }
+    
+    public boolean checkMail(String mail, User model) throws SQLException {
         ResultSet mil= db.prepareStatement("select mail from users WHERE mail = '" + mail +"'").executeQuery();
+        if(mil.next()) {
+            model.setError(1,true);
+        }
         return mil.next();
     }
+    
 	
 	private ResultSet runQuery (String query) {
 		PreparedStatement statement = null;
