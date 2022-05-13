@@ -85,22 +85,18 @@ public class User implements java.io.Serializable {
 	//Setters
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
-		System.out.println(nickname);
 	}
 	
 	public void setName(String name) {
 		this.name = name;
-		System.out.println(name);
 	}
 	
 	public void setSurname(String surname) {
 		this.surname = surname;
-		System.out.println(surname);
 	}
 	
 	public void setSecondSurname(String secondSurname) {
 		this.secondSurname = secondSurname;
-		System.out.println(secondSurname);
 	}
 	
 	public void setMail(String mail) {
@@ -109,10 +105,8 @@ public class User implements java.io.Serializable {
 		Matcher matcher = pattern.matcher(mail);
 		if (matcher.matches()) {
 			this.mail = mail;
-			System.out.println(mail);
 		} else {
 			errors[1]=true;
-			System.out.println(mail);
 		}
 		
 	}
@@ -123,7 +117,6 @@ public class User implements java.io.Serializable {
 		}else {
 			errors[2]=true;
 		}
-		System.out.println(password);
 	}
 	
 	public void setConfirmationPassword(String confirmationPassword) {
@@ -132,19 +125,14 @@ public class User implements java.io.Serializable {
 		}else {
 			errors[3] = true;
 		}
-		System.out.println(confirmationPassword);
 	}
 	
 	public void setBirthdate(String birthdate) {
 		this.birthdate = birthdate;
-		System.out.println(birthdate);
 	}
 	
 	public void setGenres(String genres[]) {
 		this.genres = genres;
-		for(int i = 0; i < genres.length; i++) {
-			System.out.println("User likes: " + genres [i]);
-		}
 	}
 	
 	public void setProfilePhoto(String profilePhoto) {

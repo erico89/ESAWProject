@@ -37,7 +37,6 @@ import models.User;
 public class RegisterController extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
-	// !!! Change image path to your personal folder path!!!
 	private static String root_path;
        
     /**
@@ -78,20 +77,20 @@ public class RegisterController extends HttpServlet {
 					// Hash password
 					String password_hashed = hash_password(model.getPassword());
 					model.setPassword(password_hashed);
-					
-					
+						
 					// Set photo properties
 					Part file = request.getPart("profilePhoto");
 					model.setProfilePhoto(file.getSubmittedFileName());
+
+					// Add user to the DataBase
+					manager.addUser(model.getNickname(), model.getName(), model.getSurname(), model.getSecondSurname(), model.getMail(), 
+							model.getPassword(), model.getBirthdate(), model.getProfilePhoto());
+					
 					//Save the photo manually
 					if (model.getProfilePhoto().length() > 0) {
 						saveProfilePhoto(file,model);						
 					}	
-					
-					// Add user to the DataBase
-					manager.addUser(model.getNickname(), model.getName(), model.getSurname(), model.getSecondSurname(), model.getMail(), 
-							model.getPassword(), model.getBirthdate(), model.getProfilePhoto());
-										
+			
 					// Add Genres in the relation table
 					String[] genres = model.getGenres();
 					for (int i = 0; i < genres.length; i++) 
@@ -99,13 +98,14 @@ public class RegisterController extends HttpServlet {
 						manager.addGenres(model.getNickname(), genres[i]);
 					}
 					
+					//Shut down connection with the database
 					manager.shutDownConnection();
 					
 					//Display the register form
 					view = "Registered.jsp";
 					
 				} else {
-					System.out.println("Some Error.");
+					System.out.println("Something went wrong!");
 				}
 			}
 	
@@ -167,7 +167,7 @@ public class RegisterController extends HttpServlet {
 		//Create output directory if it is not already created
 		String outputDirectory = "profile_photo";
 		File newDirectory = new File(root_path + slasher + outputDirectory);
-		System.out.println("Photo Saved in:" + root_path);
+		
 	    if (!newDirectory.exists()){
 	        newDirectory.mkdirs();
 	    } 
@@ -175,6 +175,7 @@ public class RegisterController extends HttpServlet {
 	    //Write the file in the output directory
 	    try {
 	    	file.write(newDirectory.getAbsolutePath() + slasher + model.getProfilePhoto());
+	    	System.out.println("Photo saved at: " + newDirectory.getAbsolutePath());
 	    }catch(IOException e) {
 	    	e.getMessage();
 	    }
