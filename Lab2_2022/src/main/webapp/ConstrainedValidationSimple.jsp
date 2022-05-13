@@ -25,61 +25,84 @@ body {
 
 <div class="row align-items-center justify-content-center">
 	<div class="shadow-sm p-3 mb-5 mt-4 rounded" id="form">	
-		<h2> Register </h2>
+		<h2> Register </h2><br>
 		<form class="form-group" action="RegisterController" id="myform" method="post" enctype="multipart/form-data">
-		  <label for="user"> User name:</label><br>
-		  <input type="text" id="user" class="form-control" name="user" placeholder="User" value="${model.user}" required pattern=".{4,}"><br>
-  		  <c:if test = "${model.error[0]}">
+		  
+		  <label for="Nickname"> Nickname </label><br>
+		  <input type="text" id="nickname" class="form-control" name="nickname" placeholder="Nickname" value="${model.nickname}" required pattern=".{4,}"><br>
+  		  <c:if test = "${model.errors[0]}">
   		  <div class="alert alert-danger" role="alert">
-			   Entered user name has been already registered
+			   The nickname you wrote has already been registered
 		  </div>
 		  </c:if>
 		  
-  		  <label for="name"> Name:</label><br>
+  		  <label for="name"> Name </label><br>
 		  <input type="text" id="name" class="form-control" name="name" placeholder="Name" value="${model.name}" required><br>
-  		  <label for="surname"> Surname:</label><br>
+  		  <label for="surname"> Surname </label><br>
 		  <input type="text" id="surname" class="form-control" name="surname" placeholder="Surname" value="${model.surname}" required><br>
-   		  <label for="surname2"> Second Surname:</label><br>
-		  <input type="text" id="surname2" class="form-control" name="surname2" placeholder="Surname2" value="${model.surname2}"><br>
-		  <label for="mail"> Mail: </label><br>
+   		  
+   		  <label for="secondSurname"> Second Surname </label><br>
+		  <input type="text" id="secondSurname" class="form-control" name="secondSurname" placeholder="Second Surname" value="${model.secondSurname}"><br>
+		  
+		  <label for="mail"> Mail </label><br>
 		  <input type="email" id="mail" class="form-control" name="mail" placeholder="Mail" value="${model.mail}" required><br>
-   		  <c:if test = "${model.error[1]}">
+   		  <c:if test = "${model.errors[1]}">
   		  <div class="alert alert-danger" role="alert">
-			   Entered email has been already registered
+			   The email you wrote is already registered
 		  </div>
 		  </c:if>
-		  <label for="pwd1"> Password: </label><br>
-		  <input type="password" id="pwd1" class="form-control" name="pwd1" placeholder="Password" value="${model.pwd1}" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$">
-   		  <small id="emailHelp" class="form-text text-muted">Min. 8 character, with 1 letter Uppercase and 1 Number </small><br>
-   		  <c:if test = "${model.error[2]}">
+		  
+		  <label for="password"> Password </label><br>
+		  <input type="password" id="password" class="form-control" name="password" placeholder="Password" value="${model.password}" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$">
+		  <small id="emailHelp" class="form-text text-muted"> 8 characters minimum <br> 1 capital letter required <br> 1 number required</small><br>
+
+
+		  
+   		  <c:if test = "${model.errors[2]}">
   		  <div class="alert alert-danger" role="alert">
-			   Invalid format. Must be contain at least 1 letter Uppercase and 1 Number.
+			   Invalid format. The password must contain at least 1 capital letter and 1 number.
 		  </div>
 		  </c:if>
-		  <label for="pwd2"> Confirm Password: </label>	
-		  <input type="password" id="pwd2" class="form-control" name="pwd2" placeholder="Confirm Password" value="${model.pwd2}" required><br>
-   		  <c:if test = "${model.error[3]}">
+		  
+		  <label for="confirmationPassword"> Confirm Password </label>	
+		  <input type="password" id="confirmationPassword" class="form-control" name="confirmationPassword" placeholder="Confirm Password" value="${model.confirmationPassword}" required><br>
+   		  <c:if test = "${model.errors[3]}">
   		  <div class="alert alert-danger" role="alert">
-			   Passwords must match!
+			   Passwords don't match!
 		  </div>
 		  </c:if>
-		  <label for="birthDate"> Date of birth:</label><br>
-		  <input type="date" id="birthDate" class="form-control" name="birthDate" placeholder="BirthDate" value="${model.birthDate}" required><br>
- 		  <!-- 
- 		  <label for="genders"> Music Genders:</label><br>
+		  
+		  <label for="birthdate"> Date of birth </label><br>
+		  <input type="date" id="birthdate" class="form-control" name=birthdate placeholder="Birthdate" value="${model.birthdate}" required><br>
+ 		  
+ 		  <label for="genres"> Choose your favorite genres </label><br>
 		  <fieldset class="form-group">
-		  	<input type="checkbox" name="gender" value="Reggaeton">Reggaeton<br>  
-	  		<input type="checkbox" name="gender" value="Trap">Trap<br>     
-		  	<input type="checkbox" name="gender" value="Blues">Blues<br>  
-	  		<input type="checkbox" name="gender" value="EDM">EDM<br> 
-		  	<input type="checkbox" name="gender" value="Rock">Rock<br>  
-	  		<input type="checkbox" name="gender" value="Pop">Pop<br> 		  
+		    <input type="checkbox" name="genres" value="Pop">Pop<br>
+		  	<input type="checkbox" name="genres" value="Latin">Latin<br>  
+		  	<input type="checkbox" name="genres" value="Hip-Hop/Rap">Hip-Hop/Rap<br>
+		  	<input type="checkbox" name="genres" value="EDM">EDM<br> 
+	  		<input type="checkbox" name="genres" value="Trap">Trap<br>   
+		  	<input type="checkbox" name="genres" value="Rock">Rock<br>  
+		  	<input type="checkbox" name="genres" value="R&B">R&B<br>
+			<input type="checkbox" name="genres" value="Heavy">Heavy<br>
+			<input type="checkbox" name="genres" value="Indie">Indie<br>
+			<input type="checkbox" name="genres" value="Country">Country<br>
+			<input type="checkbox" name="genres" value="Techno">Techno<br>
+			<input type="checkbox" name="genres" value="House">House<br>
+		  	<input type="checkbox" name="genres" value="Blues">Blues<br> 
+		  	<input type="checkbox" name="genres" value="Jazz">Jazz<br>
+			<input type="checkbox" name="genres" value="Punk">Punk<br>
+			<input type="checkbox" name="genres" value="Disco">Disco<br>
+			<input type="checkbox" name="genres" value="Reggae">Reggae<br>
+			<input type="checkbox" name="genres" value="Classical">Classical<br>
+			<input type="checkbox" name="genres" value="Regional">Regional<br>
+			<input type="checkbox" name="genres" value="Anime">Anime<br>  		 		  
   		  </fieldset>
-  		   -->
-  		  <label for="perfil_photo">Profile photo:</label>
-  		  <input type="file" id="photo" class="form-control-file" name="photo" placeholder="Photo" value="">
   		  
+  		  <label for="profilePhoto">Profile photo </label>
+  		  <input type="file" id="profilePhoto" class="form-control-file" name="profilePhoto" placeholder="Profile Photo" value="">
 		  <button class="btn btn-primary mt-3"> Submit </button>
+		  
 		</form>
 	</div>
 </div>

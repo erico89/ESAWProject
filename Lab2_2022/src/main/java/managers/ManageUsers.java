@@ -1,13 +1,8 @@
 package managers;
 
-import java.sql.Array;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
-import java.util.List;
-
-import javax.servlet.http.Part;
 
 import models.User;
 import utils.DB;
@@ -16,6 +11,7 @@ public class ManageUsers {
 	
 	private DB db = null ;
 	
+	//Create the DB client
 	public ManageUsers() {
 		try {
 			db = new DB();
@@ -24,7 +20,8 @@ public class ManageUsers {
 		}
 	}
 	
-	public void finalize() {
+	//Shut down connection with the client
+	public void shutDownConnection() {
 		try {
 			db.disconnectBD();
 		} catch (Throwable e) {
@@ -32,21 +29,28 @@ public class ManageUsers {
 		}
 	}
 		
-	// Add new user
-	public void addUser(String user, String mail, String pwd1, String name, String surname, String surname2,
-			String birthDate,  String photo) {
-		String query = "INSERT INTO users (user,name,surname,surname2,mail,pwd,birthDate,photo) VALUES (?,?,?,?,?,?,?,?)";
+	// Add a new user in the users table
+	public void addUser(String nickname, String name, String surname, String secondSurname, String mail, 
+			String password, String birthdate, String profilePhoto) 
+	{
+		
+		//Set the query
+		String query = "INSERT INTO users (nickname,name,surname,second_surname,mail,password,birthdate,profile_photo) VALUES (?,?,?,?,?,?,?,?)";
 		PreparedStatement statement = null;
+		
 		try {
+			//Fill the query
 			statement = db.prepareStatement(query);
-			statement.setString(1,user);
+			statement.setString(1,nickname);
 			statement.setString(2,name);
 			statement.setString(3,surname);
-			statement.setString(4,surname2);
+			statement.setString(4,secondSurname);
 			statement.setString(5,mail);	
-			statement.setString(6,pwd1);
-			statement.setString(7,birthDate);
-			statement.setString(8,photo);
+			statement.setString(6,password);
+			statement.setString(7,birthdate);
+			statement.setString(8,profilePhoto);
+			
+			//Execute the query
 			statement.executeUpdate();
 			statement.close();
 		} catch (SQLException e) {
@@ -54,26 +58,27 @@ public class ManageUsers {
 		}
 	}
 	
-	// Add user_genders relation
-	public void addGender(String name, String gender) throws SQLException {
-		String query1 = "SELECT id FROM users as u where u.user = '" + name + "'";
-		ResultSet userId = runQuery(query1);
+	// Add a new relation between the user and the genre in the relational table users_genres
+	public void addGenres(String nickname, String genre) throws SQLException {
+		String query1 = "SELECT id FROM users WHERE nickname = '" + nickname + "'";
+		ResultSet userID = runQuery(query1);
 		
-		String query2 = "SELECT id FROM genders as g where gender = '" + gender + "'";
-		ResultSet genderId = runQuery(query2);
+		String query2 = "SELECT id FROM genres WHERE genre = '" + genre + "'";
+		ResultSet genreID = runQuery(query2);
+		
 
-		if (userId.next() && genderId.next()) {
-			String query3 = "SELECT id FROM users_genders WHERE user_id = '" + userId.getInt("id") + "' AND gender_id = '" + genderId.getInt("id") + "'";
+		if (userID.next() && genreID.next()) {
+			String query3 = "SELECT id FROM users_genres WHERE user_id = '" + userID.getInt("id") + "' AND genre_id = '" + genreID.getInt("id") + "'";
 			ResultSet rs = runQuery(query3);
 			
 			// If not exist, Create
 			if (!rs.next()) {
-				String query4 = "INSERT INTO users_genders (user_id, gender_id) VALUES (?, ?)";
+				String query4 = "INSERT INTO users_genres (user_id, genre_id) VALUES (?, ?)";
 				PreparedStatement statement = null;
 				try {
 					statement = db.prepareStatement(query4);
-					statement.setInt(1, userId.getInt("id"));
-					statement.setInt(2, genderId.getInt("id"));
+					statement.setInt(1, userID.getInt("id"));
+					statement.setInt(2, genreID.getInt("id"));
 					statement.executeUpdate();
 					statement.close();
 				} catch (SQLException e) {
@@ -84,24 +89,26 @@ public class ManageUsers {
  
 	}
 	
-	/*Check if all the fields are filled correctly */
+	//Check if all the fields are filled correctly
 	public boolean isComplete(User user) {
-	    return(hasValue(user.getUser()) &&
+	    return(hasValue(user.getNickname()) &&
+	    	   hasValue(user.getName()) &&
+	    	   hasValue(user.getSurname()) &&
 	    	   hasValue(user.getMail()) &&
-	    	   hasValue(user.getPwd1()) &&
-	           hasValue(user.getPwd2()) &&
-	           hasValue(user.getName()) &&
-	           hasValue(user.getSurname()) );
+	    	   hasValue(user.getPassword()) &&
+	           hasValue(user.getConfirmationPassword())
+	           );
 	}
 	
+	//Validate a value
 	private boolean hasValue(String val) {
 		return((val != null) && (!val.equals("")));
 	}
 		
 	
-	// TODO: add other methods 
+	// Validate register form
 	public boolean isValidForm(User user) {
-		boolean[] errors = user.getError();
+		boolean[] errors = user.getErrors();
 		
 		boolean result = true;
 		for (boolean error : errors) {
@@ -110,28 +117,29 @@ public class ManageUsers {
 	    return(result);
 	}
 	
-	public void checkUsername(String user, User model) throws SQLException {
-        ResultSet usr = db.prepareStatement("select user from users WHERE user = '" + user +"'").executeQuery();
+	//Check if the nickname is already registered on the DataBase (error 0)
+	public void checkUsername(String nickname, User model) throws SQLException {
+        ResultSet usr = db.prepareStatement("SELECT nickname FROM users WHERE nickname = '" + nickname +"'").executeQuery();
         if(usr.next()) {
             model.setError(0,true);
         }
     }
     
+	//Check if the mail is already registered on the DataBase (error 1)
     public void checkMail(String mail, User model) throws SQLException {
-        ResultSet mil= db.prepareStatement("select mail from users WHERE mail = '" + mail +"'").executeQuery();
+        ResultSet mil= db.prepareStatement("SELECT mail FROM users WHERE mail = '" + mail +"'").executeQuery();
         if(mil.next()) {
             model.setError(1,true);
         }
     }
     
-	
+	//Execute a query and manage exceptions
 	private ResultSet runQuery (String query) {
 		PreparedStatement statement = null;
 		ResultSet result = null;
 		try {
 			statement = db.prepareStatement(query);
 			result = statement.executeQuery();
-			statement.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

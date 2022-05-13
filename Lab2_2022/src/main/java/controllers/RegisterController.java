@@ -1,5 +1,6 @@
 package controllers;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
@@ -7,6 +8,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -33,9 +35,10 @@ import models.User;
 )
 
 public class RegisterController extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
 	// !!! Change image path to your personal folder path!!!
-	private static final String img_path = "C:\\Users\\WENJI\\eclipse-workspace\\ESAWProject\\Lab2_2022\\src\\main\\webapp\\img/";
+	private static String root_path;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -44,62 +47,79 @@ public class RegisterController extends HttpServlet {
         super();
     }
 
+    public void init() {
+    	root_path = getServletContext().getRealPath("/");
+    }
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		//Get Model-View variables
 		User model = new User();
-		ManageUsers manager = new ManageUsers();
-
-		//String view = "ConstrainedValidationHTML5.jsp";
 		String view = "ConstrainedValidationSimple.jsp";
-		//String view = "ConstrainedValidationComplex.jsp";
-		//String view = "ConstrainedValidationParsley.jsp";
+		
+		//Get an instance of the manager
+		ManageUsers manager = new ManageUsers();
 		
 		try {
-			BeanUtils.populate(model,request.getParameterMap());
 			
-			// Manual set photo property
-			Part file = request.getPart("photo");
-			model.setPhoto(file.getSubmittedFileName());
+			//Populate user class
+			BeanUtils.populate(model,request.getParameterMap());	
+
 			
 			if (manager.isComplete(model)) {
-				manager.checkUsername(model.getUser(), model);
+				
+				manager.checkUsername(model.getNickname(), model);
 				manager.checkMail(model.getMail(), model);
 				
 				if (manager.isValidForm(model)) {	
-					// Hash password
-					String pwd_hashed = process_pwd(model.getPwd1());
-					model.setPwd1(pwd_hashed);
 					
-					// Insert user into DB.
-					manager.addUser(model.getUser(), model.getMail(), model.getPwd1(), model.getName(), model.getSurname(), model.getSurname2(), model.getBirthDate(), model.getPhoto());
-						
-					// Store photo
-					if (model.getPhoto().length() > 0) {
-						file.write(img_path + model.getPhoto());						
+					// Hash password: Doesn't work for now
+					/*
+					String password_hashed = hash_password(model.getPassword());
+					model.setPassword(password_hashed);
+					*/
+					
+					// Set photo properties
+					Part file = request.getPart("profilePhoto");
+					model.setProfilePhoto(file.getSubmittedFileName());
+					
+					// Add user to the DataBase
+					manager.addUser(model.getNickname(), model.getName(), model.getSurname(), model.getSecondSurname(), model.getMail(), 
+							model.getPassword(), model.getBirthdate(), model.getProfilePhoto());
+				
+
+					//Save the photo manually
+					if (model.getProfilePhoto().length() > 0) {
+	
+						saveProfilePhoto(file,model);						
+					}					
+					
+					// Add Genres in the relation table
+					String[] genres = model.getGenres();
+					for (int i = 0; i < genres.length; i++) 
+					{
+						manager.addGenres(model.getNickname(), genres[i]);
 					}
 					
-					// Insert Genders
-					// String[] genders = model.getGenders();
-					// for (int i = 0; i < genders.length; i++) {
-					//	manager.addGender(model.getUser(), genders[i]);
-					// }
+					manager.shutDownConnection();
 					
-					manager.finalize();
+					//Display the register form
 					view = "Registered.jsp";
+					
 				} else {
 					System.out.println("Some Error.");
 				}
 			}
+	
 		} catch (IllegalAccessException | InvocationTargetException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-
+		}		
+		
+		//Set the model and dispatcher for the view
 		request.setAttribute("model", model);
 		RequestDispatcher dispatcher = request.getRequestDispatcher(view);
 		dispatcher.forward(request, response);
@@ -113,17 +133,18 @@ public class RegisterController extends HttpServlet {
 		doGet(request, response);
 	}
 	
-	private String process_pwd(String pwd1) throws NoSuchAlgorithmException {
-		if (pwd1.isEmpty()) {
+	private String hash_password(String password) throws NoSuchAlgorithmException 
+	{
+		if (password.isEmpty()) {
 			return "";
 		}
 		
 		MessageDigest hash = null;
 		try {
 			hash = MessageDigest.getInstance("SHA256");
-			byte[] pwd_hashed = hash.digest(pwd1.getBytes("UTF-8"));
+			byte[] integer_hash = hash.digest(password.getBytes("UTF-8"));
 			String result = "";
-			for (byte b : pwd_hashed) {
+			for (byte b : integer_hash) {
 				String tmp = Integer.toHexString(b & 0xff);
 				if (tmp.length() == 1) {
 						tmp = "0"+tmp;
@@ -138,5 +159,31 @@ public class RegisterController extends HttpServlet {
 		
 		return "";
 	}
+
+	private void saveProfilePhoto(Part file, User model) throws IOException 
+	{
+		//Set OS slasher
+		String nameOS = System.getProperty("os.name").toLowerCase();
+		String slasher;
+		if(nameOS.contains("windows")) slasher = "\\";
+		else slasher = "/";
+		
+		//Create output directory if it is not already created
+		String outputDirectory = "profile_photo";
+		File newDirectory = new File(root_path + slasher + outputDirectory);
+	    if (!newDirectory.exists()){
+	        newDirectory.mkdirs();
+	    } 
+	    
+	    //Write the file in the output directory
+	    try {
+	    	file.write(newDirectory.getAbsolutePath() + slasher + model.getProfilePhoto());
+	    }catch(IOException e) {
+	    	e.getMessage();
+	    }
+	}
+
+
+
 
 }
