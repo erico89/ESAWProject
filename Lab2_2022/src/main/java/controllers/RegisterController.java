@@ -75,27 +75,23 @@ public class RegisterController extends HttpServlet {
 				
 				if (manager.isValidForm(model)) {	
 					
-					// Hash password: Doesn't work for now
-					/*
+					// Hash password
 					String password_hashed = hash_password(model.getPassword());
 					model.setPassword(password_hashed);
-					*/
+					
 					
 					// Set photo properties
 					Part file = request.getPart("profilePhoto");
 					model.setProfilePhoto(file.getSubmittedFileName());
+					//Save the photo manually
+					if (model.getProfilePhoto().length() > 0) {
+						saveProfilePhoto(file,model);						
+					}	
 					
 					// Add user to the DataBase
 					manager.addUser(model.getNickname(), model.getName(), model.getSurname(), model.getSecondSurname(), model.getMail(), 
 							model.getPassword(), model.getBirthdate(), model.getProfilePhoto());
-				
-
-					//Save the photo manually
-					if (model.getProfilePhoto().length() > 0) {
-	
-						saveProfilePhoto(file,model);						
-					}					
-					
+										
 					// Add Genres in the relation table
 					String[] genres = model.getGenres();
 					for (int i = 0; i < genres.length; i++) 
@@ -141,7 +137,7 @@ public class RegisterController extends HttpServlet {
 		
 		MessageDigest hash = null;
 		try {
-			hash = MessageDigest.getInstance("SHA256");
+			hash = MessageDigest.getInstance("SHA-256");
 			byte[] integer_hash = hash.digest(password.getBytes("UTF-8"));
 			String result = "";
 			for (byte b : integer_hash) {
@@ -171,6 +167,7 @@ public class RegisterController extends HttpServlet {
 		//Create output directory if it is not already created
 		String outputDirectory = "profile_photo";
 		File newDirectory = new File(root_path + slasher + outputDirectory);
+		System.out.println("Photo Saved in:" + root_path);
 	    if (!newDirectory.exists()){
 	        newDirectory.mkdirs();
 	    } 
