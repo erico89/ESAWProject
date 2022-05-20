@@ -119,34 +119,6 @@ public class RegisterController extends HttpServlet {
 		request.setAttribute("model", model);
 		RequestDispatcher dispatcher = request.getRequestDispatcher(view);
 		dispatcher.forward(request, response);
-
-		/*
-		System.out.print("RegisterController: ");
-		
-	   try {
-	
-		   User user = new User();
-		   BeanUtils.populate(user, request.getParameterMap());
-		
-		   if (user.isComplete()) {
-			   
-			   System.out.println(" user ok, forwarding to ViewLoginForm");
-			   RequestDispatcher dispatcher = request.getRequestDispatcher("ViewLoginForm.jsp");
-			   dispatcher.forward(request, response);
-		   
-		   } 
-		   else {
-		
-			   System.out.println(" forwarding to ViewRegisterForm");
-			   request.setAttribute("user",user);
-			   RequestDispatcher dispatcher = request.getRequestDispatcher("ViewRegisterForm.jsp");
-			   dispatcher.forward(request, response);
-		   }
-	   
-	   } catch (IllegalAccessException | InvocationTargetException e) {
-			e.printStackTrace();
-	   }
-		*/
 			
 	}
 
