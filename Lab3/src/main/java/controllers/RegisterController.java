@@ -105,28 +105,22 @@ public class RegisterController extends HttpServlet {
 					
 					//Display the register form
 				   System.out.println(" user ok, forwarding to ViewLoginForm");
-					request.setAttribute("menu","ViewMenuLogged.jsp");
-					request.setAttribute("content","ViewLoginForm.jsp");
-					view = "ViewLoginForm.jsp";
+				   RequestDispatcher dispatcher = request.getRequestDispatcher("ViewLoginForm.jsp");
+				   dispatcher.forward(request, response);
 
 				   
 				} else {
 					System.out.println("Something went wrong!");
-				    request.setAttribute("user",user);
-				    request.setAttribute("menu","ViewMenuNotLogged.jsp");
-					request.setAttribute("content","ViewRegisterForm.jsp");
-					view = "ViewRegisterForm.jsp";
+				   request.setAttribute("user",user);
+				   RequestDispatcher dispatcher = request.getRequestDispatcher("ViewRegisterForm.jsp");
+				   dispatcher.forward(request, response);
 				}
 			} else {
-			    System.out.println(" forwarding to ViewRegisterForm");
-			    request.setAttribute("user",user);
-			    request.setAttribute("menu","ViewMenuNotLogged.jsp");
-				request.setAttribute("content","ViewRegisterForm.jsp");
-				view = "ViewRegisterForm.jsp";
+			   System.out.println(" forwarding to ViewRegisterForm");
+			   request.setAttribute("user",user);
+			   RequestDispatcher dispatcher = request.getRequestDispatcher("ViewRegisterForm.jsp");
+			   dispatcher.forward(request, response);
 			}
-			
-			RequestDispatcher dispatcher = request.getRequestDispatcher(view);
-			dispatcher.forward(request, response);	
 		    
 		} catch (IllegalAccessException | InvocationTargetException e) {
 			e.printStackTrace();
@@ -138,9 +132,10 @@ public class RegisterController extends HttpServlet {
 	   try {
 	
 		   User user = new User();
+		   ManageUsers manager = new ManageUsers();
 		   BeanUtils.populate(user, request.getParameterMap());
 		
-		   if (user.isComplete()) {
+		   if (manager.isComplete(user)) {
 			   
 			   System.out.println(" user ok, forwarding to ViewLoginForm");
 			   RequestDispatcher dispatcher = request.getRequestDispatcher("ViewLoginForm.jsp");

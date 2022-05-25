@@ -31,7 +31,8 @@ $(document).ready(function(){
 	$("#genres").multiselect({});
 
 	$(document).on("click",".menu", async function(event) {
-		const response = await fetch($(this).attr('id'));
+		const request = $(this).attr('id');
+		const response = await fetch(request);
 		$('#content').html(await response.text());
 		var text = $(this).text() ;
 		if (text == "Registration") {
@@ -52,12 +53,15 @@ $(document).ready(function(){
 	        contentType: false,
 	        success: function(response)
 	        {
-	        	console.log(response); // show response from the php script.
+	        	$('#content').html(response);
+	        	
+				$("#genres").multiselect({});
 	        },
 	        error: function(err) {
         		console.log(err);
 	        }
 	    });
+		event.preventDefault();
 	    
 	});
 });
@@ -83,4 +87,6 @@ $(document).ready(function(){
 	<script type="text/javascript" src="js/bootstrap-multiselect.js"></script>
 	<link rel="stylesheet" href="css/bootstrap-multiselect.css" type="text/css"/>
   </body>
+  <script type="text/javascript" src="js/registerScript.js"></script>
+
 </html>
