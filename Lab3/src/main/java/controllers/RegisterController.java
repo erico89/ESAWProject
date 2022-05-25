@@ -54,9 +54,11 @@ public class RegisterController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		System.out.print("RegisterController: ");
+
 		//Get Model-View variables
 		User model = new User();
-		String view = "ConstrainedValidationSimple.jsp";
+		String view = "ViewRegisterForm.jsp";
 		
 		//Get an instance of the manager
 		ManageUsers manager = new ManageUsers();
@@ -121,7 +123,6 @@ public class RegisterController extends HttpServlet {
 		dispatcher.forward(request, response);
 
 		/*
-		System.out.print("RegisterController: ");
 		
 	   try {
 	
