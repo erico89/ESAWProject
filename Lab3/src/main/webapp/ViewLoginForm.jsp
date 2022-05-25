@@ -10,10 +10,10 @@
 			<p>
 			<p>
 			<form action="LoginController" method="POST">
-				<label for="Nickname"> Nickname </label><br>
-				<input type="text" id="nickname" class="form-control" name="nickname" placeholder="Nickname" required><br>
+				<label for="Nickname"> User id </label><br>
+				<input type="text" id="user" class="form-control" name="user" placeholder="User" value="${login.user}" required><br>
 				<label for="password"> Password </label><br>
-				<input type="password" id="password" class="form-control" name="password" placeholder="Password" required>
+				<input type="password" id="password" class="form-control" name="password" placeholder="Password" value="${login.password}" required>
 				  <button class="btn btn-primary mt-3"> Submit </button>
 			</form>
 		</div>
