@@ -3,6 +3,7 @@ package models;
 public class Login {
 
 	private String user = "";
+	private String password = " ";
 	private int[] error = {0};
 	
 	public String getUser(){
@@ -13,12 +14,20 @@ public class Login {
 		this.user = user;
 	}
 	
+	public String getPassword() {
+		return password;
+	}
+	
+	public void setPassword(String password){
+		this.password = password;
+	}
+	
 	public int[] getError() {
 		return error;
 	}
 	
 	public boolean isComplete() {
-	    return(hasValue(getUser()));
+	    return(hasValue(getUser()) && hasValue(getPassword()));
 	}
 	
 	
