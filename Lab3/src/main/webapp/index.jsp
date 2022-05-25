@@ -23,6 +23,9 @@
 <script type="text/javascript" src="js/bootstrap-multiselect.js"></script>
        
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="css/structure.css">
+
 <script type="text/javascript">
 $(document).ready(function(){
 	$.ajaxSetup({ cache: false }); //Avoids Internet Explorer caching!	
