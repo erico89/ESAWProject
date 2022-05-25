@@ -18,9 +18,7 @@
 <!--  W3C Library
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
  -->
-<!-- MultiSelector Plugins  -->
-<link rel="stylesheet" href="css/bootstrap-multiselect.css" type="text/css">
-<script type="text/javascript" src="js/bootstrap-multiselect.js"></script>
+
        
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -28,17 +26,20 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
-	$.ajaxSetup({ cache: false }); //Avoids Internet Explorer caching!	
+	$.ajaxSetup({ cache: false }); //Avoids Internet Explorer caching!
+	<!-- Initialize the multiselectors plugin: -->
+	$("#genres").multiselect({});
+
 	$(document).on("click",".menu", async function(event) {
-		//$('#content').load('ContentController',{content: $(this).attr('id')});
 		const response = await fetch($(this).attr('id'));
 		$('#content').html(await response.text());
-		//$('#content').load($(this).attr('id'));
+		var text = $(this).text() ;
+		if (text == "Registration") {
+			$("#genres").multiselect({});
+		}
 		event.preventDefault();
 	});
 	$(document).on("submit","form", function(event) {
-		event.preventDefault(); // avoid to execute the actual submit of the form.
-
 	    var form = $(this);
 	    var actionUrl = form.attr('action');
 	    var methodType = form.attr("method");
@@ -46,7 +47,6 @@ $(document).ready(function(){
 	    $.ajax({
 	        type: methodType,
 	        url: actionUrl,
-	        dataType: "JSON",
 	        data: new FormData(this),
 	        processData: false,
 	        contentType: false,
@@ -60,9 +60,6 @@ $(document).ready(function(){
 	    });
 	    
 	});
-	$("#genres").multiselect({
-        enableHTML: true
-    });
 });
 </script>
 
@@ -77,10 +74,13 @@ $(document).ready(function(){
  	<!-- End Navigation -->
  
 	<!-- Begin Content -->
-	<div class="w3-container w3-card-4 w3-padding-24" id="content">
+	<div class="container" id="content">
 	<jsp:include page="${content}" />
 	</div>
 	<!-- End Content -->
 
+	<!-- Include the plugin's CSS and JS: -->
+	<script type="text/javascript" src="js/bootstrap-multiselect.js"></script>
+	<link rel="stylesheet" href="css/bootstrap-multiselect.css" type="text/css"/>
   </body>
 </html>
