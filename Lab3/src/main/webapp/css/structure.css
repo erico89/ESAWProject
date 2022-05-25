@@ -13,8 +13,11 @@
 
 body {
  font-family: Arial, Helvetica, sans-serif;
+ color: white;
  font-size: 13px;
+ background: linear-gradient(to right, #b92b27, #1565c0);
 }
+
 #wrapper { 
  margin: 0 auto;
  width: 922px;
@@ -47,15 +50,7 @@ body {
  width: 195px;
  float: left;
 }
-#content { 
- float: left;
- color: #333;
- margin: 10px 13px;
- padding: 0px;
- width: 460px;
- display: inline;
- position: relative;
-}
+
 #rightcolumn { 
  display: inline;
  position: relative;
