@@ -57,7 +57,7 @@ public class RegisterController extends HttpServlet {
 		System.out.print("RegisterController: ");
 
 		//Get Model-View variables
-		User model = new User();
+		User user = new User();
 		String view = "ViewRegisterForm.jsp";
 		
 		//Get an instance of the manager
@@ -66,38 +66,38 @@ public class RegisterController extends HttpServlet {
 		try {
 			
 			//Populate user class
-			BeanUtils.populate(model,request.getParameterMap());	
+			BeanUtils.populate(user,request.getParameterMap());	
 
 			
-			if (manager.isComplete(model)) {
+			if (manager.isComplete(user)) {
 				
-				manager.checkUsername(model.getNickname(), model);
-				manager.checkMail(model.getMail(), model);
+				manager.checkUsername(user.getNickname(), user);
+				manager.checkMail(user.getMail(), user);
 				
-				if (manager.isValidForm(model)) {	
+				if (manager.isValidForm(user)) {	
 					
 					// Hash password
-					String password_hashed = hash_password(model.getPassword());
-					model.setPassword(password_hashed);
+					String password_hashed = hash_password(user.getPassword());
+					user.setPassword(password_hashed);
 						
 					// Set photo properties
 					Part file = request.getPart("profilePhoto");
-					model.setProfilePhoto(file.getSubmittedFileName());
+					user.setProfilePhoto(file.getSubmittedFileName());
 
 					// Add user to the DataBase
-					manager.addUser(model.getNickname(), model.getName(), model.getSurname(), model.getSecondSurname(), model.getMail(), 
-							model.getPassword(), model.getBirthdate(), model.getProfilePhoto());
+					manager.addUser(user.getNickname(), user.getName(), user.getSurname(), user.getSecondSurname(), user.getMail(), 
+							user.getPassword(), user.getBirthdate(), user.getProfilePhoto());
 					
 					//Save the photo manually
-					if (model.getProfilePhoto().length() > 0) {
-						saveProfilePhoto(file,model);						
+					if (user.getProfilePhoto().length() > 0) {
+						saveProfilePhoto(file,user);						
 					}	
 			
 					// Add Genres in the relation table
-					String[] genres = model.getGenres();
+					String[] genres = user.getGenres();
 					for (int i = 0; i < genres.length; i++) 
 					{
-						manager.addGenres(model.getNickname(), genres[i]);
+						manager.addGenres(user.getNickname(), genres[i]);
 					}
 					
 					//Shut down connection with the database
@@ -109,6 +109,17 @@ public class RegisterController extends HttpServlet {
 				} else {
 					System.out.println("Something went wrong!");
 				}
+				
+			   System.out.println(" user ok, forwarding to ViewLoginForm");
+			   RequestDispatcher dispatcher = request.getRequestDispatcher("ViewLoginForm.jsp");
+			   dispatcher.forward(request, response);
+			
+			   // If user is not complete
+			} else {
+			   System.out.println(" forwarding to ViewRegisterForm");
+			   request.setAttribute("user",user);
+			   RequestDispatcher dispatcher = request.getRequestDispatcher("ViewRegisterForm.jsp");
+			   dispatcher.forward(request, response);
 			}
 	
 		} catch (IllegalAccessException | InvocationTargetException e) {
@@ -116,12 +127,6 @@ public class RegisterController extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}		
-		
-		//Set the model and dispatcher for the view
-		request.setAttribute("model", model);
-		RequestDispatcher dispatcher = request.getRequestDispatcher(view);
-		dispatcher.forward(request, response);
-
 		/*
 		
 	   try {

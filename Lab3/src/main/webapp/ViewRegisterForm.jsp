@@ -4,7 +4,7 @@
 
 <div class="row align-items-center justify-content-center">
 	<div class="shadow-sm p-3 mb-5 mt-4 rounded" id="form">	
-		<form class="form-group" action="RegisterController" id="myform" method="post" enctype="multipart/form-data">
+		<form class="form-group" action="RegisterController" id="myform" method="POST" enctype='multipart/form-data'>
 		  
 		  <label for="Nickname"> Nickname </label><br>
 		  <input type="text" id="nickname" class="form-control" name="nickname" placeholder="Nickname" value="${model.nickname}" required pattern=".{4,}"><br>
@@ -53,34 +53,35 @@
 		  <label for="birthdate"> Date of birth </label><br>
 		  <input type="date" id="birthdate" class="form-control" name=birthdate placeholder="Birthdate" value="${model.birthdate}" required><br>
 			  
+			<div>
 			  <label for="genres"> Choose your favorite genres </label><br>
-		  <fieldset class="form-group">
-		    <input type="checkbox" name="genres" value="Pop">Pop<br>
-		  	<input type="checkbox" name="genres" value="Latin">Latin<br>  
-		  	<input type="checkbox" name="genres" value="Hip-Hop/Rap">Hip-Hop/Rap<br>
-		  	<input type="checkbox" name="genres" value="EDM">EDM<br> 
-	  		<input type="checkbox" name="genres" value="Trap">Trap<br>   
-		  	<input type="checkbox" name="genres" value="Rock">Rock<br>  
-		  	<input type="checkbox" name="genres" value="R&B">R&B<br>
-			<input type="checkbox" name="genres" value="Heavy">Heavy<br>
-			<input type="checkbox" name="genres" value="Indie">Indie<br>
-			<input type="checkbox" name="genres" value="Country">Country<br>
-			<input type="checkbox" name="genres" value="Techno">Techno<br>
-			<input type="checkbox" name="genres" value="House">House<br>
-		  	<input type="checkbox" name="genres" value="Blues">Blues<br> 
-		  	<input type="checkbox" name="genres" value="Jazz">Jazz<br>
-			<input type="checkbox" name="genres" value="Punk">Punk<br>
-			<input type="checkbox" name="genres" value="Disco">Disco<br>
-			<input type="checkbox" name="genres" value="Reggae">Reggae<br>
-			<input type="checkbox" name="genres" value="Classical">Classical<br>
-			<input type="checkbox" name="genres" value="Regional">Regional<br>
-			<input type="checkbox" name="genres" value="Anime">Anime<br>  		 		  
-	 		  </fieldset>
-	 		  
-	 		  <label for="profilePhoto">Profile photo </label>
-	 		  <input type="file" id="profilePhoto" class="form-control-file" name="profilePhoto" placeholder="Profile Photo" value="">
-		  <button class="btn btn-primary mt-3"> Submit </button>
-		  
+			  <select class="form-group" name="genres" id="genres" multiple="multiple">
+			    <option value="Pop">Pop</option>
+			  	<option value="Latin">Latin</option>
+			  	<option value="Hip-Hop/Rap">Hip-Hop&frasl;Rap</option>
+			  	<option value="EDM">EDM</option> 
+		  		<option value="Trap">Trap</option> 
+			  	<option value="Rock">Rock</option>
+			  	<option value="Rhythm and blues">Rhythm and blues</option>
+				<option value="Heavy">Heavy</option>
+				<option value="Indie">Indie</option>
+				<option value="Country">Country</option>
+				<option value="Techno">Techno</option>
+				<option value="House">House</option>
+			  	<option value="Blues">Blues</option> 
+			  	<option value="Jazz">Jazz</option>
+				<option value="Punk">Punk</option>
+				<option value="Disco">Disco</option>
+				<option value="Reggae">Reggae</option>
+				<option value="Classical">Classical</option>
+				<option value="Regional">Regional</option>
+				<option value="Anime">Anime</option>		 		  
+	 		  </select>
+ 		  </div>
+ 		  <label for="profilePhoto">Profile photo </label>
+ 		  <input type="file" id="profilePhoto" class="form-control-file" name="profilePhoto" placeholder="Profile Photo" value="">
+	    
+	    	<input class="btn btn-primary mt-3" type="submit" name="sumbit" value="Submit">
 		</form>
-	</div>
+ 	</div>
 </div>
