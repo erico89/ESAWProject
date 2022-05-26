@@ -1,15 +1,17 @@
 package models;
 
+import java.security.NoSuchAlgorithmException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import utils.DB;
+import utils.Hash;
 
 public class Login {
 
 	private String user = "";
-	private String password = " ";
-	private int[] error = {0};
+	private String password = "";
+	private String error = "";
 	private DB db = null ;
 	
 	//Create the DB client
@@ -42,28 +44,29 @@ public class Login {
 		return password;
 	}
 	
-	public void setPassword(String password){
-		this.password = password;
+	public void setPassword(String password) throws NoSuchAlgorithmException{
+		Hash hash = new Hash();
+		this.password = hash.hash_password(password);
 	}
 	
-	public int[] getError() {
+	public String getError() {
 		return error;
 	}
 	
 	public boolean isComplete() {
-	    return(hasValue(getUser()) && hasValue(getPassword()));
+		boolean bool = hasValue(getUser()) && hasValue(getPassword());
+	    return(bool);
 	}
 	
 	//Check if the credentials match
   	public boolean checkCredentials() throws SQLException {
-          ResultSet usr = db.prepareStatement("SELECT * FROM users WHERE nickname = '" + getUser() +"' AND password = '"+ getPassword() +"'").executeQuery();
-          ResultSet usr2 = db.prepareStatement("SELECT * FROM users WHERE mail = '" + getUser() +"' AND password = '"+ getPassword() +"'").executeQuery();
-          if(usr2.next()) {//If the user introduced the mail, we change it for the nickname
-        	  user = usr2.getString("nickname");
-        	  return true;
-          }
-		return(usr.next());
-      }
+        ResultSet usr = db.prepareStatement("SELECT * FROM users WHERE (nickname = '" + getUser() +"' OR mail = '" + getUser()  + "') AND password = '"+ getPassword() +"'").executeQuery();
+		boolean bool = usr.next();
+        if (!bool) {
+			this.error = "User or Password incorrect.";
+		}
+        return bool;
+    }
 	
 	private boolean hasValue(String val) {
 		return((val != null) && (!val.equals("")));

@@ -7,6 +7,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
 
@@ -62,7 +63,7 @@ public class RegisterController extends HttpServlet {
 		
 		//Get an instance of the manager
 		ManageUsers manager = new ManageUsers();
-		
+
 		try {
 			
 			//Populate user class

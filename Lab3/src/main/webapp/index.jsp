@@ -44,11 +44,11 @@ $(document).ready(function(){
 	    var form = $(this);
 	    var actionUrl = form.attr('action');
 	    var methodType = form.attr("method");
-	    
+	    var data = new FormData(this);
 	    $.ajax({
 	        type: methodType,
 	        url: actionUrl,
-	        data: new FormData(this),
+	        data: data,
 	        processData: false,
 	        contentType: false,
 	        success: function(response)

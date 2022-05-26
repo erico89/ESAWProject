@@ -9,7 +9,7 @@
 			<div class="form-group">
 				<label for="Nickname"> Nickname </label>
 				<input type="text" id="nickname" class="form-control" name="nickname" placeholder="Nickname" value="${user.nickname}" required pattern=".{4,}">
-					<c:if test = "${user.errors[0]}">
+				<c:if test = "${user.errors[0]}">
 					<div class="alert alert-danger" role="alert">
 							The nickname you wrote has already been registered
 					</div>
@@ -64,7 +64,7 @@
 		  
 			<div class="form-group">
 				<label for="birthdate"> Date of birth </label> 
-				<input type="date" id="birthdate" class="form-control" name=birthdate placeholder="Birthdate" value="${user.birthdate}" required> 
+				<input type="date" id="birthdate" class="form-control" name="birthdate" placeholder="Birthdate" value="${user.birthdate}" required> 
 			</div>
 			  
 			<div class="form-group">
