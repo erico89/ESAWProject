@@ -5,6 +5,13 @@
 $('#navigation').load('MenuController');
 </script>
 
-<div class="justify-content-center">  
-	<h2 id="nav"> Logout done! </h2>
+<style>
+h2.ex1 {
+  margin: 90px;
+  font-weight: bold;
+}
+</style>
+
+<div class="row align-items-center justify-content-center"> 
+	<h2 class = "ex1" id="nav"> Logout done! </h2>
 </div>

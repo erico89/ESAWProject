@@ -5,6 +5,14 @@
 $('#navigation').load('MenuController');
 </script>
 
-<div class="justify-content-center">  
-		<h2>Login for user ${sessionScope.user} done!</h2>
+<style>
+h2.ex1 {
+  margin: 90px;
+  font-weight: bold;
+}
+</style>
+
+<div class="row align-items-center justify-content-center">
+	<h2 class ="ex1"> Login for user ${sessionScope.user} done!</h2>
+	<h2 class="ex1">¡WELCOME TO CALYPSOUND!</h2>		
 </div>
