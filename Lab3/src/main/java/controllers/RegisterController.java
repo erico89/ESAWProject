@@ -24,6 +24,7 @@ import org.apache.commons.beanutils.BeanUtils;
 
 import managers.ManageUsers;
 import models.User;
+import utils.Hash;
 
 /**
  * Servlet implementation class FormController
@@ -59,6 +60,7 @@ public class RegisterController extends HttpServlet {
 
 		//Get Model-View variables
 		User user = new User();
+		Hash hash = new Hash();
 		String view = "ViewRegisterForm.jsp";
 		
 		//Get an instance of the manager
@@ -78,8 +80,7 @@ public class RegisterController extends HttpServlet {
 				if (manager.isValidForm(user)) {	
 					
 					// Hash password
-					String password_hashed = hash_password(user.getPassword());
-					user.setPassword(password_hashed);
+					user.setPassword(hash.hash_password(user.getPassword()));
 						
 					// Set photo properties
 					Part file = request.getPart("profilePhoto");
@@ -165,32 +166,7 @@ public class RegisterController extends HttpServlet {
 		doGet(request, response);
 	}
 	
-	private String hash_password(String password) throws NoSuchAlgorithmException 
-	{
-		if (password.isEmpty()) {
-			return "";
-		}
-		
-		MessageDigest hash = null;
-		try {
-			hash = MessageDigest.getInstance("SHA-256");
-			byte[] integer_hash = hash.digest(password.getBytes("UTF-8"));
-			String result = "";
-			for (byte b : integer_hash) {
-				String tmp = Integer.toHexString(b & 0xff);
-				if (tmp.length() == 1) {
-						tmp = "0"+tmp;
-				}
-				result += tmp;
-			}
-			return result;
-		} 
-		catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
-		
-		return "";
-	}
+	
 
 	private void saveProfilePhoto(Part file, User model) throws IOException 
 	{

@@ -56,6 +56,7 @@ public class LoginController extends HttpServlet {
 	    	if (login.isComplete() && login.checkCredentials()){
 		    	HttpSession session = request.getSession();
 		    	session.setAttribute("user",login.getUser());
+		    	login.shutDownConnection();
 		    	RequestDispatcher dispatcher = request.getRequestDispatcher("ViewLoginDone.jsp");
 			    dispatcher.forward(request, response);
 			    
