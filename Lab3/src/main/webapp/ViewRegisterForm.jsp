@@ -4,7 +4,7 @@
 
 <div class="row align-items-center justify-content-center"> 
 	<div class="col-md-6 mt-5" id="form"> 
-		<h1>Registretion</h1>
+		<h1>Registration</h1>
 		<form class="form-group" action="RegisterController" id="myform" method="POST" enctype='multipart/form-data'>
 			<div class="form-group">
 				<label for="Nickname"> Nickname </label>

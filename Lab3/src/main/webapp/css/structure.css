@@ -5,9 +5,17 @@ body {
     background: linear-gradient(to right, #b92b27, #1565c0)
 }
 
+.form-group{
+	color: white;
+}
+
 .card{
     margin-bottom:20px;
     border:none;
+}
+
+h1{
+	color: white;
 }
 
 .box {
