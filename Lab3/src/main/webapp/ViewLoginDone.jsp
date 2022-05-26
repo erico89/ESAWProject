@@ -5,4 +5,6 @@
 $('#navigation').load('MenuController');
 </script>
 
-Login for user ${sessionScope.user} done!
+<div class="justify-content-center">  
+		<h2>Login for user ${sessionScope.user} done!</h2>
+</div>

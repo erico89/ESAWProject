@@ -5,4 +5,6 @@
 $('#navigation').load('MenuController');
 </script>
 
-<p id="nav"> Logout done! </p>
+<div class="justify-content-center">  
+	<h2 id="nav"> Logout done! </h2>
+</div>
