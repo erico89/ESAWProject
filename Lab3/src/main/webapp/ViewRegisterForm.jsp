@@ -6,24 +6,45 @@
 body{
     margin-bottom: 100px; 
 }
+input[type=text]{
+	color: white;
+	background:transparent;
+	outline: none;
+}
+input[type=email]{
+	color: white;
+	background:transparent;
+	outline: none;
+}
+input[type=password]{
+	color: white;
+	background:transparent;
+	outline: none;
+}
+input[type=date]{
+	color: white;
+	background:transparent;
+	color-scheme: dark;
+	outline: none;
+}
 .info_placement
 {
-	color: black;
+	color: white;
 	margin-top: -30px;
 	margin-right: 45px;
 }
 .password_show_placement
 {
-	color: black;
-	margin-top: -53px;
+	color: white;
+	margin-top: -30px;
 	margin-right: 10px;
 	cursor: pointer;
 }
 </style>
 
 <body>
-	<div class="row mt-md-5 align-items-center justify-content-center rounded" style="background-color:#343A40; position: absolute; left: 600px; width:700px;" > 
-		<div class="col-md-10 mt-5 mb-5" id="form"> 
+	<div class="row mt-md-5 align-items-center justify-content-center rounded" style="background-color:#343A40; position: absolute; left: 700px; width:500px;" > 
+		<div class="col-md-8 mt-5 mb-5" id="form"> 
 			<div class="d-flex justify-content-center">
 			<img src="imgs/logo4.png" width="200" height="200">
 			</div><br>
@@ -31,34 +52,34 @@ body{
 			<h5 style="color: white;font-weight: bold;">Register</h5>
 			</div><br>
 			<form class="form-group" action="RegisterController" id="myform" method="POST" enctype='multipart/form-data'>
-				<div class="form-group">
+				
+				<div class="form-group ">
 					<label for="Nickname"> Nickname </label>
-					<input type="text" id="nickname" class="form-control" name="nickname" placeholder="Nickname" value="${user.nickname}" required pattern=".{4,}">
+					<input type="text" id="nickname" class="form-control" name="nickname" value="${user.nickname}" required pattern=".{4,}">
 					<c:if test = "${user.errors[0]}">
 						<div class="alert alert-danger" role="alert">
 								The nickname you wrote has already been registered
 						</div>
 					</c:if>
 				</div>
-	
 				<div class="form-group">
 					<label for="name"> Name </label> 
-					<input type="text" id="name" class="form-control" name="name" placeholder="Name" value="${user.name}" required> 
+					<input type="text" id="name" class="form-control" name="name" value="${user.name}" aria-hidden="true" required> 
 				</div>
 	
 				<div class="form-group">
 					<label for="surname"> Surname </label> 
-					<input type="text" id="surname" class="form-control" name="surname" placeholder="Surname" value="${user.surname}" required>  
+					<input type="text" id="surname" class="form-control" name="surname" value="${user.surname}" required>  
 				</div>
 		  		  
 				<div class="form-group">
 					<label for="secondSurname"> Second Surname </label>  
-					<input type="text" id="secondSurname" class="form-control" name="secondSurname" placeholder="Second Surname" value="${user.secondSurname}">  
+					<input type="text" id="secondSurname" class="form-control" name="secondSurname" value="${user.secondSurname}">  
 				</div>
 			  
 				<div class="form-group">
 					<label for="mail"> Mail </label>  
-					<input type="email" id="mail" class="form-control" name="mail" placeholder="Mail" value="${user.mail}" required>  
+					<input type="email" id="mail" class="form-control" name="mail" value="${user.mail}" required>  
 					<c:if test = "${user.errors[1]}">
 						<div class="alert alert-danger" role="alert">
 							The email you wrote is already registered
@@ -68,13 +89,13 @@ body{
 			  
 				<div class="form-group">
 					<label for="password"> Password </label>  
-					<input type="password" id="password" class="form-control" name="password" placeholder="Password" value="${user.password}" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$">
+					<input type="password" id="password" class="form-control" name="password" value="${user.password}" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$">
 					
 				    <span data-toggle="tooltip" data-placement="top" data-html="true" title="Your password must contain at lest 8 characters with 1 capital letter and 1 number">
-					  <i class="bi bi-info-circle-fill fa-lg float-right info_placement"></i>
-				    </span><br>
+					  <i class="bi bi-info-circle fa-lg float-right info_placement"></i>
+				    </span>
 
-					<i id="toggleShowPassword" class="bi bi-eye-slash-fill fa-lg float-right password_show_placement" ></i>
+					<i id="toggleShowPassword" class="bi bi-eye-slash fa-lg float-right password_show_placement" ></i>
 	
 					<c:if test = "${user.errors[2]}">
 						<div class="alert alert-danger" role="alert">
@@ -85,7 +106,10 @@ body{
 				
 				<div class="form-group">
 					<label for="confirmationPassword"> Confirm Password </label>	
-					<input type="password" id="confirmationPassword" class="form-control" name="confirmationPassword" placeholder="Confirm Password" value="${user.confirmationPassword}" required> 
+					<input type="password" id="confirmationPassword" class="form-control" name="confirmationPassword" value="${user.confirmationPassword}" required> 
+		  		  	
+		  		  	<i id="toggleShowConfirmationPassword" class="bi bi-eye-slash fa-lg float-right password_show_placement" ></i>
+		  		  	
 		  		  	<c:if test = "${user.errors[3]}">
 						<div class="alert alert-danger" role="alert">
 							Passwords don't match!
@@ -95,11 +119,11 @@ body{
 			  
 				<div class="form-group">
 					<label for="birthdate"> Date of birth </label> 
-					<input type="date" id="birthdate" class="form-control" name="birthdate" placeholder="Birthdate" value="${user.birthdate}" required> 
+					<input type="date" id="birthdate" class="form-control" name="birthdate" value="${user.birthdate}" required> 
 				</div>
 				  
 				<div class="form-group">
-				  <label for="genres"> Choose your favorite genres </label> 
+				  <label for="genres"> Choose your favorite genres </label><br>
 				  <select class="form-group" name="genres" id="genres" multiple="multiple">
 				    <option value="Pop">Pop</option>
 				  	<option value="Latin">Latin</option>
@@ -126,7 +150,7 @@ body{
 	
 				<div class="form-group">
 					<label for="profilePhoto">Profile photo </label>
-					<input type="file" id="profilePhoto" class="form-control-file" name="profilePhoto" placeholder="Profile Photo" value="">
+					<input type="file" id="profilePhoto" class="form-control-file" name="profilePhoto" value="">
 				</div>
 		    
 		    	<input class="btn btn-primary mt-3" type="submit" name="sumbit" value="Submit">
@@ -136,16 +160,29 @@ body{
 	 
 	 <script>
         const toggleShowPassword = document.getElementById("toggleShowPassword");
-        const password = document.getElementById("password");
-
-        toggleShowPassword.addEventListener("click", function () {
+        const toggleShowConfirmationPassword = document.getElementById("toggleShowConfirmationPassword");
+        const password1 = document.getElementById("password");
+        const password2 = document.getElementById("confirmationPassword");
+        
+        //Events
+        toggleShowPassword.addEventListener("click", function()
+        		{
+		            // toggle the type attribute
+		            const type = password1.getAttribute("type") === "password" ? "text" : "password";
+		            password1.setAttribute("type", type);
+		            
+		            // toggle the icon
+		            this.classList.toggle("bi-eye");
+        		});
+        toggleShowConfirmationPassword.addEventListener("click", function()
+        		{
             // toggle the type attribute
-            const type = password.getAttribute("type") === "password" ? "text" : "password";
-            password.setAttribute("type", type);
+            const type = password2.getAttribute("type") === "password" ? "text" : "password";
+            password2.setAttribute("type", type);
             
             // toggle the icon
             this.classList.toggle("bi-eye");
-        });
+		});
 
         // prevent form submit
         const form = document.querySelector("form");
