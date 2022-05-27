@@ -38,7 +38,7 @@ CREATE TABLE `genres` (
 
 LOCK TABLES `genres` WRITE;
 /*!40000 ALTER TABLE `genres` DISABLE KEYS */;
-INSERT INTO `genres` VALUES (1,'Pop'),(2,'Latin'),(3,'Hip-Hop/Rap'),(4,'EDM'),(5,'Trap'),(6,'Rock'),(7,'R&B'),(8,'Heavy'),(9,'Indie')
+INSERT INTO `genres` VALUES (1,'Pop'),(2,'Latin'),(3,'Hip-Hop/Rap'),(4,'EDM'),(5,'Trap'),(6,'Rock'),(7,'Rhythm and blues'),(8,'Heavy'),(9,'Indie')
 ,(10,'Country'),(11,'Techno'),(12,'House'),(13,'Blues'),(14,'Jazz'),(15,'Punk'),(16,'Disco'),(17,'Reggae'),(18,'Classical'),(19,'Regional'),(20,'Anime');
 /*!40000 ALTER TABLE `genres` ENABLE KEYS */;
 UNLOCK TABLES;

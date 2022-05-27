@@ -29,6 +29,8 @@ public class MenuController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		
+		System.out.println(getServletContext().getRealPath("/"));
 		System.out.print("MenuController: ");
 		
 		HttpSession session = request.getSession();

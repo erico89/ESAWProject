@@ -58,8 +58,7 @@ body {
 		  
 		  <label for="password"> Password </label><br>
 		  <input type="password" id="password" class="form-control" name="password" placeholder="Password" value="${model.password}" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$">
-		  <small id="emailHelp" class="form-text text-muted"> 8 characters minimum <br> 1 capital letter required <br> 1 number required</small><br>
-
+		 
 
 		  
    		  <c:if test = "${model.errors[2]}">

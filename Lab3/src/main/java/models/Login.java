@@ -9,7 +9,7 @@ import utils.Hash;
 
 public class Login {
 
-	private String user = "";
+	private String user = ""; //Nickname or mail
 	private String password = "";
 	private String error = "";
 	private DB db = null ;
@@ -65,6 +65,7 @@ public class Login {
         if (!bool) {
 			this.error = "User or Password incorrect.";
 		}
+        setUser(usr.getString("nickname"));
         return bool;
     }
 	
