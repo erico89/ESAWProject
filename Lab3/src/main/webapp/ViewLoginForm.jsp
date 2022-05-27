@@ -4,9 +4,14 @@
 
 <link rel="stylesheet" href="css/structure.css">
 
-<div class="row align-items-center justify-content-center"> 
-	<div class="col-md-6 mt-5"> 
-		<h1>Login</h1>
+<div class="row mt-md-5 align-items-center justify-content-center rounded" style="background-color:#343A40; position: absolute; left: 600px; width:700px;" > 
+		<div class="col-md-10 mt-5 mb-5" id="form"> 
+			<div class="d-flex justify-content-center">
+			<img src="imgs/logo4.png" width="200" height="200">
+			</div><br>
+			<div class="d-flex justify-content-center">
+		<h5 style="color: white;font-weight: bold;">Login</h5>
+			</div><br>
 		<c:if test = "${!empty login.error}">
 			<div class="alert alert-danger" role="alert">
 					${login.error}
