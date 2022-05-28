@@ -159,13 +159,13 @@ input[type=date]{
 	 </div>
 	 
 	 <script>
-        const toggleShowPassword = document.getElementById("toggleShowPassword");
+        const toggleShowPassword1 = document.getElementById("toggleShowPassword");
         const toggleShowConfirmationPassword = document.getElementById("toggleShowConfirmationPassword");
         const password1 = document.getElementById("password");
         const password2 = document.getElementById("confirmationPassword");
         
         //Events
-        toggleShowPassword.addEventListener("click", function()
+        toggleShowPassword1.addEventListener("click", function()
         		{
 		            // toggle the type attribute
 		            const type = password1.getAttribute("type") === "password" ? "text" : "password";

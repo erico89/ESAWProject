@@ -56,11 +56,11 @@ input[type=password]{
 	</div>
 	
 	<script>
-	      const toggleShowPassword = document.getElementById("toggleShowPassword");
+	      const toggleShowPassword2 = document.getElementById("toggleShowPassword");
 	      const password = document.getElementById("password");
 	      
 	      //Events
-	      toggleShowPassword.addEventListener("click", function()
+	      toggleShowPassword2.addEventListener("click", function()
 	      		{
 	            // toggle the type attribute
 	            const type = password.getAttribute("type") === "password" ? "text" : "password";
