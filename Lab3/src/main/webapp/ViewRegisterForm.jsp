@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <div class="row mt-md-5 mb-5 align-items-center justify-content-md-center rounded"> 
-	<div class="col-md-5 registerFrom" id="form"> 
+	<div class="col-md-5 myFrom" id="form"> 
 		<div class="m-5">
 			<div class="d-flex justify-content-center">
 				<img src="imgs/logo4.png" width="200" height="200">
@@ -123,35 +123,3 @@
 	</div>
  </div>
  
- <script>
-       const toggleShowPassword1 = document.getElementById("toggleShowPassword");
-       const toggleShowConfirmationPassword = document.getElementById("toggleShowConfirmationPassword");
-       const password1 = document.getElementById("password");
-       const password2 = document.getElementById("confirmationPassword");
-       
-       //Events
-       toggleShowPassword1.addEventListener("click", function()
-       		{
-	            // toggle the type attribute
-	            const type = password1.getAttribute("type") === "password" ? "text" : "password";
-	            password1.setAttribute("type", type);
-	            
-	            // toggle the icon
-	            this.classList.toggle("bi-eye");
-       		});
-       toggleShowConfirmationPassword.addEventListener("click", function()
-       		{
-           // toggle the type attribute
-           const type = password2.getAttribute("type") === "password" ? "text" : "password";
-           password2.setAttribute("type", type);
-           
-           // toggle the icon
-           this.classList.toggle("bi-eye");
-	});
-
-       // prevent form submit
-       const form = document.querySelector("form");
-       form.addEventListener('submit', function (e) {
-           e.preventDefault();
-       });
-   </script>

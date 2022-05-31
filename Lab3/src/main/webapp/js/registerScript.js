@@ -1,10 +1,10 @@
-const form = document.getElementById("myform");
-const user = document.getElementById("nickname");
-const email = document.getElementById("mail");
-const pwd1 = document.getElementById("password");
-const pwd2 = document.getElementById("confirmationPassword");
-const birthDate = document.getElementById("birthdate");
-const photo = document.getElementById("profilePhoto");
+var form = document.getElementById("myform");
+var user = document.getElementById("nickname");
+var email = document.getElementById("mail");
+var pwd1 = document.getElementById("password");
+var pwd2 = document.getElementById("confirmationPassword");
+var birthDate = document.getElementById("birthdate");
+var photo = document.getElementById("profilePhoto");
 
 var checkPasswordValidity = function() {
 	 if (pwd2.value !== pwd1.value ) {
@@ -106,3 +106,42 @@ function isValidPhoto (input)
         image.src = URL.createObjectURL(file);
     }
 };
+
+  const toggleShowPassword2 = document.getElementById("toggleShowPassword");
+  const password = document.getElementById("password");
+  
+  //Events
+  toggleShowPassword2.addEventListener("click", function()
+  		{
+        // toggle the type attribute
+        const type = password.getAttribute("type") === "password" ? "text" : "password";
+        password.setAttribute("type", type);
+        
+        // toggle the icon
+        this.classList.toggle("bi-eye");
+	});
+	
+   const toggleShowPassword1 = document.getElementById("toggleShowPassword");
+   const toggleShowConfirmationPassword = document.getElementById("toggleShowConfirmationPassword");
+   const password1 = document.getElementById("password");
+   const password2 = document.getElementById("confirmationPassword");
+   
+   //Events
+   toggleShowPassword1.addEventListener("click", function()
+   		{
+            // toggle the type attribute
+            const type = password1.getAttribute("type") === "password" ? "text" : "password";
+            password1.setAttribute("type", type);
+            
+            // toggle the icon
+            this.classList.toggle("bi-eye");
+   		});
+   toggleShowConfirmationPassword.addEventListener("click", function()
+   		{
+       // toggle the type attribute
+       const type = password2.getAttribute("type") === "password" ? "text" : "password";
+       password2.setAttribute("type", type);
+       
+       // toggle the icon
+       this.classList.toggle("bi-eye");
+	});
