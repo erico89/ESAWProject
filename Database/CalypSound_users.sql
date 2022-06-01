@@ -25,7 +25,7 @@ DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `users` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `user_id` int NOT NULL AUTO_INCREMENT,
   `nickname` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
   `surname` varchar(255) NOT NULL,
@@ -33,8 +33,8 @@ CREATE TABLE `users` (
   `mail` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `birthdate` date NOT NULL,
-  `profile_photo` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`),
+  `profile_photo` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`user_id`),
   UNIQUE KEY `mail` (`nickname`),
   UNIQUE KEY `user` (`mail`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

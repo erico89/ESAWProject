@@ -31,8 +31,8 @@ CREATE TABLE `users_genres` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `genre_id` (`genre_id`),
-  CONSTRAINT `users_genres_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
-  CONSTRAINT `users_genres_ibfk_2` FOREIGN KEY (`genre_id`) REFERENCES `genres` (`id`)
+  CONSTRAINT `users_genres_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`),
+  CONSTRAINT `users_genres_ibfk_2` FOREIGN KEY (`genre_id`) REFERENCES `genres` (`genre_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
