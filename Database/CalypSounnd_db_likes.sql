@@ -16,31 +16,35 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `genres`
+-- Table structure for table `likes`
 --
 
 use lab2;
 
-DROP TABLE IF EXISTS `genres`;
+DROP TABLE IF EXISTS `likes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `genres` (
-  `genre_id` int NOT NULL AUTO_INCREMENT,
-  `genre` varchar(255) NOT NULL,
-  PRIMARY KEY (`genre_id`),
-  UNIQUE KEY (`genre`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `likes` (
+  `tweet_id` INT NOT NULL,
+  `user_id` INT NOT NULL,
+  PRIMARY KEY (`tweet_id`, `user_id`),
+  CONSTRAINT `likes_ibfk_1` FOREIGN KEY (`tweet_id`) REFERENCES `tweets` (`tweet_id`),
+  CONSTRAINT `likes_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
+)
+ENGINE=InnoDB 
+DEFAULT CHARSET=utf8mb4 
+COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
+
 --
--- Dumping data for table `genres`
+-- Dumping data for table `likes`
 --
 
-LOCK TABLES `genres` WRITE;
-/*!40000 ALTER TABLE `genres` DISABLE KEYS */;
-INSERT INTO `genres` VALUES (1,'Pop'),(2,'Latin'),(3,'Hip-Hop/Rap'),(4,'EDM'),(5,'Trap'),(6,'Rock'),(7,'Rhythm and blues'),(8,'Heavy'),(9,'Indie')
-,(10,'Country'),(11,'Techno'),(12,'House'),(13,'Blues'),(14,'Jazz'),(15,'Punk'),(16,'Disco'),(17,'Reggae'),(18,'Classical'),(19,'Regional'),(20,'Anime');
-/*!40000 ALTER TABLE `genres` ENABLE KEYS */;
+LOCK TABLES `likes` WRITE;
+/*!40000 ALTER TABLE `likes` DISABLE KEYS */;
+/*!40000 ALTER TABLE `likes` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -51,5 +55,3 @@ UNLOCK TABLES;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2022-05-10 17:34:01

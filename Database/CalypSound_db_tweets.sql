@@ -26,7 +26,7 @@ DROP TABLE IF EXISTS `tweets`;
 /*!50503 SET character_set_client = utf8mb4 */;
 
 CREATE TABLE `tweets` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `tweet_id` int NOT NULL AUTO_INCREMENT,
   `description` varchar(255),
   `image` varchar(255),
   `audio` varchar(255),
@@ -37,7 +37,7 @@ CREATE TABLE `tweets` (
   `parent_id` int DEFAULT NULL,
   `user_id` int NOT NULL,
   PRIMARY KEY (`tweet_id`),
-  UNIQUE KEY `nickname` (`nickname`),
+  UNIQUE KEY (`nickname`),
   CONSTRAINT `tweets_ibfk_1` FOREIGN KEY (`parent_id`) REFERENCES `tweets` (`tweet_id`),
   CONSTRAINT `tweets_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
   )
