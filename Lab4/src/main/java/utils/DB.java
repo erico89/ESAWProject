@@ -5,6 +5,7 @@ import java.sql.*;
 public class DB {
 	
 	private Connection connection = null;
+	private Statement statement;
 	
 	public DB() throws Exception {
 		
@@ -12,9 +13,10 @@ public class DB {
 		String user = "mysql";
 		String password="prac";
 		Class.forName("com.mysql.cj.jdbc.Driver");
-		connection=DriverManager.getConnection("jdbc:mysql://localhost/lab4?serverTimezone=UTC&user="+user+"&password="+password);
+		connection=DriverManager.getConnection("jdbc:mysql://localhost/lab2?serverTimezone=UTC&user="+user+"&password="+password);
 
 	}
+	
 	
 	//execute queries
 	

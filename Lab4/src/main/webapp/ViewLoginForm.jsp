@@ -2,22 +2,38 @@
     pageEncoding="UTF-8" session="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-
-<c:if test = "${error}">
-<div class="w3-panel w3-theme-l4 w3-display-container">
-  <span onclick="this.parentElement.style.display='none'"
-  class="w3-button w3-large w3-display-topright">&times;</span>
-  <h3> Identification error! </h3>
-  <p> Provided credentials do not match our database. </p>
+<div class="row mt-md-5 mb-5 align-items-center justify-content-md-center rounded"> 
+	<div class="col-md-5 myFrom" id="form"> 
+		<div class="m-5">
+			<div class="d-flex justify-content-center">
+				<img src="imgs/logo4.png" width="200" height="200">
+			</div>
+			<div class="d-flex justify-content-center">
+				<h5 style="color: white;font-weight: bold;">Login</h5>
+			</div>
+			<c:if test = "${!empty login.error}">
+				<div class="alert alert-danger" role="alert">
+						${login.error}
+				</div>
+			</c:if>
+			
+			<form class="form-group" action="LoginController" id="myform" method="GET">	
+				<div class="form-group">
+					<label for="user"> NickName or Mail </label>
+					<input type="text" id="user" class="form-control  text-light bg-dark" name="user" placeholder="Nickname or Mail" value="${login.user}" required>
+				</div>
+				<div class="form-group">
+					<label for="password"> Password </label>
+					<input type="password" id="password" class="form-control  text-light bg-dark" name="password" placeholder="Password" required>
+					<i id="toggleShowPassword" class="bi bi-eye-slash fa-lg float-right password_show_placement" ></i>
+				</div>
+				
+		    	<input class="btn btn-primary mt-3" type="submit" name="sumbit" value="Submit">
+			</form>
+		</div>
+	</div>
 </div>
-</c:if>
 
 
-<form action="LoginController" method="POST">
-	<p>      
-    <label for="user" class="w3-text-theme"> User name </label><br>
-    <input class="w3-input w3-border w3-light-grey" type="text" name="name" placeholder="Username" value="${user.name}" required autocomplete="username"><br>
-    <label for="pwd1" class="w3-text-theme"> Password: </label><br>
-  	<input class="w3-input w3-border w3-light-grey" type="password" id="pwd1" name="pwd" placeholder="Password" value="${user.pwd}" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$" autocomplete="current-password"><br><br>
-    <input class="w3-btn w3-theme" type="submit" name="sumbit" value="Submit"></p>
-</form>
+
+

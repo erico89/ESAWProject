@@ -2,57 +2,124 @@
     pageEncoding="UTF-8" session="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<c:if test = "${user.error['user']}">
-<div class="w3-panel w3-theme-l4 w3-display-container">
-  <span onclick="this.parentElement.style.display='none'"
-  class="w3-button w3-large w3-display-topright">&times;</span>
-  <h3> Registration error! </h3>
-  <p> Given user name already exist on our database. </p>
-</div>
-</c:if>
+<div class="row mt-md-5 mb-5 align-items-center justify-content-md-center rounded"> 
+	<div class="col-md-5 myFrom" id="form"> 
+		<div class="m-5">
+			<div class="d-flex justify-content-center">
+				<img src="imgs/logo4.png" width="200" height="200">
+			</div>
+			<div class="d-flex justify-content-center">
+				<h5 style="color: white;font-weight: bold;">Register</h5>
+			</div>
+			<form class="form-group" action="RegisterController" id="myform" method="POST" enctype='multipart/form-data'>
+				
+				<div class="form-group ">
+					<label for="Nickname"> Nickname </label>
+					<input type="text" id="nickname" class="form-control text-light bg-dark" name="nickname" value="${user.nickname}" required pattern=".{4,}">
+					<c:if test = "${user.errors[0]}">
+						<div class="alert alert-danger" role="alert">
+								The nickname you wrote has already been registered
+						</div>
+					</c:if>
+				</div>
+				<div class="form-group">
+					<label for="name"> Name </label> 
+					<input type="text" id="name" class="form-control text-light bg-dark" name="name" value="${user.name}" aria-hidden="true" required> 
+				</div>
+	
+				<div class="form-group">
+					<label for="surname"> Surname </label> 
+					<input type="text" id="surname" class="form-control text-light bg-dark" name="surname" value="${user.surname}" required>  
+				</div>
+		  		  
+				<div class="form-group">
+					<label for="secondSurname"> Second Surname </label>  
+					<input type="text" id="secondSurname" class="form-control text-light bg-dark" name="secondSurname" value="${user.secondSurname}">  
+				</div>
+			  
+				<div class="form-group">
+					<label for="mail"> Mail </label>  
+					<input type="email" id="mail" class="form-control text-light bg-dark" name="mail" value="${user.mail}" required>  
+					<c:if test = "${user.errors[1]}">
+						<div class="alert alert-danger" role="alert">
+							The email you wrote is already registered
+						</div>
+					</c:if>
+				</div>
+			  
+				<div class="form-group">
+					<label for="password"> Password </label>  
+					<div>
+						<input type="password" id="password" class="form-control text-light bg-dark" name="password" value="${user.password}" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$">
+						
+						<div class="tools">
+						    <span data-toggle="tooltip" data-placement="top" data-html="true" title="Your password must contain at lest 8 characters with 1 capital letter and 1 number">
+							  <i class="bi bi-info-circle fa-lg float-right info_placement"></i>
+						    </span>
+							<i id="toggleShowPassword" class="bi bi-eye-slash fa-lg float-right password_show_placement" ></i>
+						</div>
+					</div>
 
-<c:if test = "${user.error['mail']}">
-<div class="w3-panel w3-theme-l4 w3-display-container">
-  <span onclick="this.parentElement.style.display='none'"
-  class="w3-button w3-large w3-display-topright">&times;</span>
-  <h3> Registration error! </h3>
-  <p> Given mail already exist on our database. </p>
-</div>
-</c:if>
-
-<form action="RegisterController" id="regform" method="POST">
-  <p>
-  <label for="user" class="w3-text-theme"> User name:</label><br>
-  <input class="w3-input w3-border w3-light-grey" type="text" id="name" name="name" placeholder="Username" value="${user.name}" required autocomplete="username"><br>
-  <label for="mail" class="w3-text-theme"> Mail  </label><br>
-  <input class="w3-input w3-border w3-light-grey" type="email" id="mail" name="mail" placeholder="Mail" value="${user.mail}" required autocomplete="email"><br>
-  <label for="pwd1" class="w3-text-theme"> Password: </label><br>
-  <input class="w3-input w3-border w3-light-grey" type="password" id="pwd1" name="pwd" placeholder="Password" value="${user.pwd}" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$" autocomplete="new-password"><br>
-  <label for="pwd2" class="w3-text-theme"> Confirm Password: </label><br>
-  <input class="w3-input w3-border w3-light-grey" type="password" id="pwd2" placeholder="Confirm Password" value="${user.pwd}" required autocomplete="new-password"><br><br>
-  <input class="w3-btn w3-theme" type="submit" name="sumbit" value="Submit"></p>
-</form>
-
-<script>
-var regform = document.getElementById("regform");
-var email = document.getElementById("mail");
-var pwd1 = document.getElementById("pwd1");
-var pwd2 = document.getElementById("pwd2");
-
-var checkPasswordValidity = function() {
-	 if (pwd2.value !== pwd1.value ) {
-		pwd2.setCustomValidity("Passwords must match!");
-	} else {
-		pwd2.setCustomValidity("");
-	}
-}
-pwd2.addEventListener("input", checkPasswordValidity, false);
-
-regform.addEventListener("submit", function (event) {
-	checkPasswordValidity();
-	if (!this.checkValidity()) {
-		this.reportValidity();
-		event.preventDefault();
-	} 
-}, false);
-</script>
+	
+					<c:if test = "${user.errors[2]}">
+						<div class="alert alert-danger" role="alert">
+							Invalid format. The password must contain at least 1 capital letter and 1 number.
+				   		</div>
+				   </c:if>
+				</div>
+				
+				<div class="form-group">
+					<label for="confirmationPassword"> Confirm Password </label>	
+					<input type="password" id="confirmationPassword" class="form-control text-light bg-dark" name="confirmationPassword" value="${user.confirmationPassword}" required> 
+		  		  	
+		  		  	<i id="toggleShowConfirmationPassword" class="bi bi-eye-slash fa-lg float-right password_show_placement" ></i>
+		  		  	
+		  		  	<c:if test = "${user.errors[3]}">
+						<div class="alert alert-danger" role="alert">
+							Passwords don't match!
+						</div>
+					</c:if>
+				</div>
+			  
+				<div class="form-group">
+					<label for="birthdate"> Date of birth </label> 
+					<input type="date" id="birthdate" class="form-control text-light bg-dark" name="birthdate" value="${user.birthdate}" required> 
+				</div>
+				  
+				<div class="form-group text-light bg-dark">
+				  <label for="genres"> Choose your favorite genres </label><br>
+				  <select class="form-group" name="genres" id="genres" multiple="multiple">
+				    <option value="Pop">Pop</option>
+				  	<option value="Latin">Latin</option>
+				  	<option value="Hip-Hop/Rap">Hip-Hop&frasl;Rap</option>
+				  	<option value="EDM">EDM</option> 
+			  		<option value="Trap">Trap</option> 
+				  	<option value="Rock">Rock</option>
+				  	<option value="Rhythm and blues">Rhythm and blues</option>
+					<option value="Heavy">Heavy</option>
+					<option value="Indie">Indie</option>
+					<option value="Country">Country</option>
+					<option value="Techno">Techno</option>
+					<option value="House">House</option>
+				  	<option value="Blues">Blues</option> 
+				  	<option value="Jazz">Jazz</option>
+					<option value="Punk">Punk</option>
+					<option value="Disco">Disco</option>
+					<option value="Reggae">Reggae</option>
+					<option value="Classical">Classical</option>
+					<option value="Regional">Regional</option>
+					<option value="Anime">Anime</option>		 		  
+		 		  </select>
+	 		  	</div>
+	
+				<div class="form-group">
+					<label for="profilePhoto">Profile photo </label>
+					<input type="file" id="profilePhoto" class="form-control-file" name="profilePhoto" value="">
+				</div>
+		    
+		    	<input class="btn btn-primary mt-3" type="submit" name="sumbit" value="Submit">
+			</form>
+		</div>
+	</div>
+ </div>
+ 

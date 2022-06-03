@@ -1,16 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" session="false"%>
-
-<div class="w3-bar">
-	<a class="w3-bar-item w3-button" href="MainController"> <i class="fa fa-home" aria-hidden="true"></i> </a> 
-	<a class="menu w3-bar-item w3-button w3-hide-small" id="GetOwnTimeline" href=#> MyPosts </a>
-	<a class="menu w3-bar-item w3-button w3-hide-small" id="GetFollowedUsers" href=#> Buddies </a>
-	<a class="menu w3-bar-item w3-button w3-hide-small w3-right" id="LogoutController" href=#> <i class="fa fa-sign-out"></i> </a>
-	<a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" onclick="stack()">&#9776;</a>
-</div>
-
-<div id="stack" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium">
-	<a class="menu w3-bar-item w3-button" id="GetOwnTimeline" href=#> MyPosts </a>
-	<a class="menu w3-bar-item w3-button" id="GetFollowedUsers" href=#> Buddies </a>
-	<a class="menu w3-bar-item w3-button" id="LogoutController" href=#> Logout </a>
-</div>
+    
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" id="LogoutController" href="MainController"><img src="imgs/letter_with_logo.png" width="160" height="32"></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="menu nav-link" id="LogoutController" href="#">Logout</a>
+      </li>
+    </ul>
+  </div>
+</nav>
