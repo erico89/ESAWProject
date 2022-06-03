@@ -37,6 +37,7 @@ public class GetUserTweets extends HttpServlet {
 		
 		HttpSession session = request.getSession(false);
 		List<Tweet> tweets = Collections.emptyList();
+		// ERROR
 		User user = (User) session.getAttribute("user");
 		
 		if (session != null || user != null) {

@@ -33,6 +33,7 @@ public class GetUserInfo extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		HttpSession session = request.getSession(false);
+		// ERROR
 		User user = (User) session.getAttribute("user");
 		
 		if (session != null || user != null) {
