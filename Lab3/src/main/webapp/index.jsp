@@ -45,8 +45,9 @@ $(document).ready(function(){
 	    var form = $(this);
 	    var actionUrl = form.attr('action');
 	    var methodType = form.attr("method");
+	    
 	    var data = (methodType == "GET") ? $(this).serialize() : new FormData(this);
-	    console.log(data);
+	    
 	    $.ajax({
 	        type: methodType,
 	        url: actionUrl,
