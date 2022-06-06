@@ -44,7 +44,7 @@ public class DelTweet extends HttpServlet {
 		try {
 			if (session != null || user != null) {
 				BeanUtils.populate(tweet, request.getParameterMap());
-				tweetManager.deleteTweet(tweet.getId(),user.getId());
+				tweetManager.deleteTweet(tweet.getTweet_id());
 				tweetManager.finalize();
 			}
 		} catch (IllegalAccessException | InvocationTargetException e) {

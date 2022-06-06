@@ -32,13 +32,20 @@ public class ManageTweets {
 	
 	/* Add a tweet */
 	public void addTweet(Tweet tweet) {
-		String query = "INSERT INTO tweets (uid,postdatetime,content) VALUES (?,?,?)";
+		String query = "INSERT INTO tweets(description, image, audio, nickname, likes, retweets, date, parent_id, user_id)"
+				+ " VALUES (?,?,?,?,?,?,?,?,?)";
 		PreparedStatement statement = null;
 		try {
 			statement = db.prepareStatement(query);
-			statement.setInt(1,tweet.getUid());
-			statement.setTimestamp(2,tweet.getPostDateTime());
-			statement.setString(3,tweet.getContent());
+			statement.setString(1,tweet.getDescription());
+			statement.setString(2,tweet.getImage());
+			statement.setString(3,tweet.getAudio());
+			statement.setString(4,tweet.getNickname());
+			statement.setInt(5,tweet.getLikes());
+			statement.setInt(6,tweet.getRetweets());
+			statement.setTimestamp(7,tweet.getPostDateTime());
+			statement.setInt(8,tweet.getParent_id());
+			statement.setInt(9,tweet.getUser_id());
 			statement.executeUpdate();
 			statement.close();
 		} catch (SQLException e) {
@@ -47,13 +54,12 @@ public class ManageTweets {
 	}
 	
 	/* Delete existing tweet */
-	public void deleteTweet(Integer id,Integer uid) {
-		String query = "DELETE FROM tweets WHERE id = ? AND uid=?";
+	public void deleteTweet(Integer tweet_id) {
+		String query = "DELETE FROM tweets WHERE tweet_id = ?";
 		PreparedStatement statement = null;
 		try {
 			statement = db.prepareStatement(query);
-			statement.setInt(1,id);
-			statement.setInt(2,uid);
+			statement.setInt(1,tweet_id);
 			statement.executeUpdate();
 			statement.close();
 		} catch (SQLException e) {
@@ -63,23 +69,27 @@ public class ManageTweets {
 	
 	
 	/* Get tweets from a user given start and end*/
-	public List<Tweet> getUserTweets(Integer uid,Integer start, Integer end) {
-		 String query = "SELECT tweets.id,tweets.uid,tweets.postdatetime,tweets.content,users.name FROM tweets INNER JOIN users ON tweets.uid = users.id where tweets.uid = ? ORDER BY tweets.postdatetime DESC LIMIT ?,? ;";
+	public List<Tweet> getUserTweets(Integer user_id,Integer start, Integer end) {
+		 String query = "SELECT tweets.tweet_id,tweets.description,tweets.image,tweets.audio,tweets.nickname,tweets.likes,tweets.retweets,tweets.date FROM tweets INNER JOIN users ON tweets.user_id = users.user_id where tweets.user_id = ? ORDER BY tweets.date DESC LIMIT ?,? ;";
 		 PreparedStatement statement = null;
 		 List<Tweet> l = new ArrayList<Tweet>();
 		 try {
 			 statement = db.prepareStatement(query);
-			 statement.setInt(1,uid);
+			 statement.setInt(1,user_id);
 			 statement.setInt(2,start);
 			 statement.setInt(3,end);
 			 ResultSet rs = statement.executeQuery();
 			 while (rs.next()) {
 				 Tweet tweet = new Tweet();
-       		     tweet.setId(rs.getInt("id"));
-				 tweet.setUid(rs.getInt("uid"));
-				 tweet.setPostDateTime(rs.getTimestamp("postdatetime"));
-				 tweet.setContent(rs.getString("content"));
-				 tweet.setUname(rs.getString("name"));
+				 statement.setString(1,tweet.getDescription());
+					statement.setString(2,tweet.getImage());
+					statement.setString(3,tweet.getAudio());
+					statement.setString(4,tweet.getNickname());
+					statement.setInt(5,tweet.getLikes());
+					statement.setInt(6,tweet.getRetweets());
+					statement.setTimestamp(7,tweet.getPostDateTime());
+					statement.setInt(8,tweet.getParent_id());
+					statement.setInt(9,tweet.getUser_id());
 				 l.add(tweet);
 			 }
 			 rs.close();
