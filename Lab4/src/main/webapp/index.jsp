@@ -133,23 +133,23 @@ $(document).ready(function(){
  	<!-- End Navigation -->
  
  	<!-- Begin Content -->
-	<div class="w3-row-padding">
-	 	<!-- Left Column -->
-		<div class="w3-container w3-col m3 w3-hide-small">
-			<div id="rcolumn">
-				<p></p>
+	<div class="container">
+		<div class="row  align-items-center justify-content-md-center">
+		 	<!-- Left Column -->
+			<div class="col-sm-3">
+				<div id="rcolumn">
+					<p></p>
+				</div>
 			</div>
-		</div>
-		<!-- Middle Column -->	
-		<div class="e3-container w3-col m6">
-			<div id="content">
-			<jsp:include page="${content}" />
+			<!-- Middle Column -->	
+			<div class="col-sm-6" id="content">
+				<jsp:include page="${content}" />
 			</div>
-		</div>
-		<!-- Right Column -->
-		<div class="w3-container w3-col m3 w3-hide-small">
-			<div id="lcolumn">
-				<p></p>
+			<!-- Right Column -->
+			<div class="col-sm-3">
+				<div id="lcolumn">
+					<p></p>
+				</div>
 			</div>
 		</div>
 	</div>

@@ -12,6 +12,6 @@ h2.ex1 {
 }
 </style>
 
-<div class="row align-items-center justify-content-center"> 
+<div class="my-5"> 
 	<h2 class = "ex1" id="nav"> Logout done! </h2>
 </div>

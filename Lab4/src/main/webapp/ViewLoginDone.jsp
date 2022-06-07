@@ -5,7 +5,7 @@
 $('#navigation').load('MenuController');
 </script>
 
-<div class="row align-items-center justify-content-center">
+<div class="my-5"> 
 	<h2 style ="margin: 90px;font-weight: bold;"> Login for user ${sessionScope.user} done!</h2>
 	<div class="w-100"></div>
 	<div class="d-flex justify-content-center" >
