@@ -178,7 +178,7 @@ public class ManageUsers {
 	
 	// Action: Follow user
 	public void followUser(Integer uid, Integer fid) {
-		String query = "INSERT INTO follows (uid,fid) VALUES (?,?)";
+		String query = "INSERT INTO followers (user_id,follower_id) VALUES (?,?)";
 		PreparedStatement statement = null;
 		try {
 			statement = db.prepareStatement(query);
@@ -195,7 +195,7 @@ public class ManageUsers {
 	
 	// Action: Unfollow user
 	public void unfollowUser(Integer uid, Integer fid) {
-		String query = "DELETE FROM follows WHERE uid = ? AND fid = ?";
+		String query = "DELETE FROM followers WHERE user_id = ? AND follower_id = ?";
 		PreparedStatement statement = null;
 		try {
 			statement = db.prepareStatement(query);
@@ -237,7 +237,7 @@ public class ManageUsers {
 	}
 	
 	public Integer getUser(String Nickname) {
-		String query = "SELECT id FROM users WHERE nickname = ?;";
+		String query = "SELECT user_id FROM users WHERE nickname = ?;";
 		PreparedStatement statement = null;
 		
 		try {
@@ -246,7 +246,7 @@ public class ManageUsers {
 			ResultSet rs = statement.executeQuery();
 			rs.close();
 			statement.close();
-			return rs.getInt("id");
+			return rs.getInt("user_id");
 		}  catch (SQLException e) {
 			e.printStackTrace();
 		} 
