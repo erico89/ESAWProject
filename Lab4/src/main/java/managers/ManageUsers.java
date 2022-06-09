@@ -237,7 +237,7 @@ public class ManageUsers {
 	}
 	
 	public Integer getUser(String Nickname) {
-		String query = "SELECT id FROM users WHERE id = ?;";
+		String query = "SELECT id FROM users WHERE nickname = ?;";
 		PreparedStatement statement = null;
 		
 		try {
