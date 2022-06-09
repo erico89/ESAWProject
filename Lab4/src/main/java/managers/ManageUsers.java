@@ -212,7 +212,7 @@ public class ManageUsers {
 	
 	// Get not followed users, TO DO: necesitamos m¨¢s datos a parte de id y name
 	public List<User> getNotFollowedUsers(Integer id, Integer start, Integer end) {
-		 String query = "SELECT id,name FROM users WHERE id NOT IN (SELECT id FROM users,follows WHERE id = fid AND uid = ?) AND id <> ? ORDER BY name LIMIT ?,?;";
+		 String query = "SELECT user_id,nickname FROM users WHERE user_id NOT IN (SELECT u.user_id FROM users u JOIN followers f ON f.user_id = u.user_id WHERE u.user_id = f.follower_id AND u.user_id = ?) AND user_id <> ? ORDER BY nickname LIMIT ?,?;";
 		 PreparedStatement statement = null;
 		 List<User> l = new ArrayList<User>();
 		 try {
@@ -224,8 +224,8 @@ public class ManageUsers {
 			 ResultSet rs = statement.executeQuery();
 			 while (rs.next()) {
 				 User user = new User();
-				 user.setId(rs.getInt("id"));
-				 user.setName(rs.getString("name"));
+				 user.setId(rs.getInt("user_id"));
+				 user.setName(rs.getString("nickname"));
 				 l.add(user);
 			 }
 			 rs.close();
@@ -256,7 +256,7 @@ public class ManageUsers {
 	
 	// Get followed Users
 	public List<User> getFollowedUsers(Integer id, Integer start, Integer end) {
-		 String query = "SELECT id,name FROM users,follows WHERE id = fid AND uid = ? ORDER BY name LIMIT ?,?;";
+		 String query = "SELECT u.user_id,u.nickname FROM users u JOIN follows f ON u.user_id = f.follower_id WHERE f.user_id = ? ORDER BY nickname LIMIT ?,?;";
 		 PreparedStatement statement = null;
 		 List<User> l = new ArrayList<User>();
 		 try {
@@ -267,8 +267,8 @@ public class ManageUsers {
 			 ResultSet rs = statement.executeQuery();
 			 while (rs.next()) {
 				 User user = new User();
-				 user.setId(rs.getInt("id"));
-				 user.setName(rs.getString("name"));
+				 user.setId(rs.getInt("user_id"));
+				 user.setName(rs.getString("nickname"));
 				 l.add(user);
 			 }
 			 rs.close();
