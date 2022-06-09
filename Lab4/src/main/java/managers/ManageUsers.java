@@ -236,6 +236,24 @@ public class ManageUsers {
 		return  l;
 	}
 	
+	public Integer getUser(String Nickname) {
+		String query = "SELECT id FROM users WHERE id = ?;";
+		PreparedStatement statement = null;
+		
+		try {
+			statement = db.prepareStatement(query);
+			statement.setString(1,Nickname);
+			ResultSet rs = statement.executeQuery();
+			rs.close();
+			statement.close();
+			return rs.getInt("id");
+		}  catch (SQLException e) {
+			e.printStackTrace();
+		} 
+		return null;
+		
+	}
+	
 	// Get followed Users
 	public List<User> getFollowedUsers(Integer id, Integer start, Integer end) {
 		 String query = "SELECT id,name FROM users,follows WHERE id = fid AND uid = ? ORDER BY name LIMIT ?,?;";
