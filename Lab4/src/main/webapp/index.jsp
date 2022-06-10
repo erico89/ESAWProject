@@ -89,7 +89,8 @@ $(document).ready(function(){
 	
 	/* Add tweet */
 	$(document).on("click","#addTweet",function(event){
-		$.post( "AddTweet", { content: $("#tweetContent").text()}, function(event) {
+		const data = $("#tweetContent").val();
+		$.post( "AddTweet", { content: data }, function(event) {
 			$("#content").load("GetOwnTimeline");		
 		});
 		event.preventDefault();
@@ -134,7 +135,7 @@ $(document).ready(function(){
  
  	<!-- Begin Content -->
 	<div class="container">
-		<div class="row  align-items-center justify-content-md-center">
+		<div class="row align-items-start justify-content-md-center">
 		 	<!-- Left Column -->
 			<div class="">
 				<div id="rcolumn">
