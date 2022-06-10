@@ -10,11 +10,11 @@ public class Tweet implements java.io.Serializable {
 	 private String image;
 	 private String audio;
 	 private String nickname;
-	 private int likes;
-	 private int retweets;
+	 private int likes = 0;
+	 private int retweets = 0;
 	 private Timestamp postDateTime;
-	 private int parent_id;
-	 private int user_id;
+	 private int parent_id = 0;
+	 private int user_id = 0;
 
 	 public Tweet() {
 	 }

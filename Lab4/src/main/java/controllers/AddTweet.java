@@ -49,23 +49,6 @@ public class AddTweet extends HttpServlet {
 		HttpSession session = request.getSession(false);
 		User user = (User) session.getAttribute("user");
 		
-       Enumeration<String> parameterNames = request.getParameterNames();
-       
-        while (parameterNames.hasMoreElements()) {
- 
-            String paramName = parameterNames.nextElement();
-            System.out.print(paramName);
-            System.out.println(": ");
- 
-            String[] paramValues = request.getParameterValues(paramName);
-            for (int i = 0; i < paramValues.length; i++) {
-                String paramValue = paramValues[i];
-                System.out.print("t" + paramValue);
-                System.out.println("n");
-            }
- 
-        }
-		
 		try {
 			
 			if (session != null || user != null)

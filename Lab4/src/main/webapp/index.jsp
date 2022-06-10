@@ -56,6 +56,10 @@ $(document).ready(function(){
 	        contentType: false,
 	        success: function(response)
 	        {
+	        	if (actionUrl == "LoginController") {
+	        		$("#lColumn").removeClass();
+	        		$("#content").removeClass().addClass("col-sm-9");	
+	        	}
 	        	$('#content').html(response);
 	        	
 				$("#genres").multiselect({});
@@ -89,8 +93,14 @@ $(document).ready(function(){
 	
 	/* Add tweet */
 	$(document).on("click","#addTweet",function(event){
-		const data = $("#tweetContent").val();
-		$.post( "AddTweet", { content: data }, function(event) {
+		
+		const data = {
+				description: $("#tweetContent").val(),
+				image: null,
+				audio: null,
+		}
+		
+		$.post( "AddTweet", data, function(event) {
 			$("#content").load("GetOwnTimeline");		
 		});
 		event.preventDefault();
@@ -137,17 +147,17 @@ $(document).ready(function(){
 	<div class="container">
 		<div class="row align-items-start justify-content-md-center">
 		 	<!-- Left Column -->
-			<div class="">
+			<div class="col-sm-3" id="lColumn">
 				<div id="rcolumn">
 					<p></p>
 				</div>
 			</div>
 			<!-- Middle Column -->	
-			<div class="col-sm-9" id="content">
+			<div class="col-sm-6" id="content">
 				<jsp:include page="${content}" />
 			</div>
 			<!-- Right Column -->
-			<div class="col-sm-3">
+			<div class="col-sm-3" id="rColumn">
 				<div id="lcolumn">
 					<p></p>
 				</div>

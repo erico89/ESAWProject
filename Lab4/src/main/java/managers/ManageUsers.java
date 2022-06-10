@@ -279,6 +279,10 @@ public class ManageUsers {
 				user.setId(rs.getInt("user_id"));
 				user.setMail(rs.getString("mail"));
 				user.setNickname(rs.getString("nickname"));
+				user.setName(rs.getString("name"));
+				user.setSurname(rs.getString("surname"));
+				user.setBirthdate(rs.getString("birthdate"));
+				user.setProfilePhoto(rs.getString("profile_photo"));
 				output = true;
 			} 
 			rs.close();
