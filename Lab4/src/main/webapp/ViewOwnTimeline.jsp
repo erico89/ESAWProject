@@ -10,14 +10,16 @@
  });
 </script>
 
-<div class="my-3 p-5 bg-white">
-	<h6 class="w3-opacity"> ${login.user}, what are you thinking? </h6>
-	<p id="tweetContent" contenteditable="true" class="w3-border w3-padding"> </p>
-	<button id="addTweet" type="button" class="w3-button w3-theme w3-section"><i class="fa fa-pencil"></i> &nbsp;Post</button> 
+<div class="p-3 my-3 myFrom shadow rounded">
+	<div class="form-group">
+	    <textarea id="tweetContent" class="form-control text-light bg-dark" rows="3" placeholder="What's happening? "></textarea>		
+  	</div>
+	<button id="addTweet" type="button" class="btn btn-primary">Post</button> 
 </div>
  
 <div id="iterator">
 </div>
+
  
 
 

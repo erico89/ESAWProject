@@ -136,13 +136,13 @@ $(document).ready(function(){
 	<div class="container">
 		<div class="row  align-items-center justify-content-md-center">
 		 	<!-- Left Column -->
-			<div class="col-sm-3">
+			<div class="">
 				<div id="rcolumn">
 					<p></p>
 				</div>
 			</div>
 			<!-- Middle Column -->	
-			<div class="col-sm-6" id="content">
+			<div class="col-sm-9" id="content">
 				<jsp:include page="${content}" />
 			</div>
 			<!-- Right Column -->

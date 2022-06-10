@@ -7,6 +7,8 @@ import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.tuple.Pair;
+
 import models.User;
 import utils.DB;
 
@@ -90,10 +92,10 @@ public class ManageUsers {
 	
 	// Add a new relation between the user and the genre in the relational table users_genres
 	public void addGenres(String nickname, String genre) throws SQLException {
-		String query1 = "SELECT id FROM users WHERE nickname = '" + nickname + "'";
+		String query1 = "SELECT user_id FROM users WHERE nickname = '" + nickname + "'";
 		ResultSet userID = runQuery(query1);
 		
-		String query2 = "SELECT id FROM genres WHERE genre = '" + genre + "'";
+		String query2 = "SELECT genre_id FROM genres WHERE genre = '" + genre + "'";
 		ResultSet genreID = runQuery(query2);
 		
 
@@ -236,23 +238,6 @@ public class ManageUsers {
 		return  l;
 	}
 	
-	public Integer getUser(String Nickname) {
-		String query = "SELECT user_id FROM users WHERE nickname = ?;";
-		PreparedStatement statement = null;
-		
-		try {
-			statement = db.prepareStatement(query);
-			statement.setString(1,Nickname);
-			ResultSet rs = statement.executeQuery();
-			rs.close();
-			statement.close();
-			return rs.getInt("user_id");
-		}  catch (SQLException e) {
-			e.printStackTrace();
-		} 
-		return null;
-		
-	}
 	
 	// Get followed Users
 	public List<User> getFollowedUsers(Integer id, Integer start, Integer end) {
@@ -277,6 +262,40 @@ public class ManageUsers {
 			e.printStackTrace();
 		} 
 		return  l;
+	}
+	
+	public Pair<Boolean,User> checkLogin(User user) {
+
+		String query = "SELECT * FROM users WHERE (nickname = ? OR mail = ?) AND password = ?";
+		PreparedStatement statement = null;
+		boolean output = false;
+		try {
+			statement = db.prepareStatement(query);
+			statement.setString(1,user.getNickname());
+			statement.setString(2,user.getMail());
+			statement.setString(3,user.getPassword());
+			ResultSet rs = statement.executeQuery();
+			if (rs.next()) {
+				user.setId(rs.getInt("user_id"));
+				user.setMail(rs.getString("mail"));
+				user.setNickname(rs.getString("nickname"));
+				output = true;
+			} 
+			rs.close();
+			statement.close();
+		} catch (SQLIntegrityConstraintViolationException e) {
+			System.out.println(e.getMessage());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return Pair.of(output,user);
+		
+	}
+	
+	public boolean isLoginComplete(User user) {
+	    return((hasValue(user.getNickname()) || hasValue(user.getMail())) &&
+	    	   hasValue(user.getPassword()) );
 	}
 
 }

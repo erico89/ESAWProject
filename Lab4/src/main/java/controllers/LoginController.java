@@ -18,9 +18,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.lang3.tuple.Pair;
 
 import managers.ManageUsers;
-import models.Login;
+import models.User;
 
 /**
  * Servlet implementation class LoginController
@@ -49,29 +50,42 @@ public class LoginController extends HttpServlet {
 
 		System.out.println("LoginController: ");
 		
-		Login login = new Login();
+		User user = new User();
+		//Get an instance of the manager
+		ManageUsers manager = new ManageUsers();
+		String view = "ViewLoginForm.jsp";
+		Pair<Boolean,User> pair = null;
+		
 	    try {
-	    	BeanUtils.populate(login, request.getParameterMap());
+	    	BeanUtils.populate(user, request.getParameterMap());
+	    	user.setNickname(request.getParameter("user"));
+	    	// Error: Usuario no se puede logear con mail 
+	    	// user.setMail(request.getParameter("user"));
+	    	
+	    	if (manager.isLoginComplete(user)) {
+	    		pair = manager.checkLogin(user);
+
+	    		if (pair.getLeft()) {
+		    		System.out.println("login OK, forwarding to ViewOwnTimeline ");
+	    			HttpSession session = request.getSession();
+	    			session.setAttribute("user",pair.getRight());
+	    			view = "ViewOwnTimeline.jsp";
+	    		}
+				else {
+			     
+					System.out.println("user is not logged, forwarding to ViewLoginForm ");
+	    			request.setAttribute("error", true);
+				    request.setAttribute("user",user);
+			    	
+			    }
+	    	} else {
+			    System.out.println("user is not logged (first time), forwarding to ViewLoginForm ");
+				request.setAttribute("user",user);
+	    	}
+	    	RequestDispatcher dispatcher = request.getRequestDispatcher(view);
+			dispatcher.forward(request, response);
 			
-	    	if (login.isComplete() && login.checkCredentials()){
-		    	HttpSession session = request.getSession();
-		    	session.setAttribute("user",login);
-		    	login.shutDownConnection();
-		    	RequestDispatcher dispatcher = request.getRequestDispatcher("ViewOwnTimeline.jsp");
-			    dispatcher.forward(request, response);
-			    
-		    } 
-			else {
-		     
-				System.out.println("user is not logged, forwarding to ViewLoginForm ");
-			    request.setAttribute("user",login);
-			    RequestDispatcher dispatcher = request.getRequestDispatcher("ViewLoginForm.jsp");
-			    dispatcher.forward(request, response);
-		    	
-		    }
 		} catch (IllegalAccessException | InvocationTargetException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	    

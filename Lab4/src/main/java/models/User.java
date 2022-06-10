@@ -1,10 +1,13 @@
 package models;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
+
+import utils.Hash;
 
 @WebServlet("/FileUpload")
 @MultipartConfig(
@@ -120,17 +123,21 @@ public class User implements java.io.Serializable {
 		
 	}
 	
-	public void setPassword(String password) {
+	public void setPassword(String password) throws NoSuchAlgorithmException {
+		Hash hash = new Hash();
+
 		if(password.length() > 7) {
-			this.password = password;
+			this.password = hash.hash_password(password);
 		}else {
 			errors[2]=true;
 		}
 	}
 	
-	public void setConfirmationPassword(String confirmationPassword) {
-		if(this.password.equals(confirmationPassword)) {
-			this.confirmationPassword = confirmationPassword;
+	public void setConfirmationPassword(String confirmationPassword) throws NoSuchAlgorithmException {
+		Hash hash = new Hash();
+		String hasedPwd = hash.hash_password(confirmationPassword);
+		if(this.password.equals(hasedPwd)) {
+			this.confirmationPassword = hasedPwd;
 		}else {
 			errors[3] = true;
 		}

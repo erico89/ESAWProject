@@ -60,7 +60,6 @@ public class RegisterController extends HttpServlet {
 
 		//Get Model-View variables
 		User user = new User();
-		Hash hash = new Hash();
 		String view = "ViewRegisterForm.jsp";
 		
 		//Get an instance of the manager
@@ -79,9 +78,6 @@ public class RegisterController extends HttpServlet {
 				
 				if (manager.isValidForm(user)) {	
 					
-					// Hash password
-					user.setPassword(hash.hash_password(user.getPassword()));
-						
 					// Set photo properties
 					Part file = request.getPart("profilePhoto");
 					user.setProfilePhoto(file.getSubmittedFileName());

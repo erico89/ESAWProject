@@ -5,8 +5,18 @@ body {
     background: linear-gradient(to right, #b92b27, #1565c0)
 }
 
+textarea {
+	resize: none;
+}
+
 .myFrom {
 	background-color:#343A40;
+}
+
+input[type="text"], textarea
+{
+    background: transparent;
+    color: white;
 }
 
 .info_placement
