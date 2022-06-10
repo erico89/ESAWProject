@@ -3,8 +3,10 @@ package controllers;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.Timestamp;
+import java.util.Enumeration;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +23,11 @@ import models.User;
  * Servlet implementation class AddTweetFromUser
  */
 @WebServlet("/AddTweet")
+@MultipartConfig(
+		  fileSizeThreshold = 1024 * 1024 * 1, // 1 MB
+		  maxFileSize = 1024 * 1024 * 10,      // 10 MB
+		  maxRequestSize = 1024 * 1024 * 100   // 100 MB
+)
 public class AddTweet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -41,6 +48,23 @@ public class AddTweet extends HttpServlet {
 		ManageTweets tweetManager = new ManageTweets();
 		HttpSession session = request.getSession(false);
 		User user = (User) session.getAttribute("user");
+		
+       Enumeration<String> parameterNames = request.getParameterNames();
+       
+        while (parameterNames.hasMoreElements()) {
+ 
+            String paramName = parameterNames.nextElement();
+            System.out.print(paramName);
+            System.out.println(": ");
+ 
+            String[] paramValues = request.getParameterValues(paramName);
+            for (int i = 0; i < paramValues.length; i++) {
+                String paramValue = paramValues[i];
+                System.out.print("t" + paramValue);
+                System.out.println("n");
+            }
+ 
+        }
 		
 		try {
 			

@@ -36,7 +36,7 @@ public class ManageUsers {
 	
 	// Get a user given its id, 
 	public User getUser(Integer id) {
-		String query = "SELECT id,name,mail FROM users WHERE id = ? ;";
+		String query = "SELECT user_id,nickname,mail FROM users WHERE user_id = ? ;";
 		ResultSet rs = null;
 		User user = null;
 		PreparedStatement statement = null;
@@ -47,8 +47,8 @@ public class ManageUsers {
 			rs = statement.executeQuery();
 			if (rs.next()) {
 				user = new User();
-				user.setId(rs.getInt("id"));
-				user.setName(rs.getString("name"));
+				user.setId(rs.getInt("user_id"));
+				user.setName(rs.getString("nickname"));
 				user.setMail(rs.getString("mail"));
 				// TO DO: M¨¢s parametros para devolver.
 				
@@ -100,7 +100,7 @@ public class ManageUsers {
 		
 
 		if (userID.next() && genreID.next()) {
-			String query3 = "SELECT id FROM users_genres WHERE user_id = '" + userID.getInt("id") + "' AND genre_id = '" + genreID.getInt("id") + "'";
+			String query3 = "SELECT id FROM users_genres WHERE user_id = '" + userID.getInt("user_id") + "' AND genre_id = '" + genreID.getInt("genre_id") + "'";
 			ResultSet rs = runQuery(query3);
 			
 			// If not exist, Create
@@ -241,7 +241,7 @@ public class ManageUsers {
 	
 	// Get followed Users
 	public List<User> getFollowedUsers(Integer id, Integer start, Integer end) {
-		 String query = "SELECT u.user_id,u.nickname FROM users u JOIN follows f ON u.user_id = f.follower_id WHERE f.user_id = ? ORDER BY nickname LIMIT ?,?;";
+		 String query = "SELECT u.user_id,u.nickname FROM users u JOIN followers f ON u.user_id = f.follower_id WHERE f.user_id = ? ORDER BY nickname LIMIT ?,?;";
 		 PreparedStatement statement = null;
 		 List<User> l = new ArrayList<User>();
 		 try {
