@@ -7,14 +7,14 @@ public class Tweet implements java.io.Serializable {
 
 	 private int tweet_id;
 	 private String description;
-	 private String image;
-	 private String audio;
+	 private String image = null;
+	 private String audio = null;
 	 private String nickname;
 	 private int likes = 0;
 	 private int retweets = 0;
 	 private Timestamp postDateTime;
-	 private int parent_id = 0;
-	 private int user_id = 0;
+	 private Integer parent_id = null;
+	 private Integer user_id = null;
 
 	 public Tweet() {
 	 }
