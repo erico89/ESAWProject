@@ -70,7 +70,7 @@ public class Tweet implements java.io.Serializable {
 		this.likes = likes;
 	}
 
-	public int getParent_id() {
+	public Integer getParent_id() {
 		return parent_id;
 	}
 
@@ -86,7 +86,7 @@ public class Tweet implements java.io.Serializable {
 		this.retweets = retweets;
 	}
 
-	public int getUser_id() {
+	public Integer getUser_id() {
 		return user_id;
 	}
 

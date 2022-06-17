@@ -5,7 +5,7 @@
  $(document).ready(function(){
 	$('#navigation').load('MenuController');
 	$('#lcolumn').load('GetNotFollowedUsers');
-	$('#rcolumn').load('GetUserInfo');
+	//$('#rcolumn').load('GetUserInfo');
 	$('#iterator').load('GetUserTweets');
  });
 </script>
