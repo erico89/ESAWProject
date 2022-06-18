@@ -3,6 +3,7 @@ package managers;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,8 +46,18 @@ public class ManageTweets {
 			statement.setInt(5,tweet.getLikes());
 			statement.setInt(6,tweet.getRetweets());
 			statement.setTimestamp(7,tweet.getPostDateTime());
-			statement.setInt(8,tweet.getParent_id());
-			statement.setInt(9,tweet.getUser_id());
+			Integer parend_id = tweet.getParent_id();
+			if (parend_id == null) {
+				statement.setNull(8, Types.INTEGER);
+			} else {
+				statement.setInt(8, parend_id);
+			}
+			Integer user_id = tweet.getUser_id();
+			if (user_id == null) {
+				statement.setNull(9, Types.INTEGER);
+			} else {
+				statement.setInt(9,user_id);								
+			}
 			statement.executeUpdate();
 			statement.close();
 		} catch (SQLException e) {

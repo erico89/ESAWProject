@@ -37,7 +37,6 @@ CREATE TABLE `tweets` (
   `parent_id` int DEFAULT NULL,
   `user_id` int NOT NULL,
   PRIMARY KEY (`tweet_id`),
-  UNIQUE KEY (`nickname`),
   CONSTRAINT `tweets_ibfk_1` FOREIGN KEY (`parent_id`) REFERENCES `tweets` (`tweet_id`),
   CONSTRAINT `tweets_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
   )
