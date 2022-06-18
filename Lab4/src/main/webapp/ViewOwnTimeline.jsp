@@ -17,7 +17,7 @@
 	    <textarea id="tweetContent" class="form-control text-light bg-dark" rows="3" placeholder="What's happening? "></textarea>		
   	</div>
 	<button id="addTweet" type="button" class="btn btn-primary">Post</button> 
-	<input type="file" id="tweetContent1" name=image value="">
+	<button type="button" class="btn btn-primary-outline"><span style="color:white"><i class="bi bi-card-image"></i> </button>
 	<button type="button" class="btn btn-primary-outline"><span style="color:white"><i class="bi bi-music-note-beamed"></i> </button>
 	<button type="button" class="btn btn-primary-outline"><span style="color:white"><i class="bi bi-emoji-smile"></i> </button>
 </div>
