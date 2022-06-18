@@ -8,14 +8,6 @@
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="menu nav-link" id="RegisterController" href="#">Registration</a>
-      </li>
-      <li class="nav-item">
-        <a class="menu nav-link" id="LoginController" href="#">Login</a>
-      </li>
-    </ul>
   </div>
   
   <div class="dropdown pull-right">
