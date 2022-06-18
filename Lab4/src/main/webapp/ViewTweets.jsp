@@ -10,7 +10,7 @@
 	  </div>
 	  <div class="col-sm-10">
 	   <div class="row">
-	    <div class="col">
+	    <div class="col overflow-hidden">
 		 ${t.nickname}
 		</div>
 		<div class="col text-right">
@@ -18,7 +18,7 @@
 		</div>
 	   </div>
 	   <div class="row">
-	   <div class="col">
+	   <div class="col overflow-hidden">
 		 ${t.description}
 	   </div>
 	   </div>

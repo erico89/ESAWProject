@@ -16,7 +16,7 @@
      </c:choose>    
      </div>
      <div class="col-sm-8">
-      <div class = "row">
+      <div class = "row overflow-hidden">
        <div>${u.name}</div>
        </div>
        <div class = "row">
