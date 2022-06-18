@@ -27,6 +27,7 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	$.ajaxSetup({ cache: false }); //Avoids Internet Explorer caching!
+	
 	<!-- Initialize the multiselectors plugin: -->
 	$("#genres").multiselect({});
 
