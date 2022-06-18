@@ -8,30 +8,48 @@
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+    
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
           <a class="menu nav-link" id="GetTimeline" href="#">For You</a>
         </li>
         <li class="nav-item">
-          <a class="menu nav-link" id="getFollinw" href="#">Following</a>
+          <a class="menu nav-link" id="getFollowing" href="#">Following</a>
         </li>
       </ul>
-	    <div class="dropdown">
-	      <a class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">
-	        <i class="bi bi-person fa-lg"></i>
-	      </a>
-	
-	      <div class="dropdown-menu dropdown-menu-right bg-dark rounded text-white" role="menu" aria-labelledby="dropdownMenu1">
-	        <div class="m-2 text-center">
-	          <div class="mb-4">
-	            <h5>CalypSound</h5>
-	          </div>
-	
-	          <div id="userInfo">
-	          </div>
-	        </div>
-	      </div>
-	    </div>
+    </div>
+    <div class="dropdown pull-right">
+      <a class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">
+        <i class="bi bi-person fa-lg"></i>
+        Login
+      </a>
+
+      <div class="dropdown-menu dropdown-menu-right bg-dark rounded text-white" role="menu" aria-labelledby="dropdownMenu1">
+        <div class="m-2 ml-5 mr-5 text-center">
+          <div class="mb-4">
+            <h5>CalypSound</h5>
+          </div>
+
+          <div id="userInfo">
+          	<div class="row">
+				<c:choose>
+			        <c:when test = "${user.profilePhoto == null || user.profilePhoto.length() == 0}">
+			            <img class="rounded-circle img-fluid" src= "imgs/avatar2.png" alt="Avatar">
+			        </c:when>
+			        <c:otherwise>
+			            <img class="rounded-circle img-fluid" src= "${user.profilePhoto}" alt="Avatar">
+			        </c:otherwise>
+			     </c:choose> 
+				</div>
+				<div class="row">
+					<div class = "col text-center">
+						<label class="mt-3 text-center text-white"> ${user.nickname} </label>
+						<button type="button" class="btn btn-dark w-100" id="profile_login">Logout</button>
+					</div>		
+				</div>
+          </div>
+        </div>
+      </div>
     </div>
   </nav>

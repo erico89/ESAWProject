@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import models.User;
+
 /**
  * Servlet implementation class MenuController
  */
@@ -34,10 +36,12 @@ public class MenuController extends HttpServlet {
 		System.out.print("MenuController: ");
 		
 		HttpSession session = request.getSession();
+		Object user = session.getAttribute("user");
 		
 		if (session.getAttribute("user")!=null) {
 		
 			System.out.println("forwarding to ViewMenuLogged");
+			request.setAttribute("user", user);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("ViewMenuLogged.jsp");
 			dispatcher.forward(request, response);
 		}

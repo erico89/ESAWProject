@@ -8,13 +8,29 @@
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="menu nav-link" id="RegisterController" href="#">Registration</a>
-      </li>
-      <li class="nav-item">
-        <a class="menu nav-link" id="LoginController" href="#">Login</a>
-      </li>
-    </ul>
+  </div>
+  
+  <div class="dropdown pull-right">
+    <a class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">
+      <i class="bi bi-person fa-lg"></i>
+      Login
+    </a>
+
+    <div class="dropdown-menu dropdown-menu-right bg-dark rounded text-white" role="menu" aria-labelledby="dropdownMenu1">
+      <div class="m-2 text-center">
+        <div class="mb-4">
+          <h5>CalypSound</h5>
+        </div>
+
+        <div id="userInfo">
+			 <div class="m-2">
+			    <button type="button" class="btn btn-dark w-100" id="profile_login">Log in </button>
+			</div>            
+			<div class="m-2">
+			    <button type="button" class="btn btn-dark w-100" id="profile_signin"> Sign in</button>
+			</div>
+        </div>
+      </div>
+    </div>
   </div>
 </nav>
