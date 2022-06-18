@@ -3,10 +3,10 @@
 <div class="row">
 	<c:choose>
         <c:when test = "${user.profilePhoto == null || user.profilePhoto.length() == 0}">
-            <img src= "imgs/avatar2.png" alt="Avatar" style="width:60px">
+            <img class="rounded-circle" src= "imgs/avatar2.png" alt="Avatar">
         </c:when>
         <c:otherwise>
-            <img src= ${user.profilePhoto} alt="Avatar" style="width:60px">
+            <img class="rounded-circle" src= ${user.profilePhoto} alt="Avatar">
         </c:otherwise>
      </c:choose> 
 </div>
