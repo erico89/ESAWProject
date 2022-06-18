@@ -69,7 +69,7 @@ public class LoginController extends HttpServlet {
 		    		System.out.println("login OK, forwarding to ViewOwnTimeline ");
 	    			HttpSession session = request.getSession();
 	    			session.setAttribute("user",pair.getRight());
-	    			view = "ViewOwnTimeline.jsp";
+	    			view = "ViewTimeline.jsp";
 	    		}
 				else {
 			     

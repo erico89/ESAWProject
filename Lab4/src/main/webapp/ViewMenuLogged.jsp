@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" session="false" %>
 
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" class="menu" id="GetOwnTimeline" href="#">
+    <a class="navbar-brand" class="menu" id="GetTimeline" href="#">
     	<img src="imgs/letter_with_logo.png" width="160" height="32">
    	</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -11,7 +11,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="menu nav-link" id="GetOwnTimeline" href="#">For You</a>
+          <a class="menu nav-link" id="GetTimeline" href="#">For You</a>
         </li>
         <li class="nav-item">
           <a class="menu nav-link" id="getFollinw" href="#">Following</a>

@@ -79,6 +79,37 @@ public class ManageTweets {
 		}
 	}
 	
+	/*** Get public tweets order by desc.***/
+	public List<Tweet> getTweets(Integer start, Integer end) {
+		 String query = "SELECT * FROM tweets as t ORDER BY t.likes DESC LIMIT ?,? ;";
+		 PreparedStatement statement = null;
+		 List<Tweet> l = new ArrayList<Tweet>();
+		 try {
+			 statement = db.prepareStatement(query);
+			 statement.setInt(1,start);
+			 statement.setInt(2,end);
+			 ResultSet rs = statement.executeQuery();
+			 while (rs.next()) {
+				 Tweet tweet = new Tweet();
+				 tweet.setTweet_id(rs.getInt("tweet_id"));
+				 tweet.setDescription(rs.getString("description"));
+				 tweet.setImage(rs.getString("image"));
+				 tweet.setAudio(rs.getString("audio"));
+				 tweet.setNickname(rs.getString("nickname"));
+				 tweet.setLikes(rs.getInt("likes"));
+				 tweet.setRetweets(rs.getInt("retweets"));				 
+				 //tweet.setPostDateTime(rs.getTimestamp("date"));;
+				 tweet.setParent_id(rs.getInt("parent_id"));
+				 tweet.setUser_id(rs.getInt("user_id"));
+				 l.add(tweet);
+			 }
+			 rs.close();
+			 statement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+		return  l;
+	}
 	
 	/* Get tweets from a user given start and end*/
 	public List<Tweet> getUserTweets(Integer user_id,Integer start, Integer end) {

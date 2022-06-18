@@ -8,7 +8,7 @@
 	$('#navigation').load('MenuController');
 	$('#lcolumn').load('GetNotFollowedUsers');
 	//$('#rcolumn').load('GetUserInfo');
-	$('#iterator').load('GetUserTweets');
+	$('#iterator').load('GetTweets');
  });
 </script>
 

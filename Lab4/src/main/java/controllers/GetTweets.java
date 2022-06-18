@@ -1,6 +1,8 @@
 package controllers;
 
 import java.io.IOException;
+import java.util.Collections;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,17 +12,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import managers.ManageTweets;
+import models.Login;
+import models.Tweet;
+import models.User;
+
 /**
- * Servlet implementation class MainController
+ * Servlet implementation class dTcontroller
  */
-@WebServlet("/MainController")
-public class MainController extends HttpServlet {
+@WebServlet("/GetTweets")
+public class GetTweets extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MainController() {
+    public GetTweets() {
         super();
     }
 
@@ -30,20 +37,19 @@ public class MainController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		HttpSession session = request.getSession(false);
+		List<Tweet> tweets = Collections.emptyList();
+		User user = (User) session.getAttribute("user");
 		
-		if (session==null || session.getAttribute("user")==null) {
-			System.out.println("MainController: NO active session has been found,");
-			request.setAttribute("menu","ViewMenuNotLogged.jsp");
-			request.setAttribute("content","ViewRegisterForm.jsp");
+		if (session != null || user != null) {
+			ManageTweets tweetManager = new ManageTweets();
+			tweets = tweetManager.getTweets(0,10);
+			tweetManager.finalize();
 		}
-		else {
-			System.out.println("Main Controller: active session has been found,");
-			request.setAttribute("menu","ViewMenuLogged.jsp");
-			request.setAttribute("content","ViewTimeline.jsp");
-		}
+
+		request.setAttribute("tweets",tweets);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/ViewTweets.jsp"); 
+		dispatcher.forward(request,response);
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
-		dispatcher.forward(request, response);	
 	}
 
 	/**
