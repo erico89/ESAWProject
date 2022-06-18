@@ -31,6 +31,7 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	$.ajaxSetup({ cache: false }); //Avoids Internet Explorer caching!
+	
 	<!-- Initialize the multiselectors plugin: -->
 	$("#genres").multiselect({});
 
@@ -100,7 +101,7 @@ $(document).ready(function(){
 		
 		const data = {
 				description: $("#tweetContent").val(),
-				image: null,
+				image: $("#tweetContent1").val(),
 				audio: null,
 		}
 		
