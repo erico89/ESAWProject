@@ -96,7 +96,7 @@ $(document).ready(function(){
 		
 		const data = {
 				description: $("#tweetContent").val(),
-				image: null,
+				image: $("#tweetContent1").val(),
 				audio: null,
 		}
 		
