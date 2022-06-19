@@ -214,7 +214,13 @@ public class ManageUsers {
 	
 	// Get not followed users, TO DO: necesitamos m¨¢s datos a parte de id y name
 	public List<User> getNotFollowedUsers(Integer id, Integer start, Integer end) {
-		 String query = "SELECT user_id,nickname FROM users WHERE user_id NOT IN (SELECT u.user_id FROM users u JOIN followers f ON f.user_id = u.user_id WHERE u.user_id = f.follower_id AND u.user_id = ?) AND user_id <> ? ORDER BY nickname LIMIT ?,?;";
+		 String query = "SELECT user_id, nickname FROM users "
+		 		+ " WHERE user_id NOT IN ("
+		 		+ "	SELECT u.user_id FROM users as u, followers as f"
+		 		+ " WHERE u.user_id = f.user_id AND f.follower_id = ?"
+		 		+ ") "
+		 		+ " AND user_id <> ?"
+		 		+ " ORDER BY nickname LIMIT ?,?;";
 		 PreparedStatement statement = null;
 		 List<User> l = new ArrayList<User>();
 		 try {
