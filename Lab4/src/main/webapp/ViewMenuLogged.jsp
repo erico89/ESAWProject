@@ -20,10 +20,9 @@
       </ul>
     </div>
     <div class="dropdown pull-right">
-      <a class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">
-        <i class="bi bi-person fa-lg"></i>
-        Login
-      </a>
+	    <a class="dropdown-toggle text-white hover-overlay" id="dropdownMenu1" data-toggle="dropdown">
+	      <i class="bi bi-person-circle fa-lg"></i>
+	    </a>
 
       <div class="dropdown-menu dropdown-menu-right bg-dark rounded text-white" role="menu" aria-labelledby="dropdownMenu1">
         <div class="m-2 ml-5 mr-5 text-center">
@@ -45,7 +44,7 @@
 				<div class="row">
 					<div class = "col text-center">
 						<label class="mt-3 text-center text-white"> ${user.nickname} </label>
-						<button type="button" class="btn btn-dark w-100" id="profile_login">Logout</button>
+						<button type="button" class="menu btn btn-dark w-100 shadow" id="LogoutController">Logout</button>
 					</div>		
 				</div>
           </div>

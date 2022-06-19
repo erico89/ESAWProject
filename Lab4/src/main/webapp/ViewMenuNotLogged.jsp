@@ -11,9 +11,8 @@
   </div>
   
   <div class="dropdown pull-right">
-    <a class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">
-      <i class="bi bi-person fa-lg"></i>
-      Login
+    <a class="dropdown-toggle text-white hover-overlay" id="dropdownMenu1" data-toggle="dropdown">
+      <i class="bi bi-person-circle fa-lg"></i>
     </a>
 
     <div class="dropdown-menu dropdown-menu-right bg-dark rounded text-white" role="menu" aria-labelledby="dropdownMenu1">
@@ -24,10 +23,10 @@
 
         <div id="userInfo">
 			 <div class="m-2">
-			    <button type="button" class="btn btn-dark w-100" id="profile_login">Log in </button>
+			    <button type="button" class="menu btn btn-dark w-100 shadow " id="LoginController">Log in </button>
 			</div>            
 			<div class="m-2">
-			    <button type="button" class="btn btn-dark w-100" id="profile_signin"> Sign in</button>
+			    <button type="button" class="menu btn btn-dark w-100 shadow " id="RegisterController"> Sign in</button>
 			</div>
         </div>
       </div>

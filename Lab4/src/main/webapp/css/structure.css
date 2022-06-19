@@ -28,7 +28,7 @@ input[type="text"], textarea
 	transition: 0.5s;
 }
 
-.info_placement:hover, .password_show_placement:hover {
+.info_placement:hover, .password_show_placement:hover, .hover-overlay:hover {
 	opacity: 0.6;
 	transition: 0.5s;
 }
