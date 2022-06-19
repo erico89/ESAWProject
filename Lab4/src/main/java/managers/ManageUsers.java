@@ -109,8 +109,8 @@ public class ManageUsers {
 				PreparedStatement statement = null;
 				try {
 					statement = db.prepareStatement(query4);
-					statement.setInt(1, userID.getInt("id"));
-					statement.setInt(2, genreID.getInt("id"));
+					statement.setInt(1, userID.getInt("user_id"));
+					statement.setInt(2, genreID.getInt("genre_id"));
 					statement.executeUpdate();
 					statement.close();
 				} catch (SQLException e) {
