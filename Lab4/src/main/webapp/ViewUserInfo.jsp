@@ -9,7 +9,7 @@
   <p class="text-left text-white"> <i class="bi bi-envelope"></i> ${user.mail} </p>
   <p class="text-left text-white"> <i class="bi bi-gift"></i> ${user.birthdate} </p>
 
-  <button type="button" class="btn btn-primary-outline tweet_ops shadow rounded text-black" style="color:white"><i class="bi bi-person-plus"></i> &nbsp;Edit</button> 
+  <button type="button" class="btn btn-primary tweet_ops shadow rounded text-black" style="border-color:white;color:white"><i class="bi bi-person-plus"></i> &nbsp;Edit</button> 
   
  </div>
 <br>
