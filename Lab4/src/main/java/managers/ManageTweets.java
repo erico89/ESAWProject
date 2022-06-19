@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import models.Tweet;
+import models.User;
 import utils.DB;
 
 
@@ -88,6 +89,43 @@ public class ManageTweets {
 			 statement = db.prepareStatement(query);
 			 statement.setInt(1,start);
 			 statement.setInt(2,end);
+			 ResultSet rs = statement.executeQuery();
+			 while (rs.next()) {
+				 Tweet tweet = new Tweet();
+				 tweet.setTweet_id(rs.getInt("tweet_id"));
+				 tweet.setDescription(rs.getString("description"));
+				 tweet.setImage(rs.getString("image"));
+				 tweet.setAudio(rs.getString("audio"));
+				 tweet.setNickname(rs.getString("nickname"));
+				 tweet.setLikes(rs.getInt("likes"));
+				 tweet.setRetweets(rs.getInt("retweets"));				 
+				 //tweet.setPostDateTime(rs.getTimestamp("date"));;
+				 tweet.setParent_id(rs.getInt("parent_id"));
+				 tweet.setUser_id(rs.getInt("user_id"));
+				 l.add(tweet);
+			 }
+			 rs.close();
+			 statement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+		return  l;
+	}
+	
+	// Get followed users' tweets
+	public List<Tweet> getFollowedTweets(Integer u_id, Integer start, Integer end) {
+		 String query = "SELECT * FROM tweets as t "
+		 		+ "JOIN users as u ON t.user_id = u.user_id "
+		 		+ "JOIN followers as f on u.user_id = f.user_id "
+		 		+ "WHERE f.follower_id = ? "
+		 		+ "ORDER BY likes LIMIT ?,?;";
+		 PreparedStatement statement = null;
+		 List<Tweet> l = new ArrayList<Tweet>();
+		 try {
+			 statement = db.prepareStatement(query);
+			 statement.setInt(1,u_id);
+			 statement.setInt(2,start);
+			 statement.setInt(3,end);
 			 ResultSet rs = statement.executeQuery();
 			 while (rs.next()) {
 				 Tweet tweet = new Tweet();

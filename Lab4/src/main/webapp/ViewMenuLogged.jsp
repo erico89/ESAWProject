@@ -12,10 +12,10 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="menu nav-link" id="GetTimeline" href="#">For You</a>
+          <a class="menu-logged nav-link" id="GetTweets" href="#">For You</a>
         </li>
         <li class="nav-item">
-          <a class="menu nav-link" id="getFollowing" href="#">Following</a>
+          <a class="menu-logged nav-link" id="GetFollowingTweets" href="#">Following</a>
         </li>
       </ul>
     </div>

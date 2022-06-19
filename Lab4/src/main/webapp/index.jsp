@@ -46,6 +46,12 @@ $(document).ready(function(){
 		event.preventDefault();
 	});
 	
+	$(document).on("click",".menu-logged", async function(event) {
+		const request = $(this).attr('id');
+		$('#iterator').load(request);
+		event.preventDefault();
+	});
+	
 	$(document).on("submit","form", function(event) {
 	    var form = $(this);
 	    var actionUrl = form.attr('action');
