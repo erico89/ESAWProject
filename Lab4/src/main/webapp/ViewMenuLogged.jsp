@@ -30,7 +30,7 @@
             <h5>CalypSound</h5>
           </div>
 
-          <div id="userInfo">
+          <div id="GetUserInfo">
           	<div class="row">
 				<c:choose>
 			        <c:when test = "${user.profilePhoto == null || user.profilePhoto.length() == 0}">
@@ -43,7 +43,7 @@
 				</div>
 				<div class="row">
 					<div class = "col text-center">
-						<label class="mt-3 text-center text-white"> ${user.nickname} </label>
+						<button type= "button" class="menu btn btn-dark w-100 shadow" id=GetUserInfo> ${user.nickname} </button>
 						<button type="button" class="menu btn btn-dark w-100 shadow" id="LogoutController">Logout</button>
 					</div>		
 				</div>
