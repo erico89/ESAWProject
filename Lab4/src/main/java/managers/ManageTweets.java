@@ -3,6 +3,7 @@ package managers;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
@@ -238,6 +239,32 @@ public class ManageTweets {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}		
+	}
+
+	public void addRetweet(Tweet tweet, User user) {
+		// TODO Auto-generated method stub
+		String query = "INSERT INTO retweets VALUE (?, ?, ?);";
+		
+		String query2 = "UPDATE tweets"
+				+ " SET retweets = retweets + 1"
+				+ " WHERE tweet_id = ?";
+		
+		 PreparedStatement statement = null;
+		 try {
+			 statement = db.prepareStatement(query);
+			 statement.setInt(1, tweet.getTweet_id());
+			 statement.setInt(2, user.getId());
+			 statement.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
+			 statement.executeUpdate();
+			 
+			 statement = null;
+			 statement = db.prepareStatement(query2);
+			 statement.setInt(1,tweet.getTweet_id());
+			 statement.executeUpdate();
+			 statement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}	
 	}
 	
 	

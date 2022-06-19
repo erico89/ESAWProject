@@ -49,7 +49,7 @@
 								</div>
 								
 								<div class="">
-									<button type="button" class="btn btn-primary-outline tweet_ops" id="AddRetweets" tweet_id="${t.tweet_id}">
+									<button type="button" class="btn btn-primary-outline tweet_ops" id="AddRetweet" tweet_id="${t.tweet_id}">
 										<i class="bi bi-arrow-repeat text-white"></i>
 										<span class="badge badge-light">${t.retweets}</span>
 									</button>
