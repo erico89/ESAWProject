@@ -79,6 +79,36 @@ public class ManageTweets {
 			e.printStackTrace();
 		}
 	}
+	/*** Get tweet by id ***/
+	public Tweet getTweetById(Integer tweet_id) {
+		String query = "SELECT * FROM tweets WHERE tweet_id = ?";
+		PreparedStatement statement = null;
+		 Tweet tweet = new Tweet();
+
+		 try {
+			 statement = db.prepareStatement(query);
+			 statement.setInt(1,tweet_id);
+			 ResultSet rs = statement.executeQuery();
+			 while (rs.next()) {
+				 tweet.setTweet_id(rs.getInt("tweet_id"));
+				 tweet.setDescription(rs.getString("description"));
+				 tweet.setImage(rs.getString("image"));
+				 tweet.setAudio(rs.getString("audio"));
+				 tweet.setNickname(rs.getString("nickname"));
+				 tweet.setLikes(rs.getInt("likes"));
+				 tweet.setRetweets(rs.getInt("retweets"));				 
+				 //tweet.setPostDateTime(rs.getTimestamp("date"));;
+				 tweet.setParent_id(rs.getInt("parent_id"));
+				 tweet.setUser_id(rs.getInt("user_id"));
+			 }
+			 rs.close();
+			 statement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+		
+		return tweet;
+	}
 	
 	/*** Get public tweets order by desc.***/
 	public List<Tweet> getTweets(Integer start, Integer end) {
@@ -184,6 +214,30 @@ public class ManageTweets {
 			e.printStackTrace();
 		} 
 		return  l;
+	}
+
+	public void addLikes(Tweet tweet, User user) {	
+		String query = "INSERT INTO likes VALUE (?, ?);";
+		
+		String query2 = "UPDATE tweets"
+				+ " SET likes = likes + 1"
+				+ " WHERE tweet_id = ?";
+		
+		 PreparedStatement statement = null;
+		 try {
+			 statement = db.prepareStatement(query);
+			 statement.setInt(1, tweet.getTweet_id());
+			 statement.setInt(2, user.getId());
+			 statement.executeUpdate();
+			 
+			 statement = null;
+			 statement = db.prepareStatement(query2);
+			 statement.setInt(1,tweet.getTweet_id());
+			 statement.executeUpdate();
+			 statement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}		
 	}
 	
 	

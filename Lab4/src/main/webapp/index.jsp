@@ -141,6 +141,18 @@ $(document).ready(function(){
 			$("#lcolumn").load("GetNotFollowedUsers");
 		});
 	});
+	
+	/* Tweet operations (Like, retweets, ...) */
+	$(document).on("click", ".tweet_ops", function(event){
+		const data = {tweet_id: $(this).attr("tweet_id")};
+		const request = $(this).attr('id');
+		const that = $(this);
+
+		$.get(request, data, function(msg){
+			that.find("span").text(msg);
+		})
+
+	});
 });
 </script>
 

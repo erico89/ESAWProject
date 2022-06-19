@@ -33,24 +33,25 @@
 								</div>
 							</div>
 							<div class="row mt-2">
+								<!-- Commentario de tweets, pendiente de implementar
 								<div class="">
-									<button type="button" class="btn btn-primary-outline">
+									<button type="button" class="btn btn-primary-outline tweet_ops"  tweet_id="${t.tweet_id}">
 										<i class="bi bi-chat-dots text-white"></i>
-										<span class="badge badge-light">${t.likes}</span>
+										<span class="badge badge-light"></span>
 									</button>
 								</div>
-
+ 								-->
 								<div class="">
-									<button type="button" class="btn btn-primary-outline">
-										<i class="bi bi-arrow-repeat text-white"></i>
-										<span class="badge badge-light">${t.retweets}</span>
-									</button>
-								</div>
-
-								<div class="">
-									<button type="button" class="btn btn-primary-outline">
+									<button type="button" class="btn btn-primary-outline tweet_ops" id="AddLikes" tweet_id="${t.tweet_id}">
 										<i class="fa fa-thumbs-up icon text-white"></i> 
 										<span class="badge badge-light">${t.likes}</span>
+									</button>
+								</div>
+								
+								<div class="">
+									<button type="button" class="btn btn-primary-outline tweet_ops" id="AddRetweets" tweet_id="${t.tweet_id}">
+										<i class="bi bi-arrow-repeat text-white"></i>
+										<span class="badge badge-light">${t.retweets}</span>
 									</button>
 								</div>
 
