@@ -112,7 +112,7 @@ $(document).ready(function(){
 		}
 		
 		$.post( "AddTweet", data, function(event) {
-			$("#content").load("GetOwnTimeline");		
+			$("#content").load("GetTimeline");		
 		});
 		event.preventDefault();
 	});
