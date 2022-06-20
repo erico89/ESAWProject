@@ -217,7 +217,7 @@ public class ManageUsers {
 	
 	// Get not followed users, TO DO: necesitamos m¨¢s datos a parte de id y name
 	public List<User> getNotFollowedUsers(Integer id, Integer start, Integer end) {
-		 String query = "SELECT user_id, nickname FROM users "
+		 String query = "SELECT * FROM users "
 		 		+ " WHERE user_id NOT IN ("
 		 		+ "	SELECT u.user_id FROM users as u, followers as f"
 		 		+ " WHERE u.user_id = f.user_id AND f.follower_id = ?"
@@ -236,7 +236,8 @@ public class ManageUsers {
 			 while (rs.next()) {
 				 User user = new User();
 				 user.setId(rs.getInt("user_id"));
-				 user.setName(rs.getString("nickname"));
+				 user.setNickname(rs.getString("nickname"));
+				 user.setProfilePhoto(rs.getString("profile_photo"));
 				 l.add(user);
 			 }
 			 rs.close();
@@ -248,7 +249,7 @@ public class ManageUsers {
 	}
 	
 	public List<User> getFollowedUsersKeyWord(Integer id, String keyWord,Integer start, Integer end) {
-		 String query = "SELECT user_id, nickname FROM users "
+		 String query = "SELECT * FROM users "
 		 		+ " WHERE user_id NOT IN ("
 		 		+ "	SELECT u.user_id FROM users as u, followers as f"
 		 		+ " WHERE u.user_id = f.user_id AND f.follower_id = ?"
@@ -259,17 +260,19 @@ public class ManageUsers {
 		 PreparedStatement statement = null;
 		 List<User> l = new ArrayList<User>();
 		 try {
+			 String words = "%" + keyWord + "%";
 			 statement = db.prepareStatement(query);
 			 statement.setInt(1,id);
 			 statement.setInt(2, id);
-			 statement.setString(3,"'%" + keyWord + "%'");
+			 statement.setString(3, words);
 			 statement.setInt(4,start);
 			 statement.setInt(5,end);
 			 ResultSet rs = statement.executeQuery();
 			 while (rs.next()) {
 				 User user = new User();
 				 user.setId(rs.getInt("user_id"));
-				 user.setName(rs.getString("nickname"));
+				 user.setNickname(rs.getString("nickname"));
+				 user.setProfilePhoto(rs.getString("profile_photo"));
 				 l.add(user);
 			 }
 			 rs.close();

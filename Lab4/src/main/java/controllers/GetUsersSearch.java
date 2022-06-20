@@ -51,10 +51,8 @@ public class GetUsersSearch extends HttpServlet {
 			userManager.finalize();
 		}
 		
-		
-		
 		request.setAttribute("users",users);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/ViewFollowedUsers.jsp"); 
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/ViewNotFollowedUsers.jsp"); 
 		dispatcher.forward(request,response);
 		
 	}

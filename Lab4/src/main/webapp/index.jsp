@@ -123,10 +123,9 @@ $(document).ready(function(){
 		const data = {
 				keyWord: $("#keyword").val(),
 		}
-		
-		$.post( "GetUsersSearch",data, function(event){
-			
-		})		
+		$("#lcolumn").load("GetUsersSearch", data);
+		event.preventDefault();
+
 	})
 	/* Delete tweet */
 	$(document).on("click",".delTweet",function(event){
