@@ -244,6 +244,39 @@ public class ManageUsers {
 		return  l;
 	}
 	
+	public List<User> getFollowedUsersKeyWord(Integer id, String keyWord,Integer start, Integer end) {
+		 String query = "SELECT user_id, nickname FROM users "
+		 		+ " WHERE user_id NOT IN ("
+		 		+ "	SELECT u.user_id FROM users as u, followers as f"
+		 		+ " WHERE u.user_id = f.user_id AND f.follower_id = ?"
+		 		+ ") "
+		 		+ " AND user_id <> ?"
+		 		+ " AND nickname LIKE '%?%' "
+		 		+ " ORDER BY nickname LIMIT ?,?;";
+		 PreparedStatement statement = null;
+		 List<User> l = new ArrayList<User>();
+		 try {
+			 statement = db.prepareStatement(query);
+			 statement.setInt(1,id);
+			 statement.setInt(2, id);
+			 statement.setString(3, keyWord);
+			 statement.setInt(4,start);
+			 statement.setInt(5,end);
+			 ResultSet rs = statement.executeQuery();
+			 while (rs.next()) {
+				 User user = new User();
+				 user.setId(rs.getInt("user_id"));
+				 user.setName(rs.getString("nickname"));
+				 l.add(user);
+			 }
+			 rs.close();
+			 statement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+		return  l;
+	}
+	
 	
 	// Get followed Users
 	public List<User> getFollowedUsers(Integer id, Integer start, Integer end) {
