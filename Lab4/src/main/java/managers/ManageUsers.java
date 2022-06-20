@@ -184,8 +184,8 @@ public class ManageUsers {
 		PreparedStatement statement = null;
 		try {
 			statement = db.prepareStatement(query);
-			statement.setInt(1,uid);
-			statement.setInt(2,fid);
+			statement.setInt(1,fid);
+			statement.setInt(2,uid);
 			statement.executeUpdate();
 			statement.close();
 		} catch (SQLIntegrityConstraintViolationException e) {
