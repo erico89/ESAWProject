@@ -36,7 +36,7 @@ public class ManageUsers {
 	
 	// Get a user given its id, 
 	public User getUser(Integer id) {
-		String query = "SELECT user_id,nickname,mail FROM users WHERE user_id = ? ;";
+		String query = "SELECT user_id,nickname,mail,birthdate,name,surname FROM users WHERE user_id = ? ;";
 		ResultSet rs = null;
 		User user = null;
 		PreparedStatement statement = null;
@@ -48,8 +48,11 @@ public class ManageUsers {
 			if (rs.next()) {
 				user = new User();
 				user.setId(rs.getInt("user_id"));
-				user.setName(rs.getString("nickname"));
+				user.setNickname(rs.getString("nickname"));
 				user.setMail(rs.getString("mail"));
+				user.setBirthdate(rs.getString("birthdate"));
+				user.setName(rs.getString("name"));
+				user.setSurname(rs.getString("surname"));
 				// TO DO: M¨¢s parametros para devolver.
 				
 			}
