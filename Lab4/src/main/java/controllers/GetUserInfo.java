@@ -35,14 +35,21 @@ public class GetUserInfo extends HttpServlet {
 		HttpSession session = request.getSession(false);
 		// ERROR
 		User user = (User) session.getAttribute("user");
-		
+		Integer following = (Integer) session.getAttribute("numFollowing");
+		Integer followers = (Integer) session.getAttribute("numFollowers");
+
 		if (session != null || user != null) {
 			ManageUsers userManager = new ManageUsers();
 			user = userManager.getUser(user.getId());
+			following = userManager.numFollowing(user.getId());
+			followers = userManager.numFollowers(user.getId());
 			userManager.finalize();
 		}
 		
 		request.setAttribute("user",user);
+		request.setAttribute("numFollowing",following);
+		request.setAttribute("numFollowers",followers);
+
 		RequestDispatcher dispatcher = request.getRequestDispatcher("ViewUserInfo.jsp"); 
 		dispatcher.include(request,response);
 	}

@@ -64,6 +64,48 @@ public class ManageUsers {
 		return user;
 
 	}
+	
+	public int numFollowing(Integer id) {
+		int numFollowing = 0;
+		String query = "SELECT COUNT(u.user_id) AS numFollowers FROM users u LEFT OUTER JOIN followers f ON u.user_id = f.follower_id WHERE u.user_id = ? ;";
+		ResultSet rs = null;
+		User user = null;
+		PreparedStatement statement = null;
+		
+		try {
+			statement = db.prepareStatement(query);
+			statement.setInt(1,id);
+			rs = statement.executeQuery();
+			if (rs.next()) {
+				numFollowing = rs.getInt(query);	
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return numFollowing;
+	}
+	
+	public int numFollowers(Integer id) {
+		int numFollowers = 0;
+		String query = "SELECT COUNT(f.user_id) AS numFollowers FROM followers f LEFT OUTER JOIN users u ON f.user_id = u.user_id WHERE u.user_id = ? ;";
+		ResultSet rs = null;
+		User user = null;
+		PreparedStatement statement = null;
+		
+		try {
+			statement = db.prepareStatement(query);
+			statement.setInt(1,id);
+			rs = statement.executeQuery();
+			if (rs.next()) {
+				numFollowers = rs.getInt(query);	
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return numFollowers;
+	}
 		
 	// Add a new user in the users table
 	public void addUser(String nickname, String name, String surname, String secondSurname, String mail, 
