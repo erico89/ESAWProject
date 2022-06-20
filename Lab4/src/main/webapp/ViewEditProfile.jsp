@@ -22,15 +22,15 @@
 					</div>
 					<div class="form-group">
 						<label for="surname"> Surname </label> 
-						<input type="text" id="surname" class="form-control text-light bg-dark" name="surname" placeholder="Surname">  
+						<input type="text" id="surname" class="form-control text-light bg-dark" name="surname" placeholder="${user.surname}">  
 					</div>
 					<div class="form-group">
-						<label for="email"> Email </label>
-						<input type="text" id="user" class="form-control text-light bg-dark" name="email" placeholder="Email">
+						<label for="mail"> Email </label>
+						<input type="text" id="mail" class="form-control text-light bg-dark" name="mail" placeholder="${user.mail}">
 					</div>
 					<div class="form-group">
 						<label for="birthdate"> Birthdate </label>
-						<input type="text" id="user" class="form-control text-light bg-dark" name="birthdate" placeholder="Birthdate">
+						<input type="text" id="birthdate" class="form-control text-light bg-dark" name="birthdate" placeholder="${user.birthdate}">
 					</div>
 					
 			    	<input class="btn btn-primary mt-3" type="submit" name="sumbit" value="Submit">
