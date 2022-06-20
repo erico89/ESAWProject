@@ -36,7 +36,7 @@ public class ManageUsers {
 	
 	// Get a user given its id, 
 	public User getUser(Integer id) {
-		String query = "SELECT user_id,nickname,mail FROM users WHERE user_id = ? ;";
+		String query = "SELECT user_id,nickname,mail,birthdate,name,surname FROM users WHERE user_id = ? ;";
 		ResultSet rs = null;
 		User user = null;
 		PreparedStatement statement = null;
@@ -48,8 +48,11 @@ public class ManageUsers {
 			if (rs.next()) {
 				user = new User();
 				user.setId(rs.getInt("user_id"));
-				user.setName(rs.getString("nickname"));
+				user.setNickname(rs.getString("nickname"));
 				user.setMail(rs.getString("mail"));
+				user.setBirthdate(rs.getString("birthdate"));
+				user.setName(rs.getString("name"));
+				user.setSurname(rs.getString("surname"));
 				// TO DO: M¨¢s parametros para devolver.
 				
 			}
@@ -184,8 +187,8 @@ public class ManageUsers {
 		PreparedStatement statement = null;
 		try {
 			statement = db.prepareStatement(query);
-			statement.setInt(1,uid);
-			statement.setInt(2,fid);
+			statement.setInt(1,fid);
+			statement.setInt(2,uid);
 			statement.executeUpdate();
 			statement.close();
 		} catch (SQLIntegrityConstraintViolationException e) {
@@ -201,8 +204,8 @@ public class ManageUsers {
 		PreparedStatement statement = null;
 		try {
 			statement = db.prepareStatement(query);
-			statement.setInt(1,uid);
-			statement.setInt(2,fid);
+			statement.setInt(1,fid);
+			statement.setInt(2,uid);
 			statement.executeUpdate();
 			statement.close();
 		} catch (SQLIntegrityConstraintViolationException e) {
@@ -280,7 +283,7 @@ public class ManageUsers {
 	
 	// Get followed Users
 	public List<User> getFollowedUsers(Integer id, Integer start, Integer end) {
-		 String query = "SELECT u.user_id,u.nickname FROM users u JOIN followers f ON u.user_id = f.follower_id WHERE f.user_id = ? ORDER BY nickname LIMIT ?,?;";
+		 String query = "SELECT * FROM users u JOIN followers f ON u.user_id = f.user_id WHERE f.follower_id = ? ORDER BY nickname LIMIT ?,?;";
 		 PreparedStatement statement = null;
 		 List<User> l = new ArrayList<User>();
 		 try {
@@ -292,7 +295,12 @@ public class ManageUsers {
 			 while (rs.next()) {
 				 User user = new User();
 				 user.setId(rs.getInt("user_id"));
-				 user.setName(rs.getString("nickname"));
+				 user.setNickname(rs.getString("nickname"));
+				 user.setProfilePhoto(rs.getString("profile_photo"));
+				 user.setMail(rs.getString("mail"));
+				 user.setName(rs.getString("name"));
+				 user.setSurname(rs.getString("surname"));
+				 user.setBirthdate(rs.getString("birthdate"));
 				 l.add(user);
 			 }
 			 rs.close();

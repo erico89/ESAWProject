@@ -29,7 +29,7 @@
                             <div class="overflow-hidden">
                                 <div>${u.name}</div>
                             </div>
-                            <div class="">
+                            <div class=""  user_id="${u.id}">
                                 <button type="button" class="followUser btn btn-primary">
                                 	<i class="fa fa-user-plus"></i> &nbsp;Follow
                                 </button>
