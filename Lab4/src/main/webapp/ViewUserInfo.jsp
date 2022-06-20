@@ -12,7 +12,7 @@
 		  	<p class="text-right text-white"> ${numFollowers} Followers </p>
 		  </div>
 		  <hr>
-		  <p class="text-left text-white"> <i class="bi bi-archive"></i>${user.name} ${user.surname} </p>
+		  <p class="text-left text-white"> <i class="bi bi-archive"></i>${user.name} ${user.surname} ${user.secondSurname} </p>
 		  <p class="text-left text-white"> <i class="bi bi-person"></i>${user.nickname} </p>
 		  <p class="text-left text-white"> <i class="bi bi-gift"></i> ${user.birthdate} </p>
 		  <p class="text-left text-white"> <i class="bi bi-envelope"></i> ${user.mail} </p>

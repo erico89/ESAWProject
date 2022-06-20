@@ -1,5 +1,6 @@
 package managers;
 
+import java.security.NoSuchAlgorithmException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -36,7 +37,7 @@ public class ManageUsers {
 	
 	// Get a user given its id, 
 	public User getUser(Integer id) {
-		String query = "SELECT user_id,nickname,mail,birthdate,name,surname,profile_photo FROM users WHERE user_id = ? ;";
+		String query = "SELECT user_id,nickname,mail,birthdate,password,name,surname,second_surname,profile_photo FROM users WHERE user_id = ? ;";
 		ResultSet rs = null;
 		User user = null;
 		PreparedStatement statement = null;
@@ -51,13 +52,17 @@ public class ManageUsers {
 				user.setNickname(rs.getString("nickname"));
 				user.setMail(rs.getString("mail"));
 				user.setBirthdate(rs.getString("birthdate"));
+				user.setPassword(rs.getString("password"));
 				user.setName(rs.getString("name"));
 				user.setSurname(rs.getString("surname"));
+				user.setSecondSurname(rs.getString("second_surname"));
 				user.setProfilePhoto(rs.getString("profile_photo"));
 				// TO DO: M¨¢s parametros para devolver.
 				
 			}
 		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		}
 		
@@ -77,6 +82,8 @@ public class ManageUsers {
 			statement.setInt(1,id);
 			rs = statement.executeQuery();
 			if (rs.next()) {
+				user = new User();
+				user.setId(rs.getInt("u.user_id"));
 				numFollowing = rs.getInt(query);	
 			}
 		} catch (SQLException e) {
@@ -98,6 +105,8 @@ public class ManageUsers {
 			statement.setInt(1,id);
 			rs = statement.executeQuery();
 			if (rs.next()) {
+				user = new User();
+				user.setId(rs.getInt("u.user_id"));
 				numFollowers = rs.getInt(query);	
 			}
 		} catch (SQLException e) {

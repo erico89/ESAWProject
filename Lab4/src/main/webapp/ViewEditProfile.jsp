@@ -17,6 +17,14 @@
 						<label for="nickname"> Nickname </label>
 						<input type="text" id="user" class="form-control  text-light bg-dark" name="nickname" placeholder="${user.nickname}">
 					</div>
+					<div class="form-group">
+						<label for="mail"> Email </label>
+						<input type="text" id="mail" class="form-control text-light bg-dark" name="mail" placeholder="${user.mail}">
+					</div>
+						<div class="form-group">
+						<label for="password"> Password </label>
+						<input type="password" id="password" class="form-control  text-light bg-dark" name="password" placeholder="">
+					</div>
 						<div class="form-group">
 						<label for="name"> Name </label>
 						<input type="text" id="user" class="form-control  text-light bg-dark" name="name" placeholder="${user.name}">
@@ -25,10 +33,11 @@
 						<label for="surname"> Surname </label> 
 						<input type="text" id="surname" class="form-control text-light bg-dark" name="surname" placeholder="${user.surname}">  
 					</div>
-					<div class="form-group">
-						<label for="mail"> Email </label>
-						<input type="text" id="mail" class="form-control text-light bg-dark" name="mail" placeholder="${user.mail}">
+						<div class="form-group">
+						<label for="second_surname"> Second Surname </label> 
+						<input type="text" id="second_surname" class="form-control text-light bg-dark" name="second_surname" placeholder="${user.secondSurname}">  
 					</div>
+				
 					<div class="form-group">
 						<label for="birthdate"> Birthdate </label>
 						<input type="text" id="birthdate" class="form-control text-light bg-dark" name="birthdate" placeholder="${user.birthdate}">
