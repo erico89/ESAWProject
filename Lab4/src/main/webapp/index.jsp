@@ -116,6 +116,18 @@ $(document).ready(function(){
 		});
 		event.preventDefault();
 	});
+	/* Search User */
+	$(document).on("click","#GetUsersSearch",function(event){
+		
+		const data = {
+				keyWord: $("keyWord").val(),
+		}
+		
+		$.post( "GetUsersSearch",data, function(event){
+			$("#content").load("GetFollowedUsers");
+			$("#lcolumn").load("GetNotFollowedUsers");
+		})		
+	})
 	/* Delete tweet */
 	$(document).on("click",".delTweet",function(event){
 		var tweet = $(this).parent();
