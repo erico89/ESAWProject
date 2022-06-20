@@ -43,22 +43,16 @@ public class GetUsersSearch extends HttpServlet {
 		
 		HttpSession session = request.getSession(false);
 		User user = (User) session.getAttribute("user");
+		keyWord = request.getParameter("keyWord");
 
-		try {
-			
-			if (session != null || user != null) {
-				BeanUtils.populate(keyWord, request.getParameterMap());
-				ManageUsers userManager = new ManageUsers();
-				users = userManager.getFollowedUsersKeyWord(user.getId(),keyWord,0,4);
-				userManager.finalize();
-			}
-		
-		} catch (IllegalAccessException | InvocationTargetException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		
+		if (session != null || user != null ) {
+			ManageUsers userManager = new ManageUsers();
+			users = userManager.getFollowedUsersKeyWord(user.getId(),keyWord,0,4);
+			userManager.finalize();
 		}
-
+		
+		
+		
 		request.setAttribute("users",users);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/ViewFollowedUsers.jsp"); 
 		dispatcher.forward(request,response);

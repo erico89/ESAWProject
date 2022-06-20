@@ -251,7 +251,7 @@ public class ManageUsers {
 		 		+ " WHERE u.user_id = f.user_id AND f.follower_id = ?"
 		 		+ ") "
 		 		+ " AND user_id <> ?"
-		 		+ " AND nickname LIKE '%?%' "
+		 		+ " AND nickname LIKE ? "
 		 		+ " ORDER BY nickname LIMIT ?,?;";
 		 PreparedStatement statement = null;
 		 List<User> l = new ArrayList<User>();
@@ -259,7 +259,7 @@ public class ManageUsers {
 			 statement = db.prepareStatement(query);
 			 statement.setInt(1,id);
 			 statement.setInt(2, id);
-			 statement.setString(3, keyWord);
+			 statement.setString(3,"'%" + keyWord + "%'");
 			 statement.setInt(4,start);
 			 statement.setInt(5,end);
 			 ResultSet rs = statement.executeQuery();

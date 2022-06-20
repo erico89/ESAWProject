@@ -116,16 +116,16 @@ $(document).ready(function(){
 		});
 		event.preventDefault();
 	});
+	
 	/* Search User */
-	$(document).on("click","#GetUsersSearch",function(event){
+	$(document).on("click","#getSearch",function(event){
 		
 		const data = {
-				keyWord: $("keyWord").val(),
+				keyWord: $("#keyword").val(),
 		}
 		
 		$.post( "GetUsersSearch",data, function(event){
-			$("#content").load("GetFollowedUsers");
-			$("#lcolumn").load("GetNotFollowedUsers");
+			
 		})		
 	})
 	/* Delete tweet */

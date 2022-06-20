@@ -5,12 +5,10 @@
          <div class="form-group">
           <div class= "row">
            <div class="col-sm-9">
-	        <textarea id="keyWord" class="form-control text-light bg-dark" rows="1" placeholder="Search"></textarea>
+	        <input id="keyword" class="form-control text-light bg-dark" rows="1" placeholder="Search"></input>
 	       </div>
 	       <div class="col-sm-3">
-	        <button id ="GetUsersSearch"type="button" class="followUser btn btn-primary">
-             <i class="bi bi-search"></i>                    	
-            </button>
+	        <button id ="getSearch"type="button" class="followUser btn btn-primary"><i class="bi bi-search"></i></button>
            </div>
            </div>		
   		 </div>
