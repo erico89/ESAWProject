@@ -43,7 +43,7 @@ public class EditProfile extends HttpServlet {
 		}
 		
 		request.setAttribute("user",user);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/ViewUserInfo.jsp"); 
+		RequestDispatcher dispatcher = request.getRequestDispatcher("ViewEditProfile.jsp"); 
 		dispatcher.include(request,response);
 	}
 

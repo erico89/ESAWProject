@@ -43,7 +43,7 @@ public class GetUserInfo extends HttpServlet {
 		}
 		
 		request.setAttribute("user",user);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/ViewUserInfo.jsp"); 
+		RequestDispatcher dispatcher = request.getRequestDispatcher("ViewUserInfo.jsp"); 
 		dispatcher.include(request,response);
 	}
 

@@ -9,16 +9,16 @@
 				
 				<form class="form-group" id="myform">	
 					<div class="form-group">
-						<label for="user"> Profile Photo </label>
+						<label for="profile photo"> Profile Photo </label>
 						<p><img src="imgs/avatar3.png" class="rounded" style="height:106px;width:106px" alt="Avatar"></p>
 					</div>
 					<div class="form-group">
-						<label for="user"> Nickname </label>
-						<input type="text" id="user" class="form-control  text-light bg-dark" name="user" placeholder="${user.nickname}">
+						<label for="nickname"> Nickname </label>
+						<input type="text" id="user" class="form-control  text-light bg-dark" name="nickname" placeholder="${user.nickname}">
 					</div>
 						<div class="form-group">
-						<label for="user"> Name </label>
-						<input type="text" id="user" class="form-control  text-light bg-dark" name="user" placeholder="${user.name}">
+						<label for="name"> Name </label>
+						<input type="text" id="user" class="form-control  text-light bg-dark" name="name" placeholder="${user.name}">
 					</div>
 					<div class="form-group">
 						<label for="surname"> Surname </label> 

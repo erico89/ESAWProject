@@ -13,4 +13,4 @@
 		<button type= "button" class="menu btn btn-primary shadow rounded" style="border-color:white;color:white" id=EditProfile><i class="bi bi-person-plus"></i> Edit </button>		  
 		</div>
 		 
-		<div class="p-3 my-3 myFrom shadow rounded text-white"> Calyps</div>
+		<div class="p-3 my-3 myFrom shadow rounded text-white" id=GetUserTweets> Calyps</div>
