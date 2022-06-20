@@ -4,7 +4,9 @@
 
 		<div class="p-3 my-3 myFrom shadow rounded text-white">
 		  <h2>My Profile</h2>
-		  <p><img src="imgs/avatar3.png" class="rounded" style="height:106px;width:106px" alt="Avatar"></p>
+		  <p>
+		  <img class="rounded-circle" src= ${user.profilePhoto} style="height:106px;width:106px" alt="Avatar"> 
+		  </p>
 		  <hr>
 		  <p class="text-left text-white"> <i class="bi bi-person"></i>${user.nickname} </p>
 		  <p class="text-left text-white"> <i class="bi bi-envelope"></i> ${user.mail} </p>

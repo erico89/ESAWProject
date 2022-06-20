@@ -10,7 +10,7 @@
 				<form class="form-group" id="myform">	
 					<div class="form-group">
 						<label for="profile photo"> Profile Photo </label>
-						<p><img src="imgs/avatar3.png" class="rounded" style="height:106px;width:106px" alt="Avatar"></p>
+						<p><img src="${user.profilePhoto}" class="rounded" style="height:106px;width:106px" alt="Avatar"></p>
 					</div>
 					<div class="form-group">
 						<label for="nickname"> Nickname </label>
