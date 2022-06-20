@@ -33,7 +33,7 @@
 						<input type="text" id="birthdate" class="form-control text-light bg-dark" name="birthdate" placeholder="${user.birthdate}">
 					</div>
 					
-			    	<input class="btn btn-primary mt-3" type="submit" name="sumbit" value="Submit">
+					<button type= "button" class="menu btn btn-primary shadow rounded" style="border-color:white;color:white" id=GetUserInfo><i class="bi bi-person-plus"></i> Save </button>		  
 				</form>
 			</div>
 		</div>
