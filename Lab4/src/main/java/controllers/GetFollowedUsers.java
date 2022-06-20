@@ -41,11 +41,9 @@ public class GetFollowedUsers extends HttpServlet {
 		User user = (User) session.getAttribute("user");
 
 		if (session != null || user != null) {
-		
 			ManageUsers userManager = new ManageUsers();
 			users = userManager.getFollowedUsers(user.getId(),0,4);
 			userManager.finalize();
-		
 		}
 
 		request.setAttribute("users",users);

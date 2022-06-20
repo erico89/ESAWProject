@@ -152,7 +152,10 @@ $(document).ready(function(){
 	/* UnFollow user */
 	$(document).on("click",".unfollowUser",function(event) {
 		var user = $(this).parent();
-		$.post( "UnFollowUser", { id: $(this).parent().attr("id") }, function(event) {
+		const data = {
+				id: user.attr("user_id")
+		}
+		$.post( "UnFollowUser", data, function(event) {
 			$("#content").load("GetFollowedUsers");
 			$("#lcolumn").load("GetNotFollowedUsers");
 		});
