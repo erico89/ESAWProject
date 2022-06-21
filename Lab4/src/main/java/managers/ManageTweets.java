@@ -143,6 +143,40 @@ public class ManageTweets {
 		return  l;
 	}
 	
+	/*** Get public tweets with keyWord order by desc.***/
+	public List<Tweet> getTweetsSearch(String keyWord, Integer start, Integer end) {
+		 String query = "SELECT * FROM tweets as t WHERE t.description LIKE ? ORDER BY t.likes DESC LIMIT ?,? ;";
+		 PreparedStatement statement = null;
+		 List<Tweet> l = new ArrayList<Tweet>();
+		 try {
+			 String words = "%" + keyWord + "%";
+			 statement = db.prepareStatement(query);
+			 statement.setString(1,words);
+			 statement.setInt(2,start);
+			 statement.setInt(3,end);
+			 ResultSet rs = statement.executeQuery();
+			 while (rs.next()) {
+				 Tweet tweet = new Tweet();
+				 tweet.setTweet_id(rs.getInt("tweet_id"));
+				 tweet.setDescription(rs.getString("description"));
+				 tweet.setImage(rs.getString("image"));
+				 tweet.setAudio(rs.getString("audio"));
+				 tweet.setNickname(rs.getString("nickname"));
+				 tweet.setLikes(rs.getInt("likes"));
+				 tweet.setRetweets(rs.getInt("retweets"));				 
+				 //tweet.setPostDateTime(rs.getTimestamp("date"));;
+				 tweet.setParent_id(rs.getInt("parent_id"));
+				 tweet.setUser_id(rs.getInt("user_id"));
+				 l.add(tweet);
+			 }
+			 rs.close();
+			 statement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+		return  l;
+	}
+	
 	// Get followed users' tweets
 	public List<Tweet> getFollowedTweets(Integer u_id, Integer start, Integer end) {
 		 String query = "SELECT * FROM tweets as t "

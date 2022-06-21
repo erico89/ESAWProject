@@ -127,6 +127,18 @@ $(document).ready(function(){
 		event.preventDefault();
 
 	})
+	
+	/* Search Tweet */
+	$(document).on("click","#getSearchTweet",function(event){
+		
+		const data = {
+				keyWord: $("#keyword").val(),
+		}
+		$("#content").load("GetTweetsSearch", data);
+		event.preventDefault();
+
+	})
+	
 	/* Delete tweet */
 	$(document).on("click",".delTweet",function(event){
 		var tweet = $(this).parent();

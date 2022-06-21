@@ -1,7 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" session="false" %>
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-		<div class="p-3 my-3 myFrom shadow rounded text-white"> Calyps
+		<div class="p-3 my-3 myFrom shadow rounded text-white"> 
+		<h5>Calyps</h5>
+		<div class="form-group row px-3">
+                <div class="col-sm-10 p-0">
+                    <textarea type="search" id="keyword" class="form-control" id="keyword" rows="1"/>
+                </div>
+                <div class="col-sm-2 p-0">
+	                <button id="getSearchTweet" type="button" class="btn btn-primary">
+	                    <i class="bi bi-search"></i>
+	                </button>
+                </div>
+            </div>
 			<c:forEach var="t" items="${tweets}">
 				<div class="container-xlp-3 my-3 p-3 bg-dark text-white border border-white rounded">
 					<div class="row">
