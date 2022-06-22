@@ -117,13 +117,13 @@ $(document).ready(function(){
 		event.preventDefault();
 	});
 	
-	/* Search User */
-	$(document).on("click","#getSearch",function(event){
+	/* Search NotFollower */
+	$(document).on("click","#getNotFollower",function(event){
 		
 		const data = {
-				keyWord: $("#keyword").val(),
+				keyWord: $("#keywordNotFollower").val(),
 		}
-		$("#lcolumn").load("GetUsersSearch", data);
+		$("#lcolumn").load("GetNotFollowersSearch", data);
 		event.preventDefault();
 
 	})
@@ -132,7 +132,7 @@ $(document).ready(function(){
 	$(document).on("click","#getSearchTweet",function(event){
 		
 		const data = {
-				keyWord: $("#keyword").val(),
+				keyWord: $("#keywordTweet").val(),
 		}
 		$("#content").load("GetTweetsSearch", data);
 		event.preventDefault();
@@ -143,7 +143,7 @@ $(document).ready(function(){
 	$(document).on("click","#getFollower",function(event){
 		
 		const data = {
-				keyWord: $("#keyword").val(),
+				keyWord: $("#keywordFollower").val(),
 		}
 		$("#content").load("GetFollowersSearch", data);
 		event.preventDefault();

@@ -4,7 +4,7 @@
 		<h5> User Following </h5>
 		<div class="form-group row px-3">
                 <div class="col-sm-10 p-0">
-                    <input type="search" id="keyword" class="form-control" id="keyword"/>
+                    <input type="search" id="keywordFollower" class="form-control" />
                 </div>
                 <div class="col-sm-2 p-0">
 	                <button id="getFollower" type="button" class="btn btn-primary">

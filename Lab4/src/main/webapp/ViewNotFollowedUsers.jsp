@@ -5,10 +5,10 @@
         	<h5>Who to follow?</h5>
             <div class="form-group row px-3">
                 <div class="col-sm-10 p-0">
-                    <input type="search" id="keyword" class="form-control" id="keyword"/>
+                    <input type="search" id="keywordNotFollower" class="form-control"/>
                 </div>
                 <div class="col-sm-2 p-0">
-	                <button id="getSearch" type="button" class="btn btn-primary">
+	                <button id="getNotFollower" type="button" class="btn btn-primary">
 	                    <i class="bi bi-search"></i>
 	                </button>
                 </div>
