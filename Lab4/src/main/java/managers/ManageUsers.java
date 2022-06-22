@@ -300,7 +300,7 @@ public class ManageUsers {
 		return  l;
 	}
 	
-	public List<User> getFollowedUsersKeyWord(Integer id, String keyWord,Integer start, Integer end) {
+	public List<User> getNotFollowedUsersKeyWord(Integer id, String keyWord,Integer start, Integer end) {
 		 String query = "SELECT * FROM users "
 		 		+ " WHERE user_id NOT IN ("
 		 		+ "	SELECT u.user_id FROM users as u, followers as f"
@@ -365,6 +365,38 @@ public class ManageUsers {
 		} 
 		return  l;
 	}
+	
+	// Get followed Users
+		public List<User> getFollowedUsersKeyWord(Integer id, String keyWord, Integer start, Integer end) {
+			 String query = "SELECT * FROM users u JOIN followers f ON u.user_id = f.user_id WHERE f.follower_id = ? AND u.nickname LIKE ? ORDER BY nickname LIMIT ?,?;";
+			 PreparedStatement statement = null;
+			 List<User> l = new ArrayList<User>();
+			 try {
+				 String words = "%" + keyWord + "%";
+				 statement = db.prepareStatement(query);
+				 statement.setInt(1,id);
+				 statement.setString(2, words);
+				 statement.setInt(3,start);
+				 statement.setInt(4,end);
+				 ResultSet rs = statement.executeQuery();
+				 while (rs.next()) {
+					 User user = new User();
+					 user.setId(rs.getInt("user_id"));
+					 user.setNickname(rs.getString("nickname"));
+					 user.setProfilePhoto(rs.getString("profile_photo"));
+					 user.setMail(rs.getString("mail"));
+					 user.setName(rs.getString("name"));
+					 user.setSurname(rs.getString("surname"));
+					 user.setBirthdate(rs.getString("birthdate"));
+					 l.add(user);
+				 }
+				 rs.close();
+				 statement.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} 
+			return  l;
+		}
 	
 	public Pair<Boolean,User> checkLogin(User user) {
 

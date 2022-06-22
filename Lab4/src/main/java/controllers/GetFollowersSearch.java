@@ -21,14 +21,14 @@ import models.User;
 /**
  * Servlet implementation class GetFollowedUsers
  */
-@WebServlet("/GetUsersSearch")
-public class GetUsersSearch extends HttpServlet {
+@WebServlet("/GetFollowersSearch")
+public class GetFollowersSearch extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GetUsersSearch() {
+    public GetFollowersSearch() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -47,12 +47,12 @@ public class GetUsersSearch extends HttpServlet {
 
 		if (session != null || user != null ) {
 			ManageUsers userManager = new ManageUsers();
-			users = userManager.getNotFollowedUsersKeyWord(user.getId(),keyWord,0,4);
+			users = userManager.getFollowedUsersKeyWord(user.getId(),keyWord,0,4);
 			userManager.finalize();
 		}
 		
 		request.setAttribute("users",users);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/ViewNotFollowedUsers.jsp"); 
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/ViewFollowedUsers.jsp"); 
 		dispatcher.forward(request,response);
 		
 	}
