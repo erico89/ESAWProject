@@ -21,14 +21,14 @@ import models.User;
 /**
  * Servlet implementation class GetFollowedUsers
  */
-@WebServlet("/GetUsersSearch")
-public class GetUsersSearch extends HttpServlet {
+@WebServlet("/GetNotFollowersSearch")
+public class GetNotFollowersSearch extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GetUsersSearch() {
+    public GetNotFollowersSearch() {
         super();
         // TODO Auto-generated constructor stub
     }
