@@ -139,6 +139,17 @@ $(document).ready(function(){
 
 	})
 	
+	/* Search Follower */
+	$(document).on("click","#getFollower",function(event){
+		
+		const data = {
+				keyWord: $("#keyword").val(),
+		}
+		$("#content").load("GetFollowersSearch", data);
+		event.preventDefault();
+
+	})
+	
 	/* Delete tweet */
 	$(document).on("click",".delTweet",function(event){
 		var tweet = $(this).parent();
