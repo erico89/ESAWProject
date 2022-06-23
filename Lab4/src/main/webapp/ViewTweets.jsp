@@ -5,7 +5,7 @@
 		<h5>Calyps</h5>
 		<div class="form-group row px-3">
                 <div class="col-sm-10 p-0">
-                    <textarea type="search" id="keywordTweet" class="form-control"rows="1"/>
+                    <input type="search" id="keywordTweet" class="form-control"rows="1"/>
                 </div>
                 <div class="col-sm-2 p-0">
 	                <button id="getSearchTweet" type="button" class="btn btn-primary">

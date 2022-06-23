@@ -145,15 +145,16 @@ public class ManageTweets {
 	
 	/*** Get public tweets with keyWord order by desc.***/
 	public List<Tweet> getTweetsSearch(String keyWord, Integer start, Integer end) {
-		 String query = "SELECT * FROM tweets as t WHERE t.description LIKE ? ORDER BY t.likes DESC LIMIT ?,? ;";
+		 String query = "SELECT * FROM tweets as t WHERE (t.description LIKE ? OR t.nickname LIKE ? ) ORDER BY t.likes DESC LIMIT ?,? ;";
 		 PreparedStatement statement = null;
 		 List<Tweet> l = new ArrayList<Tweet>();
 		 try {
 			 String words = "%" + keyWord + "%";
 			 statement = db.prepareStatement(query);
 			 statement.setString(1,words);
-			 statement.setInt(2,start);
-			 statement.setInt(3,end);
+			 statement.setString(2,words);
+			 statement.setInt(3,start);
+			 statement.setInt(4,end);
 			 ResultSet rs = statement.executeQuery();
 			 while (rs.next()) {
 				 Tweet tweet = new Tweet();
