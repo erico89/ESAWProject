@@ -48,7 +48,7 @@ $(document).ready(function(){
 	
 	$(document).on("click",".menu-logged", async function(event) {
 		const request = $(this).attr('id');
-		$('#iterator').load(request);
+		$('#content').load(request);
 		event.preventDefault();
 	});
 	
