@@ -267,6 +267,33 @@ public class ManageUsers {
 		}
 	}
 	
+	// Get All users
+	// Get not followed users, TO DO: necesitamos m¨¢s datos a parte de id y name
+	public List<User> getAllUsers(Integer start, Integer end) {
+		 String query = "SELECT * FROM users "
+		 		+ " ORDER BY nickname LIMIT ?,?;";
+		 PreparedStatement statement = null;
+		 List<User> l = new ArrayList<User>();
+		 try {
+			 statement = db.prepareStatement(query);
+			 statement.setInt(1,start);
+			 statement.setInt(2,end);
+			 ResultSet rs = statement.executeQuery();
+			 while (rs.next()) {
+				 User user = new User();
+				 user.setId(rs.getInt("user_id"));
+				 user.setNickname(rs.getString("nickname"));
+				 user.setProfilePhoto(rs.getString("profile_photo"));
+				 l.add(user);
+			 }
+			 rs.close();
+			 statement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+		return  l;
+	}
+	
 	// Get not followed users, TO DO: necesitamos m¨¢s datos a parte de id y name
 	public List<User> getNotFollowedUsers(Integer id, Integer start, Integer end) {
 		 String query = "SELECT * FROM users "

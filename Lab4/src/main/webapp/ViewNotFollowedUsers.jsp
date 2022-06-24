@@ -5,7 +5,7 @@
         	<h5>Who to follow?</h5>
             <div class="form-group row px-3">
                 <div class="col-sm-10 p-0">
-                    <input type="search" id="keywordNotFollower" class="form-control"/>
+                    <input type="search" id="keywordNotFollower" class="form-control  bg-dark text-white" placeholder="Search users"/>
                 </div>
                 <div class="col-sm-2 p-0">
 	                <button id="getNotFollower" type="button" class="btn btn-primary">

@@ -3,10 +3,10 @@
 		<div class="p-3 my-3 myFrom shadow rounded text-white"> 
 		<h5> User Following </h5>
 		<div class="form-group row px-3">
-                <div class="col-sm-10 p-0">
-                    <input type="search" id="keywordFollower" class="form-control" />
+                <div class="col-sm-11 p-0">
+                    <input type="search" id="keywordFollower" class="form-control  bg-dark text-white" placeholder="Search who are followd you ..."/>
                 </div>
-                <div class="col-sm-2 p-0">
+                <div class="col-sm-1 p-0">
 	                <button id="getFollower" type="button" class="btn btn-primary">
 	                    <i class="bi bi-search"></i>
 	                </button>

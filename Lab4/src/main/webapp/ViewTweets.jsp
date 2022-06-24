@@ -4,10 +4,10 @@
 		<div class="p-3 my-3 myFrom shadow rounded text-white"> 
 		<h5>Calyps</h5>
 		<div class="form-group row px-3">
-                <div class="col-sm-10 p-0">
-                    <input type="search" id="keywordTweet" class="form-control"rows="1"/>
+                <div class="col-sm-11 p-0">
+                    <input type="search" id="keywordTweet" class="form-control bg-dark text-white" placeholder="Search what you want to see..."/>
                 </div>
-                <div class="col-sm-2 p-0">
+                <div class="col-sm-1 p-0">
 	                <button id="getSearchTweet" type="button" class="btn btn-primary">
 	                    <i class="bi bi-search"></i>
 	                </button>

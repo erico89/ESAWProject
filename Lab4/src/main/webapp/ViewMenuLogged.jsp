@@ -43,10 +43,17 @@
 			        </c:otherwise>
 			     </c:choose> 
 				</div>
+				<div>
+				<p> ${user.nickname}</p>
+				</div>
 				<div class="row">
 					<div class = "col text-center">
-						<button type= "button" class="menu btn btn-dark w-100 shadow" id=GetUserInfo> ${user.nickname} </button>
-						<button type="button" class="menu btn btn-dark w-100 shadow" id="LogoutController">Logout</button>
+						<button type= "button" class="menu btn btn-dark w-100 shadow my-1" id=GetUserInfo> 
+							<i class="bi bi-pen"></i> Edit
+						</button>
+						<button type="button" class="menu btn btn-dark w-100 shadow my-1" id="LogoutController">
+							<i class="bi bi-box-arrow-right"></i></i> Logout
+						</button>
 					</div>		
 				</div>
           </div>

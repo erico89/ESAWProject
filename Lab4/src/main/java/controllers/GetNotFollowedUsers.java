@@ -40,12 +40,16 @@ public class GetNotFollowedUsers extends HttpServlet {
 		HttpSession session = request.getSession(false);
 		User user = (User) session.getAttribute("user");
 
-		if (session != null || user != null) {
+		if (user != null) {
 		
 			ManageUsers userManager = new ManageUsers();
 			users = userManager.getNotFollowedUsers(user.getId(),0,4);
 			userManager.finalize();
 		
+		} else {
+			ManageUsers userManager = new ManageUsers();
+			users = userManager.getAllUsers(0,4);
+			userManager.finalize();
 		}
 
 		request.setAttribute("users",users);
