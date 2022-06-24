@@ -11,9 +11,9 @@
 		<div class="d-flex justify-content-center">
 			<h5 style="color: white;font-weight: bold;">Login</h5>
 		</div>
-		<c:if test = "${!empty login.error}">
+		<c:if test = "${error}">
 			<div class="alert alert-danger" role="alert">
-					${login.error}
+					User or Password incorrect.
 			</div>
 		</c:if>
 		
