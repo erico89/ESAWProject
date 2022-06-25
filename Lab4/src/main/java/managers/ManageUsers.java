@@ -488,4 +488,33 @@ public class ManageUsers {
 	    	   hasValue(user.getPassword()) );
 	}
 
+	public List<User> getFollowerUsers(int id, int start, int end) {
+		 String query = "SELECT * FROM users u JOIN followers f ON u.user_id = f.follower_id WHERE f.user_id = ? ORDER BY nickname LIMIT ?,?;";
+		 PreparedStatement statement = null;
+		 List<User> l = new ArrayList<User>();
+		 try {
+			 statement = db.prepareStatement(query);
+			 statement.setInt(1,id);
+			 statement.setInt(2,start);
+			 statement.setInt(3,end);
+			 ResultSet rs = statement.executeQuery();
+			 while (rs.next()) {
+				 User user = new User();
+				 user.setId(rs.getInt("user_id"));
+				 user.setNickname(rs.getString("nickname"));
+				 user.setProfilePhoto(rs.getString("profile_photo"));
+				 user.setMail(rs.getString("mail"));
+				 user.setName(rs.getString("name"));
+				 user.setSurname(rs.getString("surname"));
+				 user.setBirthdate(rs.getString("birthdate"));
+				 l.add(user);
+			 }
+			 rs.close();
+			 statement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+		return  l;
+	}
+
 }

@@ -25,10 +25,10 @@
 			  <div class="col-sm-8">
 			 	<div class="row justify-content-md-center">
 			 		<div class="col">
-					  	<p class="text-center text-white"> ${numFollowing} Following </p>
+			 			<button type="button" class="btn btn-outline-light text-center profile_ops" id="GetFollowedUsers"> ${numFollowing} Following </button>
 			 		</div>
 			 		<div class="col">
-					  	<p class="text-center text-white"> ${numFollowers} Followers </p>
+			 			<button type="button" class="btn btn-outline-light text-center profile_ops" id="GetFollowerUsers"> ${numFollowers} Followers</button>			 		
 			 		</div>
 			 	</div>
 			  </div>

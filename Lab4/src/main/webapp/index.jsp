@@ -49,6 +49,15 @@ $(document).ready(function(){
 	$(document).on("click",".menu-logged", async function(event) {
 		const request = $(this).attr('id');
 		$('#content').load(request);
+
+		event.preventDefault();
+	});
+	
+	// Profile operations
+	$(document).on("click",".profile_ops", async function(event) {
+		const request = $(this).attr('id');
+		$('#content').load(request);
+		$("#lcolumn").html("");
 		event.preventDefault();
 	});
 	
@@ -183,6 +192,17 @@ $(document).ready(function(){
 		});
 	});
 	
+	/* Delete follower user */
+	$(document).on("click",".deleteFollower",function(event) {
+		var user = $(this).parent();
+		const data = {
+				id: user.attr("user_id")
+		}
+		$.post( "DeleteFollowerUser", data, function(event) {
+			$("#content").load("GetFollowerUsers");
+			$("#lcolumn").load("GetNotFollowedUsers");
+		});
+	});
 	/* Tweet operations (Like, retweets, ...) */
 	$(document).on("click", ".tweet_ops", function(event){
 		const data = {tweet_id: $(this).attr("tweet_id")};
