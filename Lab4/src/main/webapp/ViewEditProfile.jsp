@@ -10,8 +10,16 @@
 				<form class="form-group" action="UpdateProfile" id="myform" method="POST" enctype='multipart/form-data'>
 					<div class="form-group">
 						<label for="profile photo"> Profile Photo </label>
-						<p><img class="rounded-circle img-fluid" style="height:106px;width:106px" src= "./profile_photo/${user.profilePhoto}" alt="Avatar">
-
+						<div class="col-sm-6 m-auto">
+						<c:choose>
+					        <c:when test = "${user.profilePhoto == null || user.profilePhoto.length() == 0}">
+					            <img class="rounded-circle img-fluid" src= "imgs/avatar2.png" alt="Avatar">
+					        </c:when>
+					        <c:otherwise>
+					            <img class="rounded-circle img-fluid" src= "./profile_photo/${user.profilePhoto}" alt="Avatar">
+					        </c:otherwise>
+					     </c:choose> 
+						</div>
 					</div>
 					<div class="form-group">
 						<label for="nickname"> Nickname </label>

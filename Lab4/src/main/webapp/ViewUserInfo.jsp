@@ -14,8 +14,14 @@
 		  <h2>My Profile</h2>
 		  <div class="row justify-content-md-center text-center">
 			  <div class="col-sm-4">		  
-			  	<img class="rounded-circle img-fluid" style="height:106px;width:106px" src= "./profile_photo/${user.profilePhoto}" alt="Avatar">
-			  </div>
+				<c:choose>
+			        <c:when test = "${user.profilePhoto == null || user.profilePhoto.length() == 0}">
+			            <img class="rounded-circle img-fluid" src= "imgs/avatar2.png" alt="Avatar">
+			        </c:when>
+			        <c:otherwise>
+			            <img class="rounded-circle img-fluid" src= "./profile_photo/${user.profilePhoto}" alt="Avatar">
+			        </c:otherwise>
+			     </c:choose> 			  </div>
 			  <div class="col-sm-8">
 			 	<div class="row justify-content-md-center">
 			 		<div class="col">
