@@ -86,7 +86,7 @@ public class RegisterController extends HttpServlet {
 					manager.addUser(user.getNickname(), user.getName(), user.getSurname(), user.getSecondSurname(), user.getMail(), 
 							user.getPassword(), user.getBirthdate(), user.getProfilePhoto());
 					
-					//Save the photo manually
+					// Save the photo manually
 					if (user.getProfilePhoto().length() > 0) {
 						saveProfilePhoto(file,user);						
 					}	
@@ -98,10 +98,10 @@ public class RegisterController extends HttpServlet {
 						manager.addGenres(user.getNickname(), genres[i]);
 					}
 					
-					//Shut down connection with the database
+					// Shut down connection with the database
 					manager.finalize();
 					
-					//Display the register form
+					// Display the register form
 				   System.out.println(" user ok, forwarding to ViewLoginForm");
 				   RequestDispatcher dispatcher = request.getRequestDispatcher("ViewLoginForm.jsp");
 				   dispatcher.forward(request, response);

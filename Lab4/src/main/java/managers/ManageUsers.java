@@ -57,7 +57,6 @@ public class ManageUsers {
 				user.setSurname(rs.getString("surname"));
 				user.setSecondSurname(rs.getString("second_surname"));
 				user.setProfilePhoto(rs.getString("profile_photo"));
-				// TO DO: M¨¢s parametros para devolver.
 				
 			}
 		} catch (SQLException e) {
@@ -130,6 +129,38 @@ public class ManageUsers {
 			statement.setString(6,password);
 			statement.setString(7,birthdate);
 			statement.setString(8,profilePhoto);
+			
+			//Execute the query
+			statement.executeUpdate();
+			statement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	// Add a new user in the users table
+	public void updateUser(Integer id, String nickname, String name, String surname, String secondSurname, String mail, 
+			String password, String birthdate, String profilePhoto) 
+	{
+		
+		//Set the query
+		String query = "UPDATE users"
+				+ " SET nickname = ?, name = ?, surname = ?, second_surname = ? , mail = ? , password = ? , birthdate = ? , profile_photo = ?"
+				+ " WHERE user_id = ?;";
+		PreparedStatement statement = null;
+		
+		try {
+			//Fill the query
+			statement = db.prepareStatement(query);
+			statement.setString(1,nickname);
+			statement.setString(2,name);
+			statement.setString(3,surname);
+			statement.setString(4,secondSurname);
+			statement.setString(5,mail);	
+			statement.setString(6,password);
+			statement.setString(7,birthdate);
+			statement.setString(8,profilePhoto);
+			statement.setInt(9, id);
 			
 			//Execute the query
 			statement.executeUpdate();
