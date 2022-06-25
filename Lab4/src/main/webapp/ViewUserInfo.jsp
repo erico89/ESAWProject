@@ -4,12 +4,20 @@
 
 		<div class="p-3 my-3 myFrom shadow rounded text-white">
 		  <h2>My Profile</h2>
-		  <p>
-		  <img class="rounded-circle img-fluid" style="height:106px;width:106px" src= "./profile_photo/${user.profilePhoto}" alt="Avatar">
-		  </p>
-		  <div class="col-sm-8">
-		  	<p class="text-right text-white"> ${numFollowing} Following </p>
-		  	<p class="text-right text-white"> ${numFollowers} Followers </p>
+		  <div class="row justify-content-md-center text-center">
+			  <div class="col-sm-4">		  
+			  	<img class="rounded-circle img-fluid" style="height:106px;width:106px" src= "./profile_photo/${user.profilePhoto}" alt="Avatar">
+			  </div>
+			  <div class="col-sm-8">
+			 	<div class="row justify-content-md-center">
+			 		<div class="col">
+					  	<p class="text-center text-white"> ${numFollowing} Following </p>
+			 		</div>
+			 		<div class="col">
+					  	<p class="text-center text-white"> ${numFollowers} Followers </p>
+			 		</div>
+			 	</div>
+			  </div>
 		  </div>
 		  <hr>
 		  <p class="text-left text-white"> <i class="bi bi-archive"></i>${user.name} ${user.surname} ${user.secondSurname} </p>
