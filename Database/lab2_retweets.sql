@@ -19,27 +19,19 @@
 -- Table structure for table `retweets`
 --
 
-use lab2;
-
 DROP TABLE IF EXISTS `retweets`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-
-CREATE TABLE IF NOT EXISTS `retweets` 
-(
-  `tweet_id` INT NOT NULL,
-  `user_id` INT NOT NULL,
-  `date` DATE NOT NULL,
-  PRIMARY KEY (`tweet_id`, `user_id`),
+CREATE TABLE `retweets` (
+  `tweet_id` int NOT NULL,
+  `user_id` int NOT NULL,
+  `date` date NOT NULL,
+  PRIMARY KEY (`tweet_id`,`user_id`),
+  KEY `retweets_ibfk_2` (`user_id`),
   CONSTRAINT `retweets_ibfk_1` FOREIGN KEY (`tweet_id`) REFERENCES `tweets` (`tweet_id`),
   CONSTRAINT `retweets_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
-)
-  
-ENGINE=InnoDB 
-DEFAULT CHARSET=utf8mb4 
-COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
 
 --
 -- Dumping data for table `retweets`
@@ -47,6 +39,7 @@ COLLATE=utf8mb4_0900_ai_ci;
 
 LOCK TABLES `retweets` WRITE;
 /*!40000 ALTER TABLE `retweets` DISABLE KEYS */;
+INSERT INTO `retweets` VALUES (1,5,'2022-06-20'),(3,5,'2022-06-20'),(4,5,'2022-06-20'),(5,5,'2022-06-25'),(6,5,'2022-06-25'),(7,5,'2022-06-25');
 /*!40000 ALTER TABLE `retweets` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -59,3 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
+-- Dump completed on 2022-06-25 19:26:42

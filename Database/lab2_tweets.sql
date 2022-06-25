@@ -19,32 +19,27 @@
 -- Table structure for table `tweets`
 --
 
-use lab2;
-
 DROP TABLE IF EXISTS `tweets`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-
 CREATE TABLE `tweets` (
   `tweet_id` int NOT NULL AUTO_INCREMENT,
-  `description` varchar(255),
-  `image` varchar(255),
-  `audio` varchar(255),
+  `description` varchar(255) DEFAULT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `audio` varchar(255) DEFAULT NULL,
   `nickname` varchar(255) NOT NULL,
-  `likes` int NOT NULL DEFAULT 0,
-  `retweets` int NOT NULL DEFAULT 0,
+  `likes` int NOT NULL DEFAULT '0',
+  `retweets` int NOT NULL DEFAULT '0',
   `date` date NOT NULL,
   `parent_id` int DEFAULT NULL,
   `user_id` int NOT NULL,
   PRIMARY KEY (`tweet_id`),
+  KEY `tweets_ibfk_1` (`parent_id`),
+  KEY `tweets_ibfk_2` (`user_id`),
   CONSTRAINT `tweets_ibfk_1` FOREIGN KEY (`parent_id`) REFERENCES `tweets` (`tweet_id`),
   CONSTRAINT `tweets_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
-  )
-ENGINE=InnoDB 
-DEFAULT CHARSET=utf8mb4 
-COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
 
 --
 -- Dumping data for table `tweets`
@@ -52,6 +47,19 @@ COLLATE=utf8mb4_0900_ai_ci;
 
 LOCK TABLES `tweets` WRITE;
 /*!40000 ALTER TABLE `tweets` DISABLE KEYS */;
+INSERT INTO `tweets` VALUES (1,'Motomami mola mogollón?',NULL,'Candy.mp3','RosiQueen',122,3,'0000-00-00',NULL,3),
+(2,'Go to sleep, tomorrow you have school? @ahmed_14','meme.png',NULL,'Svennos',549,2034,'0000-00-00',NULL,2),
+(3,'127.38.118.119',NULL,NULL,'ahmed_14',1439,4060,'0000-00-00',2,1),
+(4,'Cant get it outta my head?',NULL,'XO Tour Llif3.mp3','f0ck_your_racist_borders',3410,14,'0000-00-00',NULL,4),
+(5,'hello','','','wenjie',1,1,'2022-06-18',NULL,5),
+(6,'asdf','','','wenjie',1,1,'2022-06-18',NULL,5),
+(7,'aaaaaaaaaaaaaaaadf asdf asdf asdf asdf asdf asdf asdf asdf wef asdfc asdfa erff asffc aerv asdf asdf asdfc er asdvc e',NULL,'','wenjie',1,1,'2022-06-18',NULL,5),
+(8,'',NULL,'','wenjie',1,0,'2022-06-18',NULL,5),
+(9,'',NULL,'','wenjie',0,0,'2022-06-18',NULL,5),
+(10,'',NULL,'','wenjie',0,0,'2022-06-18',NULL,5),
+(11,'',NULL,'','wenjie',0,0,'2022-06-18',NULL,5),
+(12,'',NULL,'','wenjie',0,0,'2022-06-18',NULL,5),
+(13,'',NULL,'','wenjie',0,0,'2022-06-18',NULL,5);
 /*!40000 ALTER TABLE `tweets` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -63,3 +71,5 @@ UNLOCK TABLES;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2022-06-25 19:26:42

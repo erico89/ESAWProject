@@ -16,37 +16,30 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `followers`
+-- Table structure for table `likes`
 --
 
-use lab2;
-
-DROP TABLE IF EXISTS `followers`;
+DROP TABLE IF EXISTS `likes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-
-CREATE TABLE IF NOT EXISTS `followers` 
-(
-  `user_id` INT NOT NULL,
-  `follower_id` INT NOT NULL,
-  PRIMARY KEY (`user_id`, `follower_id`),
-  CONSTRAINT `followers_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`),
-  CONSTRAINT `followers_ibfk_2` FOREIGN KEY (`follower_id`) REFERENCES `users` (`user_id`)
-)
-
-ENGINE=InnoDB 
-DEFAULT CHARSET=utf8mb4 
-COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `likes` (
+  `tweet_id` int NOT NULL,
+  `user_id` int NOT NULL,
+  PRIMARY KEY (`tweet_id`,`user_id`),
+  KEY `likes_ibfk_2` (`user_id`),
+  CONSTRAINT `likes_ibfk_1` FOREIGN KEY (`tweet_id`) REFERENCES `tweets` (`tweet_id`),
+  CONSTRAINT `likes_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
-
 --
--- Dumping data for table `followers`
+-- Dumping data for table `likes`
 --
 
-LOCK TABLES `followers` WRITE;
-/*!40000 ALTER TABLE `followers` DISABLE KEYS */;
-/*!40000 ALTER TABLE `followers` ENABLE KEYS */;
+LOCK TABLES `likes` WRITE;
+/*!40000 ALTER TABLE `likes` DISABLE KEYS */;
+INSERT INTO `likes` VALUES (1,5),(3,5),(4,5),(5,5),(6,5),(7,5),(8,5);
+/*!40000 ALTER TABLE `likes` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -58,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
-
+-- Dump completed on 2022-06-25 19:26:42
