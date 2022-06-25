@@ -25,8 +25,8 @@
 		
 		<form class="form-group" action="LoginController" id="myform" method="GET">	
 			<div class="form-group">
-				<label for="user"> NickName or Mail </label>
-				<input type="text" id="user" class="form-control  text-light bg-dark" name="user" placeholder="Nickname or Mail" value="${login.user}" required>
+				<label for="user"> NickName </label>
+				<input type="text" id="user" class="form-control  text-light bg-dark" name="user" placeholder="Nickname" value="${login.user}" required>
 			</div>
 			<div class="form-group">
 				<label for="password"> Password </label>
