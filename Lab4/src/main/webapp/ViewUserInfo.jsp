@@ -1,6 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" session="false" %>
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
+		 <script type="text/javascript">
+		 $(document).ready(function(){
+			$('#navigation').load('MenuController');
+			$('#lcolumn').load('GetNotFollowedUsers');
+			//$('#rcolumn').load('GetUserInfo');
+			$('#iterator').load('GetUserTweets');
+		 });
+		</script>
 
 		<div class="p-3 my-3 myFrom shadow rounded text-white">
 		  <h2>My Profile</h2>
@@ -27,5 +35,6 @@
 
 		<button type= "button" class="menu btn btn-primary shadow rounded" style="border-color:white;color:white" id=EditProfile><i class="bi bi-person-plus"></i> Edit </button>		  
 		</div>
-		 
-		<div class="p-3 my-3 myFrom shadow rounded text-white" id=GetUserTweets> Calyps</div>
+		
+		<div id="iterator">
+		</div>

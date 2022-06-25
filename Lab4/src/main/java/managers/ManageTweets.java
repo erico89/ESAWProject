@@ -239,7 +239,7 @@ public class ManageTweets {
 				 tweet.setNickname(rs.getString("nickname"));
 				 tweet.setLikes(rs.getInt("likes"));
 				 tweet.setRetweets(rs.getInt("retweets"));				 
-				 tweet.setPostDateTime(rs.getTimestamp("date"));;
+				 //tweet.setPostDateTime(rs.getTimestamp("date"));;
 				 tweet.setParent_id(rs.getInt("parent_id"));
 				 tweet.setUser_id(rs.getInt("user_id"));
 				 l.add(tweet);
