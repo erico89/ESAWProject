@@ -72,9 +72,8 @@ public class ManageUsers {
 	
 	public int numFollowing(Integer id) {
 		int numFollowing = 0;
-		String query = "SELECT COUNT(u.user_id) AS numFollowers FROM users u LEFT OUTER JOIN followers f ON u.user_id = f.follower_id WHERE u.user_id = ? ;";
+		String query = "SELECT COUNT(u.user_id) AS numFollowing FROM users u LEFT OUTER JOIN followers f ON u.user_id = f.follower_id WHERE u.user_id = ? ;";
 		ResultSet rs = null;
-		User user = null;
 		PreparedStatement statement = null;
 		
 		try {
@@ -82,9 +81,7 @@ public class ManageUsers {
 			statement.setInt(1,id);
 			rs = statement.executeQuery();
 			if (rs.next()) {
-				user = new User();
-				user.setId(rs.getInt("u.user_id"));
-				numFollowing = rs.getInt(query);	
+				numFollowing = rs.getInt("numFollowing");	
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -97,7 +94,6 @@ public class ManageUsers {
 		int numFollowers = 0;
 		String query = "SELECT COUNT(f.user_id) AS numFollowers FROM followers f LEFT OUTER JOIN users u ON f.user_id = u.user_id WHERE u.user_id = ? ;";
 		ResultSet rs = null;
-		User user = null;
 		PreparedStatement statement = null;
 		
 		try {
@@ -105,9 +101,7 @@ public class ManageUsers {
 			statement.setInt(1,id);
 			rs = statement.executeQuery();
 			if (rs.next()) {
-				user = new User();
-				user.setId(rs.getInt("u.user_id"));
-				numFollowers = rs.getInt(query);	
+				numFollowers = rs.getInt("numFollowers");	
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

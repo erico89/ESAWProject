@@ -35,8 +35,8 @@ public class GetUserInfo extends HttpServlet {
 		HttpSession session = request.getSession(false);
 		// ERROR
 		User user = (User) session.getAttribute("user");
-		Integer following = (Integer) session.getAttribute("numFollowing");
-		Integer followers = (Integer) session.getAttribute("numFollowers");
+		Integer following = 0;
+		Integer followers = 0;
 
 		if (session != null || user != null) {
 			ManageUsers userManager = new ManageUsers();
