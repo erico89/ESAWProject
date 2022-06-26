@@ -69,8 +69,56 @@ public class ManageTweets {
 	
 	/* Delete existing tweet */
 	public void deleteTweet(Integer tweet_id) {
-		String query = "DELETE FROM tweets WHERE tweet_id = ?";
+
+		// Select all retweeted tweets and delete the relation FK.
 		PreparedStatement statement = null;
+		String allRetweets = "SELECT * FROM tweets WHERE parent_id = ?";
+		String queryLikes = "DELETE FROM likes WHERE tweet_id = ?";
+		PreparedStatement likeStatement = null;
+		String queryRetweets = "DELETE FROM retweets WHERE tweet_id = ?";
+		PreparedStatement rtStatement = null;
+
+		try {
+			statement = db.prepareStatement(allRetweets);
+			statement.setInt(1,tweet_id);
+			ResultSet rs = statement.executeQuery();
+			while (rs.next()) {
+				int id = rs.getInt("tweet_id");
+				
+				// Remove all retweeted's likes
+				likeStatement = db.prepareStatement(queryLikes);
+				likeStatement.setInt(1,id);
+				likeStatement.executeUpdate();
+				likeStatement.close();
+				
+				// Remove all retweeted's retweets
+				rtStatement = db.prepareStatement(queryRetweets);
+				rtStatement.setInt(1,id);
+				rtStatement.executeUpdate();
+				rtStatement.close();
+			}
+			statement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		// Remove main tweets likes and retweets
+		try {
+			likeStatement = db.prepareStatement(queryLikes);
+			likeStatement.setInt(1,tweet_id);
+			likeStatement.executeUpdate();
+			likeStatement.close();
+			
+			rtStatement = db.prepareStatement(queryRetweets);
+			rtStatement.setInt(1,tweet_id);
+			rtStatement.executeUpdate();
+			rtStatement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		// Remove main tweet
+		String query = "DELETE FROM tweets WHERE tweet_id = ?";
 		try {
 			statement = db.prepareStatement(query);
 			statement.setInt(1,tweet_id);

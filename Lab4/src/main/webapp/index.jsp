@@ -162,11 +162,15 @@ $(document).ready(function(){
 	/* Delete tweet */
 	$(document).on("click",".delTweet",function(event){
 		var tweet = $(this).parent();
-		$.post( "DelTweet", { id: $(this).parent().attr("id") } , function(event) {
-			$("#content").load("GetOwnTimeline");				
+		const data = {
+				tweet_id: tweet.attr("tweet_id")
+		}
+		$.post( "DelTweet", data , function(event) {
+			$("#content").load("GetTimeline");				
 		});
 		event.preventDefault();
 	});
+	
 	/* Follow user */
 	$(document).on("click",".followUser",function(event){
 		var user = $(this).parent();

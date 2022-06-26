@@ -8,7 +8,7 @@
                     <input type="search" id="keywordTweet" class="form-control bg-dark text-white" placeholder="Search what you want to see..."/>
                 </div>
                 <div class="col-sm-1 p-0">
-	                <button id="getSearchTweet" type="button" class="btn btn-primary">
+	                <button type="button" class="btn btn-primary">
 	                    <i class="bi bi-search"></i>
 	                </button>
                 </div>
@@ -24,8 +24,9 @@
 								<div class="col overflow-hidden">
 									${t.nickname}
 								</div>
-								<div class="col text-right">
-									${t.postDateTime}
+								
+								<div class="col text-right"  tweet_id="${t.tweet_id}">
+									<button type="button" class="btn btn-outline-light delTweet"><i class="bi bi-trash"></i></button>
 								</div>
 							</div>
 							<div class="row">
