@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import managers.ManageTweets;
+import managers.ManageUsers;
 import models.Login;
 import models.Tweet;
 import models.User;
@@ -42,11 +43,15 @@ public class GetUserTweets extends HttpServlet {
 		
 		if (session != null || user != null) {
 			ManageTweets tweetManager = new ManageTweets();
+			ManageUsers userManager = new ManageUsers();
 			tweets = tweetManager.getUserTweets(user.getId(),0,4);
+			user = userManager.getUser(user.getId());
 			tweetManager.finalize();
+			userManager.finalize();
 		}
 
 		request.setAttribute("tweets",tweets);
+		request.setAttribute("user",user);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/ViewTweets.jsp"); 
 		dispatcher.forward(request,response);
 		

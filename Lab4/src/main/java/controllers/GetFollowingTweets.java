@@ -42,11 +42,15 @@ public class GetFollowingTweets extends HttpServlet {
 		
 		if (session != null || user != null) {
 			ManageTweets tweetManager = new ManageTweets();
+			ManageUsers userManager = new ManageUsers();
 			tweets = tweetManager.getFollowedTweets(user.getId(), 0,10);
+			user = userManager.getUser(user.getId());
 			tweetManager.finalize();
+			userManager.finalize();
 		}
 
 		request.setAttribute("tweets",tweets);
+		request.setAttribute("user",user);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/ViewTweets.jsp"); 
 		dispatcher.forward(request,response);
 		
