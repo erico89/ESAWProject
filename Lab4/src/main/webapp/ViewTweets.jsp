@@ -24,10 +24,11 @@
 								<div class="col overflow-hidden">
 									${t.nickname}
 								</div>
-								
-								<div class="col text-right"  tweet_id="${t.tweet_id}">
-									<button type="button" class="btn btn-outline-light delTweet"><i class="bi bi-trash"></i></button>
-								</div>
+								<c:if test="${user.id == t.user_id || user.rol_id == 1}">
+									<div class="col text-right"  tweet_id="${t.tweet_id}">
+										<button type="button" class="btn btn-outline-light delTweet"><i class="bi bi-trash"></i></button>
+									</div>
+								</c:if>
 							</div>
 							<div class="row">
 								<div class="col overflow-hidden">

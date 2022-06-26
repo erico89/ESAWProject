@@ -37,7 +37,7 @@ public class ManageUsers {
 	
 	// Get a user given its id, 
 	public User getUser(Integer id) {
-		String query = "SELECT user_id,nickname,mail,birthdate,password,name,surname,second_surname,profile_photo FROM users WHERE user_id = ? ;";
+		String query = "SELECT * FROM users WHERE user_id = ? ;";
 		ResultSet rs = null;
 		User user = null;
 		PreparedStatement statement = null;
@@ -57,6 +57,7 @@ public class ManageUsers {
 				user.setSurname(rs.getString("surname"));
 				user.setSecondSurname(rs.getString("second_surname"));
 				user.setProfilePhoto(rs.getString("profile_photo"));
+				user.setRol_id(rs.getInt("rol_id"));
 				
 			}
 		} catch (SQLException e) {
@@ -111,11 +112,11 @@ public class ManageUsers {
 		
 	// Add a new user in the users table
 	public void addUser(String nickname, String name, String surname, String secondSurname, String mail, 
-			String password, String birthdate, String profilePhoto) 
+			String password, String birthdate, String profilePhoto, Integer rol_id) 
 	{
 		
 		//Set the query
-		String query = "INSERT INTO users (nickname,name,surname,second_surname,mail,password,birthdate,profile_photo) VALUES (?,?,?,?,?,?,?,?)";
+		String query = "INSERT INTO users (nickname,name,surname,second_surname,mail,password,birthdate,profile_photo,rol_id) VALUES (?,?,?,?,?,?,?,?,?)";
 		PreparedStatement statement = null;
 		
 		try {
@@ -129,7 +130,8 @@ public class ManageUsers {
 			statement.setString(6,password);
 			statement.setString(7,birthdate);
 			statement.setString(8,profilePhoto);
-			
+			statement.setInt(9,rol_id);
+
 			//Execute the query
 			statement.executeUpdate();
 			statement.close();
@@ -469,6 +471,7 @@ public class ManageUsers {
 				user.setSurname(rs.getString("surname"));
 				user.setBirthdate(rs.getString("birthdate"));
 				user.setProfilePhoto(rs.getString("profile_photo"));
+				user.setRol_id(rs.getInt("rol_id"));
 				output = true;
 			} 
 			rs.close();

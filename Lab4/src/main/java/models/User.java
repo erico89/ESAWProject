@@ -31,6 +31,7 @@ public class User implements java.io.Serializable {
 	private String birthdate = "";
 	private String genres[] = {""};
 	private String profilePhoto = "";
+	private int rol_id = 2;
 	
 	private boolean[] errors  = 
 		{
@@ -94,6 +95,10 @@ public class User implements java.io.Serializable {
 		return this.profilePhoto;
 	}
 	
+	public int getRol_id() {
+		return this.rol_id;
+	}
+	
 	//Setters
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
@@ -153,6 +158,10 @@ public class User implements java.io.Serializable {
 	
 	public void setProfilePhoto(String profilePhoto) {
 		this.profilePhoto = profilePhoto;
+	}
+	
+	public void setRol_id ( int id ) {
+		this.rol_id = id;
 	}
 	
 	//Error Management

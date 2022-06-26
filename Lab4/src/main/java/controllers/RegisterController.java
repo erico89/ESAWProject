@@ -81,10 +81,13 @@ public class RegisterController extends HttpServlet {
 					// Set photo properties
 					Part file = request.getPart("profilePhoto");
 					user.setProfilePhoto(file.getSubmittedFileName());
-
+					
+					// Set standard rol_id = 2 (normal user)
+					user.setRol_id(2);
+					
 					// Add user to the DataBase
 					manager.addUser(user.getNickname(), user.getName(), user.getSurname(), user.getSecondSurname(), user.getMail(), 
-							user.getPassword(), user.getBirthdate(), user.getProfilePhoto());
+							user.getPassword(), user.getBirthdate(), user.getProfilePhoto(), user.getRol_id());
 					
 					// Save the photo manually
 					if (user.getProfilePhoto().length() > 0) {
