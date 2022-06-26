@@ -251,12 +251,56 @@ public class ManageTweets {
 		} 
 		return  l;
 	}
+	
+	//check likes
+	public boolean checkLikes(Tweet tweet, User user) {
+		String query = "SELECT * FROM likes WHERE tweet_id = ? AND user_id = ?";
+		PreparedStatement statement = null;
+		boolean returns = false;
+		try {
+			statement = db.prepareStatement(query);
+			statement.setInt(1, tweet.getTweet_id());
+			statement.setInt(2, user.getId());
+			ResultSet rs = statement.executeQuery();
+			returns = rs.next();
+			rs.close();
+			statement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return returns;
+	}
 
 	public void addLikes(Tweet tweet, User user) {	
 		String query = "INSERT INTO likes VALUE (?, ?);";
 		
 		String query2 = "UPDATE tweets"
 				+ " SET likes = likes + 1"
+				+ " WHERE tweet_id = ?";
+		
+		 PreparedStatement statement = null;
+		 try {
+			 statement = db.prepareStatement(query);
+			 statement.setInt(1, tweet.getTweet_id());
+			 statement.setInt(2, user.getId());
+			 statement.executeUpdate();
+			 
+			 statement = null;
+			 statement = db.prepareStatement(query2);
+			 statement.setInt(1,tweet.getTweet_id());
+			 statement.executeUpdate();
+			 statement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}		
+	}
+	
+	//removes likes 
+	public void removeLikes(Tweet tweet, User user) {	
+		String query = "DELETE FROM likes WHERE tweet_id = ? AND user_id = ?";
+		
+		String query2 = "UPDATE tweets"
+				+ " SET likes = likes - 1"
 				+ " WHERE tweet_id = ?";
 		
 		 PreparedStatement statement = null;
