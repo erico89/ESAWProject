@@ -41,10 +41,14 @@ public class FollowUser extends HttpServlet {
 		
 		try {
 			
-			if (session != null || user != null)
+			if (user != null) {
 				BeanUtils.populate(fuser, request.getParameterMap());
 				userManager.followUser(user.getId(),fuser.getId());
 				userManager.finalize();
+			} else {
+			    response.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+			    response.getWriter().print("You are not logged, please Sign in/Log in.");
+			}
 
 		} catch (IllegalAccessException | InvocationTargetException e) {
 			e.printStackTrace();

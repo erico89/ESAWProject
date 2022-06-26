@@ -41,15 +41,17 @@ public class GetTweets extends HttpServlet {
 		List<Tweet> tweets = Collections.emptyList();
 		User user = (User) session.getAttribute("user");
 		
-		if (session != null || user != null) {
-			ManageTweets tweetManager = new ManageTweets();
+		
+		ManageTweets tweetManager = new ManageTweets();
+		tweets = tweetManager.getTweets(0,10);
+		tweetManager.finalize();
+		
+		if (user != null) {
 			ManageUsers userManager = new ManageUsers();
-			tweets = tweetManager.getTweets(0,10);
 			user = userManager.getUser(user.getId());
-			tweetManager.finalize();
 			userManager.finalize();
-		}
-
+		} 
+		
 		request.setAttribute("tweets",tweets);
 		request.setAttribute("user",user);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/ViewTweets.jsp"); 

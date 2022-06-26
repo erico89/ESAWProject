@@ -1,6 +1,7 @@
 package controllers;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.Timestamp;
 import java.util.Enumeration;
@@ -52,7 +53,7 @@ public class AddRetweet extends HttpServlet {
 		try {
 			BeanUtils.populate(tweet,request.getParameterMap());	
 
-			if (session != null || user != null)
+			if (user != null) {
 				tweet = tweetManager.getTweetById(tweet.getTweet_id());
 			
 				tweetManager.addRetweet(tweet, user);
@@ -62,7 +63,10 @@ public class AddRetweet extends HttpServlet {
 				
 				// Return retweet number
 				response.getWriter().print(tweet.getRetweets());
-
+			} else {
+			    response.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+			    response.getWriter().print("You are not logged, please Sign in/Log in.");
+			}
 		} catch (IllegalAccessException | InvocationTargetException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

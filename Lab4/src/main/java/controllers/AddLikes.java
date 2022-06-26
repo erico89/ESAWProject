@@ -52,7 +52,7 @@ public class AddLikes extends HttpServlet {
 		try {
 			BeanUtils.populate(tweet,request.getParameterMap());	
 
-			if (session != null || user != null)
+			if (user != null) {
 				tweet = tweetManager.getTweetById(tweet.getTweet_id());
 				if(tweetManager.checkLikes(tweet, user)) {
 					tweetManager.removeLikes(tweet, user);
@@ -63,7 +63,10 @@ public class AddLikes extends HttpServlet {
 				tweet = tweetManager.getTweetById(tweet.getTweet_id());				
 				tweetManager.finalize();
 				response.getWriter().print(tweet.getLikes());
-
+			} else {
+			    response.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+			    response.getWriter().print("You are not logged, please Sign in/Log in.");
+			}
 		} catch (IllegalAccessException | InvocationTargetException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

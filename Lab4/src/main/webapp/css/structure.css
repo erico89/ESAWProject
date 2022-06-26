@@ -9,6 +9,14 @@ textarea {
 	resize: none;
 }
 
+.float-Middle {
+	position: absolute;
+    display: block;
+    z-index: 1000;
+    left: 50%;
+    transform: translate(-50%, 50%);
+}
+
 .myFrom {
 	background-color:#343A40;
 }

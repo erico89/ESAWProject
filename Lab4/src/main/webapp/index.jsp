@@ -122,7 +122,11 @@ $(document).ready(function(){
 		
 		$.post( "AddTweet", data, function(event) {
 			$("#content").load("GetTimeline");		
-		});
+		})	    
+		.fail(function(xhr, status, error) {
+    		$("#server_msg").html(xhr.responseText);
+    		$("#server_msg").fadeIn(1000).delay(5000).fadeOut(1000)
+    	});
 		event.preventDefault();
 	});
 	
@@ -181,7 +185,10 @@ $(document).ready(function(){
 		$.post( "FollowUser", data, function(event) { 
 			$("#content").load("GetFollowedUsers");
 			$("#lcolumn").load("GetNotFollowedUsers");
-		});
+		}).fail(function(xhr, status, error) {
+    		$("#server_msg").html(xhr.responseText);
+    		$("#server_msg").fadeIn(1000).delay(5000).fadeOut(1000)
+    	});
 		event.preventDefault();
 	});
 	/* UnFollow user */
@@ -213,9 +220,15 @@ $(document).ready(function(){
 		const request = $(this).attr('id');
 		const that = $(this);
 
-		$.get(request, data, function(msg){
-			that.find("span").text(msg);
+		$.get(request, data) 
+		.done(
+			function(msg){
+				that.find("span").text(msg);
 		})
+	    .fail(function(xhr, status, error) {
+	    		$("#server_msg").html(xhr.responseText);
+	    		$("#server_msg").fadeIn(1000).delay(5000).fadeOut(1000)
+	    });
 
 	});
 });
@@ -224,7 +237,10 @@ $(document).ready(function(){
 
 </head>
 <body>
+	<div class="alert alert-danger float-Middle" role="alert" id="server_msg" style="display:none;" >
+	</div>
 
+	
  	<!-- Begin Navigation -->
  	<div class="w3-bar w3-red" id="navigation">
     <jsp:include page="${menu}" />

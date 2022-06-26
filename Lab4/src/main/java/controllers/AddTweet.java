@@ -51,14 +51,17 @@ public class AddTweet extends HttpServlet {
 		
 		try {
 			
-			if (session != null || user != null)
+			if (user != null) {
 				BeanUtils.populate(tweet, request.getParameterMap());
 				tweet.setUser_id(user.getId());
 				tweet.setNickname(user.getName());
 				tweet.setPostDateTime(new Timestamp(System.currentTimeMillis()));
 				tweetManager.addTweet(tweet);
 				tweetManager.finalize();
-
+			} else {
+			    response.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+			    response.getWriter().print("You are not logged, please Sign in/Log in.");
+			}
 		} catch (IllegalAccessException | InvocationTargetException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
