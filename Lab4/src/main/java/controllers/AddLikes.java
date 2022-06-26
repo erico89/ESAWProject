@@ -54,7 +54,11 @@ public class AddLikes extends HttpServlet {
 
 			if (session != null || user != null)
 				tweet = tweetManager.getTweetById(tweet.getTweet_id());
-				tweetManager.addLikes(tweet, user);
+				if(tweetManager.checkLikes(tweet, user)) {
+					tweetManager.removeLikes(tweet, user);
+				}else {
+					tweetManager.addLikes(tweet, user);
+				}
 				// Get updated tweet
 				tweet = tweetManager.getTweetById(tweet.getTweet_id());				
 				tweetManager.finalize();
