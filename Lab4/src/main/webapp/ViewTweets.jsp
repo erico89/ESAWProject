@@ -47,11 +47,6 @@
 									${t.image}
 								</div>
 							</div>
-							<div class="row">
-								<div class="col">
-									${t.audio}
-								</div>
-							</div>
 							<div class="row mt-2">
 								<!-- Commentario de tweets, pendiente de implementar
 								<div class="">

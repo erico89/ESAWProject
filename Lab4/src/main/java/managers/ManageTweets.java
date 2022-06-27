@@ -35,7 +35,7 @@ public class ManageTweets {
 	
 	/* Add a tweet */
 	public void addTweet(Tweet tweet) {
-		String query = "INSERT INTO tweets(description, image, profilePhoto, nickname, likes, retweets, date, parent_id, user_id)"
+		String query = "INSERT INTO tweets(description, image, profile_photo, nickname, likes, retweets, date, parent_id, user_id)"
 				+ " VALUES (?,?,?,?,?,?,?,?,?)";
 		
 		PreparedStatement statement = null;
@@ -174,7 +174,7 @@ public class ManageTweets {
 				 tweet.setTweet_id(rs.getInt("tweet_id"));
 				 tweet.setDescription(rs.getString("description"));
 				 tweet.setImage(rs.getString("image"));
-				 tweet.setProfilePhoto(rs.getString("profilePhoto"));
+				 tweet.setProfilePhoto(rs.getString("profile_photo"));
 				 tweet.setNickname(rs.getString("nickname"));
 				 tweet.setLikes(rs.getInt("likes"));
 				 tweet.setRetweets(rs.getInt("retweets"));				 
@@ -209,7 +209,7 @@ public class ManageTweets {
 				 tweet.setTweet_id(rs.getInt("tweet_id"));
 				 tweet.setDescription(rs.getString("description"));
 				 tweet.setImage(rs.getString("image"));
-				 tweet.setProfilePhoto(rs.getString("profilePhoto"));
+				 tweet.setProfilePhoto(rs.getString("profile_photo"));
 				 tweet.setNickname(rs.getString("nickname"));
 				 tweet.setLikes(rs.getInt("likes"));
 				 tweet.setRetweets(rs.getInt("retweets"));				 
