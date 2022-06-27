@@ -161,7 +161,7 @@ public class ManageTweets {
 	
 	/*** Get public tweets order by desc.***/
 	public List<Tweet> getTweets(Integer start, Integer end) {
-		 String query = "SELECT * FROM tweets as t ORDER BY t.likes DESC LIMIT ?,? ;";
+		 String query = "SELECT * FROM tweets as t ORDER BY t.date DESC LIMIT ?,? ;";
 		 PreparedStatement statement = null;
 		 List<Tweet> l = new ArrayList<Tweet>();
 		 try {
