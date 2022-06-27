@@ -161,7 +161,7 @@ public class ManageTweets {
 	
 	/*** Get public tweets order by desc.***/
 	public List<Tweet> getTweets(Integer start, Integer end) {
-		 String query = "SELECT * FROM tweets t ORDER BY t.date LIMIT ?,? ;";
+		 String query = "SELECT * FROM tweets t ORDER BY t.date DESC LIMIT ?,? ;";
 		 PreparedStatement statement = null;
 		 List<Tweet> l = new ArrayList<Tweet>();
 		 try {
@@ -232,7 +232,7 @@ public class ManageTweets {
 		 		+ "JOIN users as u ON t.user_id = u.user_id "
 		 		+ "JOIN followers as f on u.user_id = f.user_id "
 		 		+ "WHERE f.follower_id = ? "
-		 		+ "ORDER BY t.likes LIMIT ?,?;";
+		 		+ "ORDER BY t.likes DESC LIMIT ?,?;";
 		 PreparedStatement statement = null;
 		 List<Tweet> l = new ArrayList<Tweet>();
 		 try {
