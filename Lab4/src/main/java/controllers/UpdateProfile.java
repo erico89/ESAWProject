@@ -55,6 +55,8 @@ public class UpdateProfile extends HttpServlet {
 		User user = (User) session.getAttribute("user");
 		User userNew = new User();
 		String view = "ViewEditProfile.jsp";
+		Integer following = 0;
+		Integer followers = 0;
 		if (session != null || user != null) {
 			// Save old password
 			ManageUsers userManager = new ManageUsers();
@@ -69,7 +71,7 @@ public class UpdateProfile extends HttpServlet {
 				Part file = request.getPart("profilePhoto");
 				if (file != null) {
 					user.setProfilePhoto(file.getSubmittedFileName());
-				}					
+				}
 				
 				// Get parameters if null. 
 				String psw = ((userNew.getPassword() == null || userNew.getPassword() == "") ? user.getPassword() : userNew.getPassword());
@@ -89,6 +91,9 @@ public class UpdateProfile extends HttpServlet {
 				
 				// Get user
 				userNew = userManager.getUser(user.getId());
+				following = userManager.numFollowing(user.getId());
+	            followers = userManager.numFollowers(user.getId());
+	            
 				
 				view = "ViewUserInfo.jsp";
 					
@@ -104,6 +109,8 @@ public class UpdateProfile extends HttpServlet {
 		}
 		
 		request.setAttribute("user",userNew);
+		request.setAttribute("numFollowing",following);
+        request.setAttribute("numFollowers",followers);
 		RequestDispatcher dispatcher = request.getRequestDispatcher(view); 
 		dispatcher.include(request,response);
 	}

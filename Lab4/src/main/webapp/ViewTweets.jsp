@@ -8,7 +8,7 @@
                     <input type="search" id="keywordTweet" class="form-control bg-dark text-white" placeholder="Search what you want to see..."/>
                 </div>
                 <div class="col-sm-1 p-0">
-	                <button type="button" class="btn btn-primary">
+	                <button type="button" class="btn btn-primary" id="getSearchTweet">
 	                    <i class="bi bi-search"></i>
 	                </button>
                 </div>
@@ -17,7 +17,14 @@
 				<div class="container-xlp-3 my-3 p-3 bg-dark text-white border border-white rounded">
 					<div class="row">
 						<div class="col-sm-2">
-							<img src="imgs/avatar2.png" alt="Avatar" class="rounded-circle img-fluid">
+							<c:choose>
+			                    <c:when test="${t.profilePhoto == null || t.profilePhoto.length() == 0}">
+			                        <img class="rounded-circle img-fluid" src="imgs/avatar2.png" alt="Avatar">
+			                    </c:when>
+			                    <c:otherwise>
+			                        <img class="rounded-circle img-fluid" src="./profile_photo/${t.profilePhoto}" alt="Avatar">
+			                    </c:otherwise>
+			                </c:choose>
 						</div>
 						<div class="col-sm-10">
 							<div class="row">
@@ -38,11 +45,6 @@
 							<div class="row">
 								<div class="col">
 									${t.image}
-								</div>
-							</div>
-							<div class="row">
-								<div class="col">
-									${t.audio}
 								</div>
 							</div>
 							<div class="row mt-2">

@@ -35,7 +35,7 @@ public class ManageTweets {
 	
 	/* Add a tweet */
 	public void addTweet(Tweet tweet) {
-		String query = "INSERT INTO tweets(description, image, audio, nickname, likes, retweets, date, parent_id, user_id)"
+		String query = "INSERT INTO tweets(description, image, profile_photo, nickname, likes, retweets, date, parent_id, user_id)"
 				+ " VALUES (?,?,?,?,?,?,?,?,?)";
 		
 		PreparedStatement statement = null;
@@ -43,7 +43,7 @@ public class ManageTweets {
 			statement = db.prepareStatement(query);
 			statement.setString(1,tweet.getDescription());
 			statement.setString(2,tweet.getImage());
-			statement.setString(3,tweet.getAudio());
+			statement.setString(3,tweet.getProfilePhoto());
 			statement.setString(4,tweet.getNickname());
 			statement.setInt(5,tweet.getLikes());
 			statement.setInt(6,tweet.getRetweets());
@@ -142,7 +142,7 @@ public class ManageTweets {
 				 tweet.setTweet_id(rs.getInt("tweet_id"));
 				 tweet.setDescription(rs.getString("description"));
 				 tweet.setImage(rs.getString("image"));
-				 tweet.setAudio(rs.getString("audio"));
+				 tweet.setProfilePhoto(rs.getString("profile_photo"));
 				 tweet.setNickname(rs.getString("nickname"));
 				 tweet.setLikes(rs.getInt("likes"));
 				 tweet.setRetweets(rs.getInt("retweets"));				 
@@ -174,7 +174,7 @@ public class ManageTweets {
 				 tweet.setTweet_id(rs.getInt("tweet_id"));
 				 tweet.setDescription(rs.getString("description"));
 				 tweet.setImage(rs.getString("image"));
-				 tweet.setAudio(rs.getString("audio"));
+				 tweet.setProfilePhoto(rs.getString("profile_photo"));
 				 tweet.setNickname(rs.getString("nickname"));
 				 tweet.setLikes(rs.getInt("likes"));
 				 tweet.setRetweets(rs.getInt("retweets"));				 
@@ -193,7 +193,7 @@ public class ManageTweets {
 	
 	/*** Get public tweets with keyWord order by desc.***/
 	public List<Tweet> getTweetsSearch(String keyWord, Integer start, Integer end) {
-		 String query = "SELECT * FROM tweets t WHERE (t.description LIKE ? OR t.nickname LIKE ? ) ORDER BY t.date DESC LIMIT ?,? ;";
+		 String query = "SELECT * FROM tweets t WHERE (t.description LIKE ? OR t.nickname LIKE ? ) ORDER BY t.date LIMIT ?,? ;";
 		 PreparedStatement statement = null;
 		 List<Tweet> l = new ArrayList<Tweet>();
 		 try {
@@ -209,7 +209,7 @@ public class ManageTweets {
 				 tweet.setTweet_id(rs.getInt("tweet_id"));
 				 tweet.setDescription(rs.getString("description"));
 				 tweet.setImage(rs.getString("image"));
-				 tweet.setAudio(rs.getString("audio"));
+				 tweet.setProfilePhoto(rs.getString("profile_photo"));
 				 tweet.setNickname(rs.getString("nickname"));
 				 tweet.setLikes(rs.getInt("likes"));
 				 tweet.setRetweets(rs.getInt("retweets"));				 
@@ -232,7 +232,7 @@ public class ManageTweets {
 		 		+ "JOIN users as u ON t.user_id = u.user_id "
 		 		+ "JOIN followers as f on u.user_id = f.user_id "
 		 		+ "WHERE f.follower_id = ? "
-		 		+ "ORDER BY t.date DESC LIMIT ?,?;";
+		 		+ "ORDER BY t.likes DESC LIMIT ?,?;";
 		 PreparedStatement statement = null;
 		 List<Tweet> l = new ArrayList<Tweet>();
 		 try {
@@ -246,7 +246,7 @@ public class ManageTweets {
 				 tweet.setTweet_id(rs.getInt("tweet_id"));
 				 tweet.setDescription(rs.getString("description"));
 				 tweet.setImage(rs.getString("image"));
-				 tweet.setAudio(rs.getString("audio"));
+				 tweet.setProfilePhoto(rs.getString("profile_photo"));
 				 tweet.setNickname(rs.getString("nickname"));
 				 tweet.setLikes(rs.getInt("likes"));
 				 tweet.setRetweets(rs.getInt("retweets"));				 
@@ -265,7 +265,7 @@ public class ManageTweets {
 	
 	/* Get tweets from a user given start and end*/
 	public List<Tweet> getUserTweets(Integer user_id,Integer start, Integer end) {
-		 String query = "SELECT tweets.tweet_id,tweets.description,tweets.image,tweets.audio,tweets.nickname,tweets.likes,tweets.retweets,tweets.date, tweets.parent_id, tweets.user_id "
+		 String query = "SELECT tweets.tweet_id,tweets.description,tweets.image,tweets.profile_photo,tweets.nickname,tweets.likes,tweets.retweets,tweets.date, tweets.parent_id, tweets.user_id "
 		 		+ "FROM tweets "
 		 		+ "INNER JOIN users ON tweets.user_id = users.user_id "
 		 		+ "where tweets.user_id = ? "
@@ -283,7 +283,7 @@ public class ManageTweets {
 				 tweet.setTweet_id(rs.getInt("tweet_id"));
 				 tweet.setDescription(rs.getString("description"));
 				 tweet.setImage(rs.getString("image"));
-				 tweet.setAudio(rs.getString("audio"));
+				 tweet.setProfilePhoto(rs.getString("profile_photo"));
 				 tweet.setNickname(rs.getString("nickname"));
 				 tweet.setLikes(rs.getInt("likes"));
 				 tweet.setRetweets(rs.getInt("retweets"));				 
@@ -318,6 +318,25 @@ public class ManageTweets {
 		}
 		return returns;
 	}
+	
+	//check retweets
+		public boolean checkRetweets(Tweet tweet, User user) {
+			String query = "SELECT * FROM retweets WHERE tweet_id = ? AND user_id = ?";
+			PreparedStatement statement = null;
+			boolean returns = false;
+			try {
+				statement = db.prepareStatement(query);
+				statement.setInt(1, tweet.getTweet_id());
+				statement.setInt(2, user.getId());
+				ResultSet rs = statement.executeQuery();
+				returns = rs.next();
+				rs.close();
+				statement.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return returns;
+		}
 
 	public void addLikes(Tweet tweet, User user) {	
 		String query = "INSERT INTO likes VALUE (?, ?);";
@@ -382,6 +401,30 @@ public class ManageTweets {
 			 statement.setInt(1, tweet.getTweet_id());
 			 statement.setInt(2, user.getId());
 			 statement.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
+			 statement.executeUpdate();
+			 
+			 statement = null;
+			 statement = db.prepareStatement(query2);
+			 statement.setInt(1,tweet.getTweet_id());
+			 statement.executeUpdate();
+			 statement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}	
+	}
+	
+	public void removeRetweet(Tweet tweet, User user) {
+		String query = "DELETE FROM retweets WHERE tweet_id = ? AND user_id = ?";
+		
+		String query2 = "UPDATE tweets"
+				+ " SET retweets = retweets - 1"
+				+ " WHERE tweet_id = ?";
+		
+		 PreparedStatement statement = null;
+		 try {
+			 statement = db.prepareStatement(query);
+			 statement.setInt(1, tweet.getTweet_id());
+			 statement.setInt(2, user.getId());
 			 statement.executeUpdate();
 			 
 			 statement = null;

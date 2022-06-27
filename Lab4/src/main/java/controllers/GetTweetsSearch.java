@@ -43,9 +43,10 @@ public class GetTweetsSearch extends HttpServlet {
 		String keyWord = null;
 		
 		if (session != null || user != null) {
+			keyWord = request.getParameter("keyWord");
 			ManageTweets tweetManager = new ManageTweets();
 			ManageUsers userManager = new ManageUsers();
-			tweets = tweetManager.getTweets(0,10);
+			tweets = tweetManager.getTweetsSearch(keyWord,0,10);
 			user = userManager.getUser(user.getId());
 			tweetManager.finalize();
 			userManager.finalize();

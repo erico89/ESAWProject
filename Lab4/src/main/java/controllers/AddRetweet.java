@@ -56,7 +56,11 @@ public class AddRetweet extends HttpServlet {
 			if (user != null) {
 				tweet = tweetManager.getTweetById(tweet.getTweet_id());
 			
-				tweetManager.addRetweet(tweet, user);
+				if(tweetManager.checkRetweets(tweet, user)) {
+					tweetManager.removeRetweet(tweet, user);
+				}else {
+					tweetManager.addRetweet(tweet, user);
+				}
 				// Get updated tweet
 				tweet = tweetManager.getTweetById(tweet.getTweet_id());				
 				tweetManager.finalize();

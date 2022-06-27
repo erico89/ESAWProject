@@ -19,7 +19,7 @@
                         <div class="col-sm-4">
                             <c:choose>
                                 <c:when test="${u.profilePhoto == null || u.profilePhoto.length() == 0}">
-                                    <img src="imgs/avatar6.png" alt="Avatar" class="rounded-circle img-fluid">
+                                    <img src="imgs/avatar2.png" alt="Avatar" class="rounded-circle img-fluid">
                                 </c:when>
                                 <c:otherwise>
                                     <img src=${u.profilePhoto} alt="Avatar" class="rounded-circle img-fluid">
