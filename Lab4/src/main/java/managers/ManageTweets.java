@@ -161,7 +161,7 @@ public class ManageTweets {
 	
 	/*** Get public tweets order by desc.***/
 	public List<Tweet> getTweets(Integer start, Integer end) {
-		 String query = "SELECT * FROM tweets as t ORDER BY t.date DESC LIMIT ?,? ;";
+		 String query = "SELECT * FROM tweets t ORDER BY t.date DESC LIMIT ?,? ;";
 		 PreparedStatement statement = null;
 		 List<Tweet> l = new ArrayList<Tweet>();
 		 try {
@@ -193,7 +193,7 @@ public class ManageTweets {
 	
 	/*** Get public tweets with keyWord order by desc.***/
 	public List<Tweet> getTweetsSearch(String keyWord, Integer start, Integer end) {
-		 String query = "SELECT * FROM tweets as t WHERE (t.description LIKE ? OR t.nickname LIKE ? ) ORDER BY t.likes DESC LIMIT ?,? ;";
+		 String query = "SELECT * FROM tweets t WHERE (t.description LIKE ? OR t.nickname LIKE ? ) ORDER BY t.date DESC LIMIT ?,? ;";
 		 PreparedStatement statement = null;
 		 List<Tweet> l = new ArrayList<Tweet>();
 		 try {
@@ -228,11 +228,11 @@ public class ManageTweets {
 	
 	// Get followed users' tweets
 	public List<Tweet> getFollowedTweets(Integer u_id, Integer start, Integer end) {
-		 String query = "SELECT * FROM tweets as t "
+		 String query = "SELECT * FROM tweets t "
 		 		+ "JOIN users as u ON t.user_id = u.user_id "
 		 		+ "JOIN followers as f on u.user_id = f.user_id "
 		 		+ "WHERE f.follower_id = ? "
-		 		+ "ORDER BY likes LIMIT ?,?;";
+		 		+ "ORDER BY t.date DESC LIMIT ?,?;";
 		 PreparedStatement statement = null;
 		 List<Tweet> l = new ArrayList<Tweet>();
 		 try {
