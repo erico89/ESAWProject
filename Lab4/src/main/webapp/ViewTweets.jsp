@@ -8,7 +8,7 @@
                     <input type="search" id="keywordTweet" class="form-control bg-dark text-white" placeholder="Search what you want to see..."/>
                 </div>
                 <div class="col-sm-1 p-0">
-	                <button type="button" class="btn btn-primary">
+	                <button type="button" class="btn btn-primary" id="getSearchTweet">
 	                    <i class="bi bi-search"></i>
 	                </button>
                 </div>
