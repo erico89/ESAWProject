@@ -51,6 +51,11 @@
 						<input type="date" id="birthdate" class="form-control text-light bg-dark" name="birthdate" value="${user.birthdate}" required> 
 					</div>
 					
+					<div class="form-group">
+						<label for="profilePhoto">Profile photo </label>
+						<input type="file" id="profilePhoto" class="form-control-file" name="profilePhoto" value="${user.profilePhoto}">
+					</div>
+					
 					<input class="btn btn-primary mt-3" type="submit" name="sumbit" value="Submit">
 				</form>
 			</div>
