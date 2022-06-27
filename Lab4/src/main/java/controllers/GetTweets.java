@@ -41,7 +41,6 @@ public class GetTweets extends HttpServlet {
 		List<Tweet> tweets = Collections.emptyList();
 		User user = (User) session.getAttribute("user");
 		
-		
 		ManageTweets tweetManager = new ManageTweets();
 		tweets = tweetManager.getTweets(0,10);
 		tweetManager.finalize();

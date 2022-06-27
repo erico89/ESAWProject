@@ -4,7 +4,10 @@
 <script>
 	$(document).ready(function(){		
 		$('#lcolumn').html('');
-
+	});
+	
+	$("#ProfilePhotoUploader").click(function() {
+	    $("#UploadProfilePhoto").click();
 	});
 </script>
 
@@ -118,8 +121,9 @@
  		  	</div>
 
 			<div class="form-group">
-				<label for="profilePhoto">Profile photo </label>
-				<input type="file" id="profilePhoto" class="form-control-file" name="profilePhoto" value="">
+				<label for="profilePhoto">Profile photo </label><br>	
+				<button id="ProfilePhotoUploader" type="button" class="btn btn-primary-outline text-white" style ="background-color: black;">Upload image</button>
+                <input type="file" id="UploadProfilePhoto" class="form-control-file" style="display: none;"></input>
 			</div>
 	    
 	    	<input class="btn btn-primary mt-3" type="submit" name="sumbit" value="Submit">

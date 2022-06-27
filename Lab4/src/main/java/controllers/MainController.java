@@ -42,6 +42,8 @@ public class MainController extends HttpServlet {
 			request.setAttribute("content","ViewTimeline.jsp");
 		}
 		
+		System.out.println( getServletContext().getRealPath("/"));
+		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
 		dispatcher.forward(request, response);	
 	}

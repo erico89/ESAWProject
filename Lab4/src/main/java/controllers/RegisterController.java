@@ -128,33 +128,6 @@ public class RegisterController extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}		
-		/*
-		
-	   try {
-	
-		   User user = new User();
-		   ManageUsers manager = new ManageUsers();
-		   BeanUtils.populate(user, request.getParameterMap());
-		
-		   if (manager.isComplete(user)) {
-			   
-			   System.out.println(" user ok, forwarding to ViewLoginForm");
-			   RequestDispatcher dispatcher = request.getRequestDispatcher("ViewLoginForm.jsp");
-			   dispatcher.forward(request, response);
-		   
-		   } 
-		   else {
-		
-			   System.out.println(" forwarding to ViewRegisterForm");
-			   request.setAttribute("user",user);
-			   RequestDispatcher dispatcher = request.getRequestDispatcher("ViewRegisterForm.jsp");
-			   dispatcher.forward(request, response);
-		   }
-	   
-	   } catch (IllegalAccessException | InvocationTargetException e) {
-			e.printStackTrace();
-	   }
-		*/
 			
 	}
 
