@@ -265,7 +265,7 @@ public class ManageTweets {
 	
 	/* Get tweets from a user given start and end*/
 	public List<Tweet> getUserTweets(Integer user_id,Integer start, Integer end) {
-		 String query = "SELECT tweets.tweet_id,tweets.description,tweets.image,tweets.profilePhoto,tweets.nickname,tweets.likes,tweets.retweets,tweets.date, tweets.parent_id, tweets.user_id "
+		 String query = "SELECT tweets.tweet_id,tweets.description,tweets.image,tweets.profile_photo,tweets.nickname,tweets.likes,tweets.retweets,tweets.date, tweets.parent_id, tweets.user_id "
 		 		+ "FROM tweets "
 		 		+ "INNER JOIN users ON tweets.user_id = users.user_id "
 		 		+ "where tweets.user_id = ? "
