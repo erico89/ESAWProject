@@ -26,7 +26,7 @@ CREATE TABLE `tweets` (
   `tweet_id` int NOT NULL AUTO_INCREMENT,
   `description` varchar(255) DEFAULT NULL,
   `image` varchar(255) DEFAULT NULL,
-  `audio` varchar(255) DEFAULT NULL,
+  `profile_photo` varchar(255) DEFAULT NULL,
   `nickname` varchar(255) NOT NULL,
   `likes` int NOT NULL DEFAULT '0',
   `retweets` int NOT NULL DEFAULT '0',

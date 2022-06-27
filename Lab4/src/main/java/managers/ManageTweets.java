@@ -35,7 +35,7 @@ public class ManageTweets {
 	
 	/* Add a tweet */
 	public void addTweet(Tweet tweet) {
-		String query = "INSERT INTO tweets(description, image, audio, nickname, likes, retweets, date, parent_id, user_id)"
+		String query = "INSERT INTO tweets(description, image, profilePhoto, nickname, likes, retweets, date, parent_id, user_id)"
 				+ " VALUES (?,?,?,?,?,?,?,?,?)";
 		
 		PreparedStatement statement = null;
@@ -43,7 +43,7 @@ public class ManageTweets {
 			statement = db.prepareStatement(query);
 			statement.setString(1,tweet.getDescription());
 			statement.setString(2,tweet.getImage());
-			statement.setString(3,tweet.getAudio());
+			statement.setString(3,tweet.getProfilePhoto());
 			statement.setString(4,tweet.getNickname());
 			statement.setInt(5,tweet.getLikes());
 			statement.setInt(6,tweet.getRetweets());
@@ -142,7 +142,7 @@ public class ManageTweets {
 				 tweet.setTweet_id(rs.getInt("tweet_id"));
 				 tweet.setDescription(rs.getString("description"));
 				 tweet.setImage(rs.getString("image"));
-				 tweet.setAudio(rs.getString("audio"));
+				 tweet.setProfilePhoto(rs.getString("profilePhoto"));
 				 tweet.setNickname(rs.getString("nickname"));
 				 tweet.setLikes(rs.getInt("likes"));
 				 tweet.setRetweets(rs.getInt("retweets"));				 
@@ -174,7 +174,7 @@ public class ManageTweets {
 				 tweet.setTweet_id(rs.getInt("tweet_id"));
 				 tweet.setDescription(rs.getString("description"));
 				 tweet.setImage(rs.getString("image"));
-				 tweet.setAudio(rs.getString("audio"));
+				 tweet.setProfilePhoto(rs.getString("profilePhoto"));
 				 tweet.setNickname(rs.getString("nickname"));
 				 tweet.setLikes(rs.getInt("likes"));
 				 tweet.setRetweets(rs.getInt("retweets"));				 
@@ -209,7 +209,7 @@ public class ManageTweets {
 				 tweet.setTweet_id(rs.getInt("tweet_id"));
 				 tweet.setDescription(rs.getString("description"));
 				 tweet.setImage(rs.getString("image"));
-				 tweet.setAudio(rs.getString("audio"));
+				 tweet.setProfilePhoto(rs.getString("profilePhoto"));
 				 tweet.setNickname(rs.getString("nickname"));
 				 tweet.setLikes(rs.getInt("likes"));
 				 tweet.setRetweets(rs.getInt("retweets"));				 
@@ -246,7 +246,7 @@ public class ManageTweets {
 				 tweet.setTweet_id(rs.getInt("tweet_id"));
 				 tweet.setDescription(rs.getString("description"));
 				 tweet.setImage(rs.getString("image"));
-				 tweet.setAudio(rs.getString("audio"));
+				 tweet.setProfilePhoto(rs.getString("profilePhoto"));
 				 tweet.setNickname(rs.getString("nickname"));
 				 tweet.setLikes(rs.getInt("likes"));
 				 tweet.setRetweets(rs.getInt("retweets"));				 
@@ -265,7 +265,7 @@ public class ManageTweets {
 	
 	/* Get tweets from a user given start and end*/
 	public List<Tweet> getUserTweets(Integer user_id,Integer start, Integer end) {
-		 String query = "SELECT tweets.tweet_id,tweets.description,tweets.image,tweets.audio,tweets.nickname,tweets.likes,tweets.retweets,tweets.date, tweets.parent_id, tweets.user_id "
+		 String query = "SELECT tweets.tweet_id,tweets.description,tweets.image,tweets.profilePhoto,tweets.nickname,tweets.likes,tweets.retweets,tweets.date, tweets.parent_id, tweets.user_id "
 		 		+ "FROM tweets "
 		 		+ "INNER JOIN users ON tweets.user_id = users.user_id "
 		 		+ "where tweets.user_id = ? "
@@ -283,7 +283,7 @@ public class ManageTweets {
 				 tweet.setTweet_id(rs.getInt("tweet_id"));
 				 tweet.setDescription(rs.getString("description"));
 				 tweet.setImage(rs.getString("image"));
-				 tweet.setAudio(rs.getString("audio"));
+				 tweet.setProfilePhoto(rs.getString("profilePhoto"));
 				 tweet.setNickname(rs.getString("nickname"));
 				 tweet.setLikes(rs.getInt("likes"));
 				 tweet.setRetweets(rs.getInt("retweets"));				 

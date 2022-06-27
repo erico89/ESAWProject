@@ -8,7 +8,7 @@ public class Tweet implements java.io.Serializable {
 	 private int tweet_id;
 	 private String description;
 	 private String image = null;
-	 private String audio = null;
+	 private String profilePhoto = null;
 	 private String nickname;
 	 private int likes = 0;
 	 private int retweets = 0;
@@ -41,11 +41,11 @@ public class Tweet implements java.io.Serializable {
 		 this.image = image_;
 	 }
 	 
-	 public String getAudio() {
-		 return this.audio;
+	 public String getProfilePhoto() {
+		 return this.profilePhoto;
 	 }
-	 public void setAudio(String audio_) {
-		 this.audio = audio_;
+	 public void setProfilePhoto(String profilePhoto_) {
+		 this.profilePhoto = profilePhoto_;
 	 }
 	 
 	 public String getNickname() {
